@@ -1,0 +1,55 @@
+# vim:set syntax=sh:
+
+# aliases
+## ssh aliases
+alias ssr='ssh -lroot'
+alias ssa='ssh -ladmin'
+## git aliases
+alias gst='git status'
+alias gr='git pull --rebase'
+alias gf='git fetch'
+alias gcm='git commit -m'
+alias gcsm='git commit -S -m'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gpl='git pull --ff-only'
+alias gps='git pull --ff-only && git push'
+alias gsf='git submodule foreach'
+alias confgit='GIT_WORK_TREE=~/git/private/confrc \
+    GIT_DIR=~/git/private/confrc/.git git'
+## other
+alias ll='ls -lahv'
+alias la='ls -A'
+alias s='screen -rd ddd'
+#alias s3cmd='s3cmd --signature-v2'
+#alias cp='cp -i'
+#alias mv='mv -i'
+alias dicten='dict -d fd-eng-deu'
+alias dictde='dict -d fd-deu-eng'
+alias vless='vim -u ~/.vimrc.less -'
+alias apachelog='sudo tail -f /var/log/apache2/error.log'
+alias ds='dig +short'
+alias pcd='for ((i=$((60-$(date +%S))); i>0; i--)); do clear; figlet "$i" |lolcat -F 0.5; sleep 1; done'
+alias pcde='pcd; exit'
+alias mcde='mcd; exit'
+alias fixmonworkleft='xrandr --output eDP-1 --mode 1360x768 --pos 0x0 --output DP-2-1 --mode 1920x1200 --pos 1360x-432 --primary --output DP-2-2 --mode 1920x1200 --pos 3280x-432'
+alias fixmonworkright='xrandr --output eDP-1 --mode 1360x768 --pos 3840x432 --output DP-2-1 --mode 1920x1200 --pos 1920x0 --primary --output DP-2-2 --mode 1920x1200 --pos 0x0'
+#alias atom='atom-beta .'
+
+# probably tmp
+alias portal='head -"$((($RANDOM%9+1)*20))" ~/git/private/confrc/assets/portal_ascii | tail -20 ; echo -e "\033[23A"'
+alias dotfiles-public='git --git-dir=$HOME/.dotfiles-public/.git --work-tree=$HOME'
+alias dotfiles-private='git --git-dir=$HOME/.dotfiles-private/.git --work-tree=$HOME'
+
+# zsh aliases
+# extra files?
+if [[ "$SHELL" =~ "zsh" && "$0" != "bash" ]]; then
+  alias -g EXGIT='--exclude-dir .git'
+  alias -g NC="|grep -vE '^\s*(#|$)'"
+  alias -g ':L'='|less -F'
+  alias -g ':LL'='2>&1|less -F'
+  alias -g PT="|sed 's/but was:/\r\n        but was:/g'"
+fi
+
+
+# Y U ADD HERE? echo >> much?

@@ -1,0 +1,24 @@
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = git@github.com:robbyrussell/oh-my-zsh.git
+[submodule ".oh-my-zsh-custom/plugins/fast-syntax-highlighting"]
+	path = .oh-my-zsh-custom/plugins/fast-syntax-highlighting
+	url = git@github.com:zdharma/fast-syntax-highlighting.git
+[submodule ".oh-my-zsh-custom/plugins/zsh-syntax-highlighting"]
+	path = .oh-my-zsh-custom/plugins/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule ".oh-my-zsh-custom/plugins/zsh-autosuggestions"]
+	path = .oh-my-zsh-custom/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule ".oh-my-zsh-custom/plugins/zsh-completions"]
+	path = .oh-my-zsh-custom/plugins/zsh-completions
+	url = git@github.com:zsh-users/zsh-completions.git
+[submodule ".oh-my-zsh-custom/plugins/zsh-prompt-benchmark"]
+	path = .oh-my-zsh-custom/plugins/zsh-prompt-benchmark
+	url = git@github.com:romkatv/zsh-prompt-benchmark.git
+[submodule ".oh-my-zsh-custom/themes/powerlevel9k"]
+	path = .oh-my-zsh-custom/themes/powerlevel9k
+	url = git@github.com:bhilburn/powerlevel9k.git
+[submodule ".oh-my-zsh-custom/themes/powerlevel10k"]
+	path = .oh-my-zsh-custom/themes/powerlevel10k
+	url = git@github.com:romkatv/powerlevel10k.git

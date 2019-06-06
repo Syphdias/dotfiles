@@ -1,0 +1,41 @@
+# vim:set syntax=sh:
+
+keychain --systemd id_rsa --agents gpg,ssh
+#keychain --systemd id_rsa id_rsa2048 --agents gpg,ssh
+#[ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+#[ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
+#[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && source $HOME/.keychain/$HOSTNAME-sh-gpg
+
+## Fix for keychain in /usr/bin/keychain (l. 547+551)
+#inherit_gpg_agent_pid=`echo "$GPG_AGENT_INFO" | cut -f2 -d:` #alt
+#inherit_gpg_agent_pid=$(ps -u "$USER" -o pid,ucomm | grep "gpg-agent" | head -n 1 | cut -d" " -f2) #neu
+
+#[ -d "~/.ssh/connections" ] || mkdir -p ~/.ssh/connections
+#__HOSTNAME=`hostname`
+#
+#if [ -f ~/.agent.env$__HOSTNAME ]; then
+#  . ~/.agent.env$__HOSTNAME >/dev/null
+#
+#  if ! kill -0 $SSH_AGENT_PID >/dev/null; then
+#    echo "Stale agent file found. Spawning new agent..."
+#    eval $(ssh-agent | tee ~/.agent.env$__HOSTNAME)
+#    ssh-add
+#  fi
+#else
+#  echo "Starting ssh-agent..."
+#  eval $(ssh-agent | tee ~/.agent.env$__HOSTNAME)
+#  ssh-add
+#fi
+
+# gpg
+#if [ -f ~/.gnupg/gpg-agent-info$__HOSTNAME ]; then
+#  source ~/.gnupg/gpg-agent-info$__HOSTNAME
+#  if ! kill -0 $(echo $GPG_AGENT_INFO | awk -F ':' '{print $2}') > /dev/null; then 
+#    eval $(gpg-agent --daemon --default-cache-ttl 3 | tee ~/.gnupg/gpg-agent-info$__HOSTNAME)
+#    source ~/.gnupg/gpg-agent-info$__HOSTNAME
+#  fi
+#else
+#  eval $(gpg-agent --daemon --default-cache-ttl 3 | tee ~/.gnupg/gpg-agent-info$__HOSTNAME)
+#  source ~/.gnupg/gpg-agent-info$__HOSTNAME
+#fi
+

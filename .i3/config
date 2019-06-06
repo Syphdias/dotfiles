@@ -1,0 +1,347 @@
+# setting modifier key for float actions (move/resize)
+set $mod Mod4
+floating_modifier $mod
+workspace_auto_back_and_forth yes
+# mouse_warping all?? (valid: output(default) none)
+focus_on_window_activation none #default: smart
+set $ws1 "01  Terminal"
+set $ws2 "02  Chrome"
+set $ws3 "03  Atom"
+set $ws4 "04"
+set $ws5 "05"
+set $ws6 "06"
+set $ws7 "07  Reading"
+set $ws8 "08"
+set $ws9 "09 Messaging"
+set $ws0 "10  Sound"
+
+# assign default output for work
+workspace $ws1 output DP-2-2
+workspace $ws2 output DP-2-1
+workspace $ws3 output DP-2-1
+workspace $ws9 output eDP-1
+workspace $ws0 output eDP-1
+# assign programs to workspaces
+assign [class="Rambox"] $ws9
+assign [class="Atom"] $ws3
+for_window [class="Spotify"] move to workspace $ws0
+# floating
+for_window [window_role="pop-up"]         floating enable
+for_window [window_role="task_dialog"]    floating enable
+for_window [class="Pavucontrol"]          floating enable
+for_window [class="Skype"]                floating enable
+for_window [class="Nemo"]                 floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Cinnamon-settings.py"] floating enable
+for_window [class="Gnome-calculator"]     floating enable
+for_window [class="Arandr"]               floating enable
+for_window [class="zoom"]                 floating enable
+# Tabs Outliner
+for_window [title="Tabs Outliner"] floating disable
+for_window [title="Tabs Outliner"] resize set width 350px
+for_window [title="Tabs Outliner"] move left
+# Calendar
+for_window [class="Zenity"] move position mouse
+
+# theme/style
+font pango:System San Francisco Display 10
+hide_edge_borders both
+
+set $background          feh --bg-fill ~/Pictures/1440p/wallhaven-384906.png
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #454b56
+#set $inactive-bg-color   #3f4550
+#set $inactive-bg-color   #343944
+set $text-color          #f3f4f5
+set $inactive-text-color #848c9b
+#set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+for_window [class=".*"] title_format "  %title"
+
+# window colors         border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+# bar
+bar {
+        # status_command i3status # default
+        # (requires i3blocks)
+  	status_command i3blocks -c ~/.i3/i3blocks.conf
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
+}
+
+# session management
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (shift+s) shutdown
+mode "$mode_system" {
+   bindsym l exec --no-startup-id ~/.i3/exit.sh lock, mode "default"
+   bindsym e exec --no-startup-id ~/.i3/exit.sh logout, mode "default"
+   bindsym s exec --no-startup-id ~/.i3/exit.sh suspend, mode "default"
+   bindsym h exec --no-startup-id ~/.i3/exit.sh hibernate, mode "default"
+   bindsym r exec --no-startup-id ~/.i3/exit.sh reboot, mode "default"
+   bindsym shift+s exec --no-startup-id ~/.i3/exit.sh shutdown, mode "default"  
+
+   bindsym Return mode "default"
+   bindsym Escape mode "default"
+}
+bindsym control+mod1+Delete mode "$mode_system"
+
+# display management
+set $displayMode "Display Modes: [w]ork [a]nother [s]ingle [d]e[f]ault (HMDI|DP) magic [p|P] [$mop-p]"
+bindsym $mod+p mode $displayMode
+mode $displayMode {
+    # arandr
+    bindsym $mod+p exec --no-startup-id arandr;             mode "default"
+    bindsym o      exec --no-startup-id autorandr --change; mode "default"
+    # very untested "auto switch" and "auto same"
+    bindsym p exec --no-startup-id "\
+        xrandr --output eDP-1  --auto   \
+               --output DP-1   --auto --left-of eDP1    \
+               --output DP-2   --auto --left-of DP1     \
+               --output HDMI-1 --auto --left-of DP2     \
+               --output HDMI-2 --auto --left-of HDMI1"; \
+        mode "default"; exec --no-startup-id $background
+    bindsym shift+p exec --no-startup-id "\
+        xrandr --output eDP-1  --auto   \
+               --output DP-1   --auto --same-as eDP1   \
+               --output DP-2   --auto --same-as eDP1   \
+               --output HDMI-1 --auto --same-as eDP1   \
+               --output HDMI-2 --auto --same-as eDP1"; \
+        mode "default"; exec --no-startup-id $background
+    # only laptop
+    bindsym s exec --no-startup-id "\
+        xrandr --output eDP-1 --auto   \
+               --output DP-1   --off   \
+               --output DP-2   --off   \
+               --output DP-2-1 --off   \
+               --output DP-2-2 --off   \
+               --output HDMI-1 --off   \
+               --output HDMI-2 --off"; \
+        mode "default"; exec --no-startup-id $background
+    # work with laptop on right
+    bindsym w exec --no-startup-id "\
+        xrandr --output eDP-1  --mode 1360x768  --pos 3840x432         \
+               --output DP-2-1 --mode 1920x1200 --pos 1920x0 --primary \
+               --output DP-2-2 --mode 1920x1200 --pos    0x0";         \
+        mode "default"; exec --no-startup-id $background
+    # one extra 1440p on left side
+    bindsym a exec --no-startup-id "\
+        xrandr --output eDP-1  --mode 1920x1080 --pos 2560x360 \
+               --output HDMI-2 --mode 2560x1440 --pos    0x0"; \
+        mode "default"; exec --no-startup-id $background
+    # one extra 1080p on left side (with HDMI or DP)
+    bindsym d exec --no-startup-id "\
+        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
+               --output HDMI-2 --mode 1920x1080 --pos    0x0 || \
+        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
+               --output HDMI-1 --mode 1920x1080 --pos    0x0"; \
+        mode "default"; exec --no-startup-id $background
+    bindsym f exec --no-startup-id "\
+        xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0    \
+               --output DP-2  --mode 1920x1080 --pos    0x0 || \
+        xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0    \
+               --output DP-1  --mode 1920x1080 --pos    0x0";  \
+    bindsym d exec --no-startup-id "\
+        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
+               --output HDMI-2 --mode 1920x1080 --pos    0x0 || \
+        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
+               --output HDMI-1 --mode 1920x1080 --pos    0x0"; \
+        mode "default"; exec --no-startup-id $background
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+set $mons ~/.i3/mon
+set $display_layout: [h], [j], [k], [l] , [d]uplicate, [m]irror, [s]econd-only, [o]ff
+mode "$display_layout" {
+    bindsym $left mode "default", exec $mons -e left
+    bindsym $down mode "default", exec $mons -e bottom
+    bindsym $up mode "default", exec $mons -e top
+    bindsym $right mode "default", exec $mons -e right
+
+    # misc
+    bindsym d mode "default", exec $mons -d
+    bindsym m mode "default", exec $mons -m
+    bindsym s mode "default", exec $mons -s
+    bindsym o mode "default", exec $mons -o
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+udiaeresis mode "$display_layout"
+
+# key bindings
+# requires rofi and compton(opacity)
+#bindcode 133 --release 
+bindsym $mod+shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -lines 3 -eh 2 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+d --release exec --no-startup-id j4-dmenu-desktop
+#bindsym $mod+shift+d --release exec --no-startup-id LC_ALL=en_US.UTF-8 i3-dmenu-desktop --dmenu='rofi -dmenu -i -lines 10 -eh 1 -width 70 -padding 50 -opacity "85" -font "System San Francisco Display 18"'
+#bindsym $mod+d exec dmenu_run # default
+#bindsym $mod+Tab exec rofi -show window -i -lines 10 -eh 1 -width 50 -padding 50 -opacity "85" -font "System San Francisco Display 16"
+bindsym $mod+Tab exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show window -i -lines 10 -eh 1 -width 50 -padding 50 -opacity "85" -font "Cousine Nerd Font Regular 16"
+
+# compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
+exec        --no-startup-id compton -b --vsync opengl &
+bindsym $mod+o exec killall compton
+# background (requires feh)
+exec_always --no-startup-id $background
+
+# PowerManagement
+exec --no-startup-id xss-lock -- ~/.i3/lock.sh &
+## (auto)lock and screenoff requires: scrot convert xautolock xss-lock
+bindsym control+mod1+l exec --no-startup-id ~/.i3/lock.sh # i3lock --color 475263 -f # -i ~/Pictures/1440p/wallhaven-384906.png
+#bindsym XF86PowerOff exec i3lock --color 475263 -f && systemctl hibernate
+# TODO: replace xautolock with xss-lock?
+exec --no-startup-id xautolock -time 5 -locker "~/.i3/lock.sh" &
+
+# shotcuts for applications
+bindsym control+Print exec flameshot gui
+bindsym $mod+comma exec cinnamon-settings
+bindsym $mod+period exec nm-connection-editor
+
+# autostart and applets
+exec --no-startup-id glipper
+exec --no-startup-id nm-applet
+exec --no-startup-id spotify
+exec --no-startup-id rambox
+exec --no-startup-id i3-msg 'workspace $ws1; exec tilix'
+
+# keys changes
+exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
+exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+exec        --no-startup-id numlockx on                            # enable numlock (requires numlockx)
+
+# app launchers (requires xcape)
+bindsym $mod+Escape exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'"
+bindsym mod1+F2 exec --no-startup-id /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
+exec ~/.i3/xcape.sh
+
+# scratchpad
+bindsym $mod+shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+#---------------------------------------------------------------------------------------------------
+
+# key settings
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym control+mod1+t exec i3-sensible-terminal
+bindsym $mod+shift+c reload
+bindsym $mod+shift+r restart
+bindsym $mod+shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. \
+Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+## modes, layout and fullscreen
+bindsym $mod+h           split h
+bindsym $mod+v           split v
+bindsym $mod+s           layout stacking
+bindsym $mod+w           layout tabbed
+bindsym $mod+e           layout toggle split
+bindsym $mod+shift+space floating toggle
+bindsym $mod+space       focus mode_toggle
+bindsym $mod+f           fullscreen toggle
+
+## containers
+bindsym $mod+shift+q kill
+### change focus
+bindsym $mod+Left       focus left; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+j          focus left; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+Down       focus down; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+k          focus down; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+Up         focus up; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+l          focus up; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+Right      focus right; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+odiaeresis focus right; exec --no-startup-id ~/.i3/warpmouse.sh
+### move focused container to workspace and move there
+bindsym $mod+shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+shift+0 move container to workspace $ws0; workspace $ws0
+### move focused container
+# issue: focuses OTHER container on that workspace after move...
+bindsym $mod+shift+Left       move left;  exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+j          move left;  exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Down       move down;  exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+k          move down;  exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Up         move up;    exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+l          move up;    exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Right      move right; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+odiaeresis move right; exec --no-startup-id ~/.i3/warpmouse.sh
+### move focused container to other output
+bindsym $mod+control+shift+Left       move container to output left;  focus output left
+bindsym $mod+control+shift+j          move container to output left;  focus output left
+bindsym $mod+control+shift+Right      move container to output right; focus output right
+bindsym $mod+control+shift+odiaeresis move container to output right; focus output right
+bindsym $mod+control+shift+Up         exec --no-startup-id ~/.i3/i3empty.py -m 
+bindsym $mod+control+shift+l          exec --no-startup-id ~/.i3/i3empty.py -m 
+bindsym $mod+control+shift+Down       move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+control+shift+k          move container to workspace back_and_forth; workspace back_and_forth
+### resize container
+bindsym $mod+mod1+Left       resize shrink width  5 px or 5 ppt
+bindsym $mod+mod1+j          resize shrink width  5 px or 5 ppt
+bindsym $mod+mod1+Down       resize grow   height 5 px or 5 ppt
+bindsym $mod+mod1+k          resize grow   height 5 px or 5 ppt
+bindsym $mod+mod1+Up         resize shrink height 5 px or 5 ppt
+bindsym $mod+mod1+l          resize shrink height 5 px or 5 ppt
+bindsym $mod+mod1+Right      resize grow   width  5 px or 5 ppt
+bindsym $mod+mod1+odiaeresis resize grow   width  5 px or 5 ppt
+### focus the parent container
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+
+## workspaces
+### switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+bindsym control+mod1+Left        workspace prev
+bindsym control+mod1+j           workspace prev
+bindsym control+mod1+Right       workspace next
+bindsym control+mod1+odiaeresis  workspace next
+bindsym control+mod1+Up          exec --no-startup-id ~/.i3/i3empty.py
+#bindsym control+mod1+l           exec --no-startup-id ~/.i3/i3empty.py
+bindsym control+mod1+Down        workspace back_and_forth
+bindsym control+mod1+k           workspace back_and_forth
+### move workspace
+bindsym control+shift+mod1+Left       move workspace to output left
+bindsym control+shift+mod1+j          move workspace to output left
+bindsym control+shift+mod1+Right      move workspace to output right
+bindsym control+shift+mod1+odiaeresis move workspace to output right
+
+## Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -5% #decrease sound volume
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   alsa_output.pci-0000_00_1f.3.analog-stereo toggle
+## Screen brightness controls (requires xbacklight)
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+## Media player controls (requires playerctl)
+bindsym XF86AudioPlay              exec playerctl play-pause
+bindsym shift+XF86AudioMute        exec playerctl play-pause
+bindsym XF86AudioNext              exec playerctl next
+bindsym shift+XF86AudioRaiseVolume exec playerctl next
+bindsym XF86AudioPrev              exec playerctl previous
+bindsym shift+XF86AudioLowerVolume exec playerctl previous

@@ -1,0 +1,7 @@
+$include /etc/inputrc
+set completion-ignore-case on
+"\e[1;5C": backward-word
+"\e[5C": backward-word
+"\e\e[C": backward-word
+
+# http://chneukirchen.org/dotfiles/.inputrc ?

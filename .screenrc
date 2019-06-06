@@ -1,0 +1,31 @@
+#hardstatus alwayslastline '%{= G}[ %{G}%H %{g}][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g}][%{B}%Y-%m-%d %{W}%c:%s %{g}]'
+hardstatus alwayslastline
+hardstatus string '%{= G}[ %{G}%H %{g}][ %{= w}%?%-Lw%?%{= R}%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g}][ %{B}%Y-%m-%d %{W}%c:%s %{g}]'
+#hardstatus alwayslastline                                                                              
+#hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+startup_message off
+vbell off
+defscrollback 100000
+
+### kein ammoklauf nach less oder vim
+altscreen on
+
+# scrolling
+termcapinfo xterm* ti@:te@
+#termcapinfo rxvt-unicode ti@:te@
+#termcapinfo rxvt ti@:te@
+#termcapinfo rxvt 'hs:ts=\E]2;:fs=07:ds=\E]2;screen07'
+
+shell '/usr/bin/zsh'
+
+# TODO: find out if I want these
+# http://chneukirchen.org/dotfiles/.screenrc
+# defflow off
+# defutf8 on
+# nonblock on
+# bind o focus
+# bind P paste .
+# bind x
+# bind ^X
+# bind X lockscreen
+# caption always "%{= kW}%-Lw%{=b kW}%n* %t%{= kW}%+Lw %= %?%E%{=b}ESC %?%?%P%{=b}COPY %?"
