@@ -7,6 +7,7 @@
 #"DISCONNECTED"  "${DEFAULT_COLOR}" "${DEFAULT_COLOR_INVERTED}" '\u'${CODEPOINT_OF_AWESOME_BATTERY_FULL}  $'\uF240 '
 
 local -i POWERLEVEL9K_BATTERY_LOW_THRESHOLD=10
+local -i POWERLEVEL9K_BATTERY_MEDIUM_THRESHOLD=20
 local -i POWERLEVEL9K_BATTERY_HIDE_ABOVE_THRESHOLD=999
 local -a POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND
 local POWERLEVEL9K_BATTERY_VERBOSE=true
@@ -14,6 +15,7 @@ typeset -g POWERLEVEL9K_BATTERY_STAGES
 
 typeset -gA _P9K_BATTERY_STATES=(
   'low'           'red'
+  'medium'        'orange'
   'charging'      'yellow'
   'charged'       'green'
   'disconnected'  'white'
@@ -58,6 +60,8 @@ else
     state=charging
   elif (( bat_percent < POWERLEVEL9K_BATTERY_LOW_THRESHOLD )); then
     state=low
+  elif (( bat_percent < POWERLEVEL9K_BATTERY_MEDIUM_THRESHOLD )); then
+    state=medium
   else
     state=disconnected
   fi

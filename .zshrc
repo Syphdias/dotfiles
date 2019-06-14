@@ -34,6 +34,7 @@ plugins=(
   autojump
   #autopep8
   common-aliases
+  command-not-found
   #compleat
   dirhistory
   docker

@@ -59,7 +59,7 @@
       custom_rprompt
       vpn_ip
       time #newline
-      battery
+      #battery
       #context
   )
 
