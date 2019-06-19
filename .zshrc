@@ -54,24 +54,29 @@ plugins=(
   zsh-prompt-benchmark
 )
 
+function my_source () {
+    [[ -f "$1" ]] \
+        && source "$1"
+}
+
 # Oh My Zsh
 ZSH="${HOME}/.oh-my-zsh"
 ZSH_CUSTOM="${HOME}/.oh-my-zsh-custom"
-: typeset -g ${ZSH_THEME=powerlevel10k/powerlevel10k}
-source "${HOME}/.zshrc.d/powerlevel0krc.zsh"
-source "$ZSH/oh-my-zsh.sh"
+: ${ZSH_THEME=powerlevel10k/powerlevel10k}
+my_source "${HOME}/.zshrc.d/powerlevel0krc.zsh"
+my_source "$ZSH/oh-my-zsh.sh"
 
-source "${HOME}/.zshrc.d/env.zsh"
-source "${HOME}/.zshrc.d/completion.zsh"
-source "${HOME}/.zshrc.d/keybinds.zsh"
-source "${HOME}/.zshrc.d/agents.zsh"
-source "${HOME}/.zshrc.d/virtenvwrapper.zsh"
+my_source "${HOME}/.zshrc.d/env.zsh"
+my_source "${HOME}/.zshrc.d/completion.zsh"
+my_source "${HOME}/.zshrc.d/keybinds.zsh"
+my_source "${HOME}/.zshrc.d/agents.zsh"
+my_source "${HOME}/.zshrc.d/virtenvwrapper.zsh"
 
-source "${HOME}/.bashrc.d/50_function"
-source "${HOME}/.bashrc.d/60_alias"
-source "${HOME}/.$(hostname).src"
+my_source "${HOME}/.bashrc.d/50_function"
+my_source "${HOME}/.bashrc.d/60_alias"
+my_source "${HOME}/.$(hostname).src"
 
-source "${HOME}/.zshrc.d/testing.zsh"
+my_source "${HOME}/.zshrc.d/testing.zsh"
 
 [[ "$ZDATE" == true ]] && echo $((EPOCHREALTIME - _timer)) >&2
 [[ "$ZPROF" == true ]] && zprof || true
