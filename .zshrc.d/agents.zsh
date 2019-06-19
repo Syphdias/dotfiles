@@ -1,4 +1,5 @@
-keychain id_rsa id_rsa2048 --agents gpg,ssh
+command -v keychain 2>&- 1>&- \
+    && keychain id_rsa id_rsa2048 --agents gpg,ssh
 #if (( $+commands[keychain] )); then
 #    eval "$(keychain --eval --quick --noask --nogui --quiet --inherit 'any' --agents 'gpg,ssh' --ignore-missing id_rsa id_rsa2048)"
 #fi
