@@ -21,9 +21,9 @@ try:
         elif (os.environ['BLOCK_BUTTON'] == '3'):
             control_iface.Next()
         elif (os.environ['BLOCK_BUTTON'] == '4'):
-            subprocess.call(["pactl", "set-sink-volume", "0", "+5%"])
+            subprocess.call(["pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%"])
         elif (os.environ['BLOCK_BUTTON'] == '5'):
-            subprocess.call(["pactl", "set-sink-volume", "0", "-5%"])
+            subprocess.call(["pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%"])
 
     spotify_iface = dbus.Interface(spotify, 'org.freedesktop.DBus.Properties')
     props = spotify_iface.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
@@ -31,7 +31,8 @@ try:
     if (sys.version_info > (3, 0)):
         print(str(props['xesam:artist'][0]) + " - " + str(props['xesam:title']))
     else:
-        print(props['xesam:artist'][0] + " - " + props['xesam:title']).encode('utf-8')
+        print("<span color='#2ebd59'></span>" + props['xesam:artist'][0] + " - " + props['xesam:title'])
+        # removed _after_ print .encode('utf-8')
     exit
 except dbus.exceptions.DBusException:
     exit

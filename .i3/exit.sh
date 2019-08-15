@@ -1,6 +1,6 @@
 #!/bin/sh
 lock() {
-    ~/.i3/lock.sh
+    ~/.i3/lock.sh & sleep 1
 }
 
 case "$1" in
