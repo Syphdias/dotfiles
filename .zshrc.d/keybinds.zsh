@@ -16,15 +16,6 @@ foreground-vi() {
 zle -N foreground-vi
 bindkey '^Z' foreground-vi
 
-# https://superuser.com/questions/1027957/zsh-change-prompt-just-before-command-is-run
-renew-prompt-accept-line() {
-    zle .reset-prompt && zle -R
-    zle .accept-line
-}
-zle -N renew-prompt-accept-line
-bindkey "^M" renew-prompt-accept-line
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=renew-prompt-accept-line
-
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
 # unset zle_bracketed_paste

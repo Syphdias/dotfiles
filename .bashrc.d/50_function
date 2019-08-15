@@ -222,4 +222,39 @@ zsh_stats_better() {
         | head -n20
 }
 
+zshupdate () {
+    usage () {
+        echo -e "-a all\n-o omz\n-p p10k"
+    }
+
+    git=/usr/bin/git
+    repo_omz="${HOME}/git/private/confrc/public-dotfiles/.oh-my-zsh"
+    repo_p10k="${HOME}/git/private/confrc/public-dotfiles/.oh-my-zsh-custom/themes/powerlevel10k"
+
+    while getopts alop opt; do
+        case $opt in
+            a) mode=all  ;;
+            o) mode=omz  ;;
+            p) mode=p10k ;;
+            ?|*) usage
+        esac
+    done
+
+    if [[ $mode == "omz" || $mode == "all" ]]; then
+        $git --git-dir "$repo_omz/.git" --work-tree "$repo_omz" log -1
+        $git --git-dir "$repo_omz/.git" --work-tree "$repo_omz" pull --ff-only
+    fi
+    if [[ $mode == "p10k" || $mode == "all" ]]; then
+        $git --git-dir "$repo_p10k/.git" --work-tree "$repo_p10k" log -1
+        $git --git-dir "$repo_p10k/.git" --work-tree "$repo_p10k" pull --ff-only
+    fi
+}
+
+zshmode () {
+    # kunde|customer|audit -> if 3rd party sees stuff
+    #   no autosuggestions
+    # copy -> for tickets
+    #   no rprompt
+}
+
 fi

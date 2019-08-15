@@ -52,7 +52,8 @@ MAILCHECK=0
 # export stuff
 #export PATH="${HOME}/.local/bin:${HOME}/bin:/usr/local/bin:${PATH}"
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="${HOME}/.local/bin:$PYENV_ROOT/bin:${HOME}/bin:/usr/local/bin:${PATH}"
+export GOPATH="$HOME/go"
+export PATH="${HOME}/.local/bin:$PYENV_ROOT/bin:/usr/local/bin:$GOPATH/bin:${HOME}/bin:${PATH}"
 
 export EDITOR='vim'
 export TERMINAL=tilix
