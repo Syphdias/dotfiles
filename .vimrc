@@ -5,7 +5,7 @@ set viminfo='100,<1000,s100,h
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 autocmd FileType yaml set shiftwidth=2
 
-set number relativenumber " linenumbers
+"set number relativenumber " linenumbers
 
 set scrolloff=3
 set modeline      " Enables infile settings
@@ -20,6 +20,9 @@ set foldlevel=5   " to expand yaml folds by default
 if has("autocmd") " save cursor position
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+se undofile                " maintain persistent undo history
+set undodir=~/.vim/undodir " folder with undo files
 
 " status line
 "set laststatus=2
