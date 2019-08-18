@@ -58,9 +58,7 @@
       background_jobs
       custom_rprompt
       vpn_ip
-      time #newline
-      #battery
-      #context
+      time
   )
 
   # gerneral
@@ -189,40 +187,6 @@
   P9K_IGNORE_VAR_WARNING=true
   P9K_IGNORE_DEPRECATION_WARNING=true
 
-#   () {
-#     local envVar varType varName origVar newVar newVal
-#     local oldVarsFound=false
-#     for envVar in $(declare); do
-#       if [[ ${envVar} =~ "POWERLEVEL9K_" ]]; then
-#         oldVarsFound=true
-#         varType=( "$(declare -p ${envVar})" )
-#         varName=${${envVar##POWERLEVEL9K_}%=*}
-#         origVar="POWERLEVEL9K_${varName}"
-#         newVar="P9K_${varName}"
-#         if [[ "${varType[1]:9:1}" == "a" || "${varType[1]:12:1}" == "a" ]]; then # array variable
-#         case ${(U)varName} in
-#           BATTERY_STAGES|BATTERY_LEVEL_BACKGROUND|LEFT_PROMPT_ELEMENTS|RIGHT_PROMPT_ELEMENTS)
-#           [[ "${varType[2]}" == "" ]] && var=${varType[1]} || var=${varType[2]} # older ZSH installs have 2 lines for declare
-#           newVal="${${${var##*\(}%\)*}//  / }" # remove brackets and extra spaces
-#           newVal="${newVal%"${newVal##*[! $'\t']}"}" # severe trick - remove trailing whitespace
-#           newVal="${newVal#"${newVal%%[! $'\t']*}"}" # severe trick - remove leading whitespace
-#           ;;
-#           BATTERY_STAGES)
-#           newVal=${${newVal}//\'/}
-#           ;;
-#         esac
-#         typeset -g -a $newVar
-#         : ${(PA)newVar::=${(s: :)newVal}} # array assignment with values split on space
-#       else
-#         newVal=${(P)origVar}
-#         : ${(P)newVar::=$newVal}
-#       fi
-#       unset $origVar
-#     fi
-#   done
-# } "$@"
-
-
   P9K_LEFT_PROMPT_ELEMENTS=($POWERLEVEL9K_LEFT_PROMPT_ELEMENTS)
   P9K_RIGHT_PROMPT_ELEMENTS=($POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS)
   P9K_MODE=$POWERLEVEL9K_MODE
@@ -286,37 +250,6 @@
   # $'\ue0b8' $'\ue0b9' $'\ue0ba' $'\ue0bb' $'\ue0bc' $'\ue0bd' $'\ue0be' $'\ue0bf'
   #                                                                
   # ▶ ◀ ◥ ◤ ◆ ▬ ◼
-
-
-  # TESTS
-  # POWERLEVEL9K_DIR_SHORTEN_STRATEGY="truncate_to_unique"
-
-  #setopt promptsubst
-
-  #debug P9K_VCS_SHOW_CHANGESET=true
-  #P9K_BATTERY_LEVEL_BACKGROUND=(blue red yellow green)
-  #P9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
-  #P9K_BATTERY_STAGES="abcdefghijklmnopqrstuvwxyz"
-  #P9K_BATTERY_STAGES=1
-  #P9K_BATTERY_STAGES=("lowest" "low" "medium" "high" "full")
-  #   $'▏    ▏' $'▎    ▏' $'▍    ▏' $'▌    ▏' $'▋    ▏' $'▊    ▏' $'▉    ▏' $'█    ▏'
-  #   $'█▏   ▏' $'█▎   ▏' $'█▍   ▏' $'█▌   ▏' $'█▋   ▏' $'█▊   ▏' $'█▉   ▏' $'██   ▏'
-  #   $'██   ▏' $'██▎  ▏' $'██▍  ▏' $'██▌  ▏' $'██▋  ▏' $'██▊  ▏' $'██▉  ▏' $'███  ▏'
-  #   $'███  ▏' $'███▎ ▏' $'███▍ ▏' $'███▌ ▏' $'███▋ ▏' $'███▊ ▏' $'███▉ ▏' $'████ ▏'
-  #   $'████ ▏' $'████▎▏' $'████▍▏' $'████▌▏' $'████▋▏' $'████▊▏' $'████▉▏' $'█████▏' )
-
-
-  ## for newline-revolution
-  #unset P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON P9K_PROMPT_ON_NEWLINE P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON
-  #P9K_PROMPT_ON_NEWLINE=true
-  #P9K_LEFT_PROMPT_ELEMENTS=(dir newline vcs newline newline)
-  #P9K_RIGHT_PROMPT_ELEMENTS=(dir newline vcs dir newline newline vcs)
-  #P9K_RIGHT_PROMPT_ELEMENTS=(dir newline vcs dir newline dir newline vcs)
-  #P9K_MULTILINE_LAST_NEWLINE_PROMPT_SUFFIX_ICON='❱'
-
-  ## for newdir test
-  #P9K_LEFT_PROMPT_ELEMENTS=(dir dirnew); P9K_RIGHT_PROMPT_ELEMENTS=(); P9K_DIR_PATH_ABSOLUTE=true; P9K_DIR_SHORTEN_STRATEGY='truncate_with_folder_marker'; P9K_DIR_SHORTEN_FOLDER_MARKER=.git
-  #P9K_BATTERY_CHARGING_ICON_COLOR=blue
 
   unfunction _pp_c _pp_s
 } "$@"
