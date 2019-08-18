@@ -172,7 +172,7 @@ bindsym $mod+udiaeresis mode "$display_layout"
 exec --no-startup-id autorandr --change --default single
 
 # compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
-exec        --no-startup-id compton -b --config ~/compton.conf &
+exec        --no-startup-id compton -b --config ~/.config/compton.conf
 bindsym $mod+o exec killall compton
 # background (requires feh)
 exec_always --no-startup-id $background
