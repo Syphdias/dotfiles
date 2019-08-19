@@ -15,6 +15,14 @@ set $ws7 "07  Reading"
 set $ws8 "08"
 set $ws9 "09 Messaging"
 set $ws0 "10  Sound"
+# background
+set $background          feh --bg-fill ~/Pictures/1440p/wallhaven-384906.png
+set $exec_bg             exec --no-startup-id $background;
+set $resetmode           mode "default";
+set $left  j
+set $down  k
+set $up    l
+set $right odiaeresis
 
 # assign default output for work
 workspace $ws1 output DP-2-2
@@ -37,7 +45,7 @@ for_window [class="Cinnamon-settings.py"] floating enable
 for_window [class="Gnome-calculator"]     floating enable
 for_window [class="Arandr"]               floating enable
 for_window [class="zoom"]                 floating enable
-for_window [class="^Cssh$"]           floating enable
+for_window [class="^Cssh$"]               floating enable
 for_window [title="CLUSTERSSH: "]         floating enable
 # Tabs Outliner
 for_window [title="Tabs Outliner"] floating disable
@@ -48,11 +56,11 @@ for_window [class="Zenity"] move position mouse
 # gimp
 for_window [class="gimp-2.10"] $ws5
 
+#---------------------------------------------------------------------------------------------------
 # theme/style
 font pango:System San Francisco Display 10
 hide_edge_borders both
 
-set $background          feh --bg-fill ~/Pictures/1440p/wallhaven-384906.png
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #454b56
 #set $inactive-bg-color   #3f4550
@@ -86,132 +94,11 @@ bar {
 	}
 }
 
-# display management
-set $displayMode "Display Modes: [w]ork [a]nother [s]ingle [d]e[f]ault (HMDI|DP) magic [p|P] [$mop-p]"
-bindsym $mod+p mode $displayMode
-mode $displayMode {
-    # arandr
-    bindsym $mod+p exec --no-startup-id arandr;             mode "default"
-    bindsym o      exec --no-startup-id autorandr --change; mode "default"
-    # very untested "auto switch" and "auto same"
-    bindsym p exec --no-startup-id "\
-        xrandr --output eDP-1  --auto   \
-               --output DP-1   --auto --left-of eDP1    \
-               --output DP-2   --auto --left-of DP1     \
-               --output HDMI-1 --auto --left-of DP2     \
-               --output HDMI-2 --auto --left-of HDMI1"; \
-        mode "default"; exec --no-startup-id $background
-    bindsym shift+p exec --no-startup-id "\
-        xrandr --output eDP-1  --auto   \
-               --output DP-1   --auto --same-as eDP1   \
-               --output DP-2   --auto --same-as eDP1   \
-               --output HDMI-1 --auto --same-as eDP1   \
-               --output HDMI-2 --auto --same-as eDP1"; \
-        mode "default"; exec --no-startup-id $background
-    # only laptop
-    bindsym s exec --no-startup-id "\
-        xrandr --output eDP-1 --auto   \
-               --output DP-1   --off   \
-               --output DP-2   --off   \
-               --output DP-2-1 --off   \
-               --output DP-2-2 --off   \
-               --output HDMI-1 --off   \
-               --output HDMI-2 --off"; \
-        mode "default"; exec --no-startup-id $background
-    # work with laptop on right
-    bindsym w exec --no-startup-id "\
-        xrandr --output eDP-1  --mode 1360x768  --pos 3840x432         \
-               --output DP-2-1 --mode 1920x1200 --pos 1920x0 --primary \
-               --output DP-2-2 --mode 1920x1200 --pos    0x0";         \
-        mode "default"; exec --no-startup-id $background
-    # one extra 1440p on left side
-    bindsym a exec --no-startup-id "\
-        xrandr --output eDP-1  --mode 1920x1080 --pos 2560x360 \
-               --output HDMI-2 --mode 2560x1440 --pos    0x0"; \
-        mode "default"; exec --no-startup-id $background
-    # one extra 1080p on left side (with HDMI or DP)
-    bindsym d exec --no-startup-id "\
-        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
-               --output HDMI-2 --mode 1920x1080 --pos    0x0 || \
-        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
-               --output HDMI-1 --mode 1920x1080 --pos    0x0"; \
-        mode "default"; exec --no-startup-id $background
-    bindsym f exec --no-startup-id "\
-        xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0    \
-               --output DP-2  --mode 1920x1080 --pos    0x0 || \
-        xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0    \
-               --output DP-1  --mode 1920x1080 --pos    0x0";  \
-    bindsym d exec --no-startup-id "\
-        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
-               --output HDMI-2 --mode 1920x1080 --pos    0x0 || \
-        xrandr --output eDP-1  --mode 1920x1080 --pos 1920x0    \
-               --output HDMI-1 --mode 1920x1080 --pos    0x0"; \
-        mode "default"; exec --no-startup-id $background
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-# https://github.com/Ventto/mons
-set $mons ~/.i3/mon
-set $display_layout: [h], [j], [k], [l] , [d]uplicate, [m]irror, [s]econd-only, [o]ff
-mode "$display_layout" {
-    bindsym $left  mode "default", exec $mons -e left
-    bindsym $down  mode "default", exec $mons -e bottom
-    bindsym $up    mode "default", exec $mons -e top
-    bindsym $right mode "default", exec $mons -e right
-    bindsym d      mode "default", exec $mons -d
-    bindsym m      mode "default", exec $mons -m
-    bindsym s      mode "default", exec $mons -s
-    bindsym o      mode "default", exec $mons -o
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+udiaeresis mode "$display_layout"
-
-# fix initial monitor setup
-exec --no-startup-id autorandr --change --default single
-
-# compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
-exec        --no-startup-id compton -b --config ~/.config/compton.conf
-bindsym $mod+o exec killall compton
-# background (requires feh)
-exec_always --no-startup-id $background
-
-# PowerManagement
-exec --no-startup-id xss-lock -- ~/.i3/lock.sh &
-## (auto)lock and screenoff requires: scrot convert xautolock xss-lock
-bindsym control+mod1+l exec --no-startup-id ~/.i3/lock.sh # i3lock --color 475263 -f # -i ~/Pictures/1440p/wallhaven-384906.png
-#bindsym XF86PowerOff exec i3lock --color 475263 -f && systemctl hibernate
-# TODO: replace xautolock with xss-lock?
-exec --no-startup-id xautolock -time 5 -locker "~/.i3/lock.sh" &
-
-# shotcuts for applications
-bindsym control+Print   exec flameshot gui
-bindsym $mod+comma      exec cinnamon-settings
-bindsym $mod+n          exec nm-connection-editor
-bindsym $mod+m          exec pavucontrol
-bindsym --release control+shift+dead_acute exec --no-startup-id xdotool sleep 0.1 type '````'
-
-# alternating vsplit|hsplit (requires i3-py (pip3))
-#exec_always --no-startup-id ~/.i3/alternating_layouts.py
-
-# autostart and applets
-exec --no-startup-id nm-applet
-exec --no-startup-id glipper
-exec --no-startup-id pasystray
-exec --no-startup-id spotify
-exec --no-startup-id rambox
-exec --no-startup-id i3-msg 'workspace $ws1; exec tilix'
-exec_always --no-startup-id dunst -conf ~/.i3/dunstrc
-
-# keys changes
-exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
-exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
-exec        --no-startup-id numlockx on                            # enable numlock (requires numlockx)
 
 #---------------------------------------------------------------------------------------------------
+# modes
 
-# session management
+## Session Management
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (shift+s) shutdown
 mode "$mode_system" {
    bindsym l exec --no-startup-id ~/.i3/exit.sh lock, mode "default"
@@ -225,10 +112,90 @@ mode "$mode_system" {
 }
 bindsym control+mod1+Delete mode "$mode_system"
 
+## Display Management
+# https://github.com/Ventto/mons
+set $mons /usr/bin/mons
+set $display_layout [←→↑↓] , [d]uplicate, [m]irror, [s]ol[o], [Shift+s]econd-only, [a]uto
+mode "$display_layout" {
+    bindsym $mod+p exec --no-startup-id arandr;             mode "default"
+    bindsym a      exec --no-startup-id autorandr --change; mode "default"
+    # only laptop
+    bindsym s exec --no-startup-id "\
+        xrandr --output eDP-1 --auto                         \
+               --output DP-1   --off --output DP-2   --off   \
+               --output DP-2-1 --off --output DP-2-2 --off   \
+               --output HDMI-1 --off --output HDMI-2 --off"; $exec_bg
+    # work with laptop on right
+    bindsym w exec --no-startup-id "\
+        xrandr --output eDP-1  --mode 1360x768  --pos 3840x432         \
+               --output DP-2-1 --mode 1920x1200 --pos 1920x0 --primary \
+               --output DP-2-2 --mode 1920x1200 --pos    0x0"; $exec_bg
+
+    bindsym Left    exec $mons -e left;   $resetmode $exec_bg
+    bindsym Down    exec $mons -e bottom; $resetmode $exec_bg
+    bindsym Up      exec $mons -e top;    $resetmode $exec_bg
+    bindsym Right   exec $mons -e right;  $resetmode $exec_bg
+    bindsym d       exec $mons -d;        $resetmode $exec_bg
+    bindsym m       exec $mons -m;        $resetmode $exec_bg
+    bindsym Shift+s exec $mons -s;        $resetmode $exec_bg
+    bindsym o       exec $mons -o;        $resetmode $exec_bg
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$display_layout"
+
 
 #---------------------------------------------------------------------------------------------------
+# desktop environment stuff and looks
 
+## fix initial monitor setup
+exec --no-startup-id autorandr --change --default single
+
+## Background (requires feh)
+exec_always --no-startup-id $background
+
+## Compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
+exec        --no-startup-id compton -b --config ~/.config/compton.conf
+bindsym $mod+o exec killall compton
+
+## Power Management
+exec --no-startup-id xss-lock -- ~/.i3/lock.sh
+exec --no-startup-id xautolock -time 5 -locker "~/.i3/lock.sh"
+# TODO: replace xautolock with xss-lock? (needs: 5m -> lock; lock before sus/hiber/...; lid close lock?)
+
+## (auto)lock and screenoff requires: scrot convert xautolock xss-lock
+bindsym control+mod1+l exec --no-startup-id ~/.i3/lock.sh
+
+
+#---------------------------------------------------------------------------------------------------
+# autostart and start on reload
+
+## applets
+exec --no-startup-id nm-applet
+exec --no-startup-id glipper
+exec --no-startup-id pasystray
+
+## autostart
+exec --no-startup-id spotify
+exec --no-startup-id rambox
+exec --no-startup-id i3-msg 'workspace $ws1; exec tilix'
+
+## notification daemon (_always make it possible to kill and restart i3 for new config)
+exec_always --no-startup-id dunst -conf ~/.i3/dunstrc
+
+## keys changes
+exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
+exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+exec        --no-startup-id numlockx on                            # enable numlock (requires numlockx)
+
+## alternating vsplit|hsplit (requires i3-py (pip3))
+# exec_always --no-startup-id ~/.i3/alternating_layouts.py
+# disabled since unexpected behaviour can occur and it should be rewriten with i3ipc
+
+
+#---------------------------------------------------------------------------------------------------
 # key settings
+
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym control+mod1+t exec i3-sensible-terminal
 bindsym $mod+shift+c reload
@@ -365,4 +332,10 @@ bindsym XF86AudioNext              exec playerctl next
 bindsym shift+XF86AudioRaiseVolume exec playerctl next
 bindsym XF86AudioPrev              exec playerctl previous
 bindsym shift+XF86AudioLowerVolume exec playerctl previous
+## shotcuts for applications
+bindsym control+Print   exec flameshot gui
+bindsym $mod+comma      exec cinnamon-settings
+bindsym $mod+n          exec nm-connection-editor
+bindsym $mod+m          exec pavucontrol
+#bindsym --release control+shift+dead_acute exec --no-startup-id xdotool sleep 0.1 type '````'
 #---------------------------------------------------------------------------------------------------
