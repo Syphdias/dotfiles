@@ -230,14 +230,14 @@ bindsym $mod+minus scratchpad show
 ## containers
 bindsym $mod+shift+q kill
 ### change focus
-bindsym $mod+Left       focus left; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+j          focus left; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+Down       focus down; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+k          focus down; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+Up         focus up; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+l          focus up; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+Right      focus right; exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+odiaeresis focus right; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+Left       exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh left
+bindsym $mod+$left      exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh left
+bindsym $mod+Down       exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh down
+bindsym $mod+$down      exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh down
+bindsym $mod+Up         exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh up
+bindsym $mod+$up        exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh up
+bindsym $mod+Right      exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh right
+bindsym $mod+$right     exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh right
 ### move focused container to workspace and move there
 bindsym $mod+shift+1    move container to workspace $ws1; workspace $ws1
 bindsym $mod+shift+KP_1 move container to workspace $ws1; workspace $ws1
