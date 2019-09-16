@@ -230,14 +230,14 @@ bindsym $mod+minus scratchpad show
 ## containers
 bindsym $mod+shift+q kill
 ### change focus
-bindsym $mod+Left       exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh left
-bindsym $mod+$left      exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh left
-bindsym $mod+Down       exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh down
-bindsym $mod+$down      exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh down
-bindsym $mod+Up         exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh up
-bindsym $mod+$up        exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh up
-bindsym $mod+Right      exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh right
-bindsym $mod+$right     exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh right
+bindsym $mod+Left   exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh left
+bindsym $mod+$left  exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh left
+bindsym $mod+Down   exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh down
+bindsym $mod+$down  exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh down
+bindsym $mod+Up     exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh up
+bindsym $mod+$up    exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh up
+bindsym $mod+Right  exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh right
+bindsym $mod+$right exec --no-startup-id ~/.i3/i3_fullscreen_focus.sh right
 ### move focused container to workspace and move there
 bindsym $mod+shift+1    move container to workspace $ws1; workspace $ws1
 bindsym $mod+shift+KP_1 move container to workspace $ws1; workspace $ws1
@@ -261,32 +261,32 @@ bindsym $mod+shift+0    move container to workspace $ws0; workspace $ws0
 bindsym $mod+shift+KP_0 move container to workspace $ws0; workspace $ws0
 ### move focused container
 # issue: focuses OTHER container on that workspace after move...sometimes
-bindsym $mod+shift+Left       move left 50px;
-bindsym $mod+shift+j          move left;  exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+shift+Down       move down 50px;
-bindsym $mod+shift+k          move down;  exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+shift+Up         move up 50px;
-bindsym $mod+shift+l          move up;    exec --no-startup-id ~/.i3/warpmouse.sh
-bindsym $mod+shift+Right      move right 50px;
-bindsym $mod+shift+odiaeresis move right; exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Left   move left 50px;
+bindsym $mod+shift+$left  move left;  exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Down   move down 50px;
+bindsym $mod+shift+$down  move down;  exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Up     move up 50px;
+bindsym $mod+shift+$up    move up;    exec --no-startup-id ~/.i3/warpmouse.sh
+bindsym $mod+shift+Right  move right 50px;
+bindsym $mod+shift+$right move right; exec --no-startup-id ~/.i3/warpmouse.sh
 ### move focused container to other output
-bindsym $mod+control+shift+Left       move container to output left;  focus output left
-bindsym $mod+control+shift+j          move container to output left;  focus output left
-bindsym $mod+control+shift+Right      move container to output right; focus output right
-bindsym $mod+control+shift+odiaeresis move container to output right; focus output right
-bindsym $mod+control+shift+Up         exec --no-startup-id ~/.i3/i3empty.py -m 
-bindsym $mod+control+shift+l          exec --no-startup-id ~/.i3/i3empty.py -m 
-bindsym $mod+control+shift+Down       move container to workspace back_and_forth; workspace back_and_forth
-bindsym $mod+control+shift+k          move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+control+shift+Left   move container to output left;  focus output left
+bindsym $mod+control+shift+$left  move container to output left;  focus output left
+bindsym $mod+control+shift+Right  move container to output right; focus output right
+bindsym $mod+control+shift+$right move container to output right; focus output right
+bindsym $mod+control+shift+Up     exec --no-startup-id ~/.i3/i3empty.py -m 
+bindsym $mod+control+shift+$up    exec --no-startup-id ~/.i3/i3empty.py -m 
+bindsym $mod+control+shift+Down   move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+control+shift+$down  move container to workspace back_and_forth; workspace back_and_forth
 ### resize container
-bindsym $mod+mod1+Left       resize shrink width  50 px
-bindsym $mod+mod1+j          resize shrink width  50 px
-bindsym $mod+mod1+Down       resize grow   height 50 px
-bindsym $mod+mod1+k          resize grow   height 50 px
-bindsym $mod+mod1+Up         resize shrink height 50 px
-bindsym $mod+mod1+l          resize shrink height 50 px
-bindsym $mod+mod1+Right      resize grow   width  50 px
-bindsym $mod+mod1+odiaeresis resize grow   width  50 px
+bindsym $mod+mod1+Left   resize shrink width  50 px
+bindsym $mod+mod1+$left  resize shrink width  50 px
+bindsym $mod+mod1+Down   resize grow   height 50 px
+bindsym $mod+mod1+$down  resize grow   height 50 px
+bindsym $mod+mod1+Up     resize shrink height 50 px
+bindsym $mod+mod1+$up    resize shrink height 50 px
+bindsym $mod+mod1+Right  resize grow   width  50 px
+bindsym $mod+mod1+$right resize grow   width  50 px
 ### focus the parent container
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
@@ -304,19 +304,19 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws0
-bindsym control+mod1+Left        workspace prev
-bindsym control+mod1+j           workspace prev
-bindsym control+mod1+Right       workspace next
-bindsym control+mod1+odiaeresis  workspace next
-bindsym control+mod1+Up          exec --no-startup-id ~/.i3/i3empty.py
-#bindsym control+mod1+l           exec --no-startup-id ~/.i3/i3empty.py
-bindsym control+mod1+Down        workspace back_and_forth
-bindsym control+mod1+k           workspace back_and_forth
+bindsym control+mod1+Left   workspace prev
+bindsym control+mod1+$left  workspace prev
+bindsym control+mod1+Right  workspace next
+bindsym control+mod1+$right workspace next
+bindsym control+mod1+Up     exec --no-startup-id ~/.i3/i3empty.py
+#bindsym control+mod1+$up    exec --no-startup-id ~/.i3/i3empty.py
+bindsym control+mod1+Down   workspace back_and_forth
+bindsym control+mod1+$down  workspace back_and_forth
 ### move workspace
-bindsym control+shift+mod1+Left       move workspace to output left
-bindsym control+shift+mod1+j          move workspace to output left
-bindsym control+shift+mod1+Right      move workspace to output right
-bindsym control+shift+mod1+odiaeresis move workspace to output right
+bindsym control+shift+mod1+Left   move workspace to output left
+bindsym control+shift+mod1+$left  move workspace to output left
+bindsym control+shift+mod1+Right  move workspace to output right
+bindsym control+shift+mod1+$right move workspace to output right
 
 ## Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
