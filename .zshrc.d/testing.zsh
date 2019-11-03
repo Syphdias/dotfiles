@@ -21,3 +21,6 @@ function prompt_p9k_compile() {
 }
 #add-zsh-hook zshexit prompt_p9k_compile
 #prompt_p9k_compile &
+
+# fix for fast-syntax-highlighting ^man bug zdharma/fast-syntax-highlighting#154
+unset 'FAST_HIGHLIGHT[chroma-whatis]' 'FAST_HIGHLIGHT[chroma-man]'

@@ -10,9 +10,11 @@ autocmd FileType yaml set shiftwidth=2
 set scrolloff=3
 set modeline      " Enables infile settings
 set wildmenu      " Better command-line completion
+set wildmode=longest,list,full " ???
 "set DoMatchParen " ?????
 set showcmd       " Show partial commands in the last line of the screen
 set hlsearch      " Highlight searches (use <C-L> to temporarily turn off highlighting; see the mapping of <C-L> below)
+set incsearch     " Highlight every mached char you type (jumps for partials and back for none)
 set ignorecase    " Use case insensitive search
 set smartcase     " except when using capital letters
 set foldlevel=5   " to expand yaml folds by default
@@ -36,7 +38,7 @@ map <F2> :TableModeRealign <CR>
 " set spell spl=de,en sps=20 spf=~/.vim/spell/de.add
 
 " syntastic 'defaults'
-execute pathogen#infect()
+"execute pathogen#infect()
 "call pathogen#infect()
 filetype plugin indent on "https://blog.netways.de/2012/10/30/puppet-und-vim/
 

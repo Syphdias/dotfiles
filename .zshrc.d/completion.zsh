@@ -1,10 +1,13 @@
 # probably alread done by oh-my-zsh
 # zmodload zsh/complist
 # autoload -Uz compinit && compinit
+# load bashcompinit for some old bash completions; then source bashcomplete file
+# autoload bashcompinit && bashcompinit
 
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 zstyle ':completion:*' special-dirs true
 
+# TODO: include recommendations /etc/zsh/newuser.zshrc.recommended
 # TODO: find out if I want these
 # http://chneukirchen.org/dotfiles/.zshrc
 # zstyle ':completion:*' squeeze-slashes true
@@ -44,3 +47,23 @@ zstyle ':completion:*' special-dirs true
 # zstyle ':completion:history-words:*:history-words' list no
 # zstyle ':completion:history-words:*' remove-all-dups yes
 
+## add the ability to print >> << for the portion of the cli we'll be using
+#autoload -Uz narrow-to-region
+#
+#function _history-incremental-preserving-pattern-search-backward
+#{
+#  local state
+#  MARK=CURSOR  
+#  narrow-to-region -p "$LBUFFER${BUFFER:+>>}" -P "${BUFFER:+<<}$RBUFFER" -S state
+#  zle end-of-history
+#  zle history-incremental-pattern-search-backward
+#  narrow-to-region -R state
+#}
+#
+## load the function into zle
+#zle -N _history-incremental-preserving-pattern-search-backward
+#
+## bind it to ctrl+r
+#bindkey "^R" _history-incremental-preserving-pattern-search-backward
+#bindkey -M isearch "^R" history-incremental-pattern-search-backward
+#bindkey "^S" history-incremental-pattern-search-forward

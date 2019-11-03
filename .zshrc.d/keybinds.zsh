@@ -16,6 +16,24 @@ foreground-vi() {
 zle -N foreground-vi
 bindkey '^Z' foreground-vi
 
+# expand on undo
+# https://www.zsh.org/mla/users/2015/msg00652.html
+after_zle-line-init () {
+    if [[ -n $ZLE_LINE_ABORTED ]]; then
+        local savebuf="$BUFFER" savecur="$CURSOR"
+        BUFFER="$ZLE_LINE_ABORTED"
+        CURSOR="$#BUFFER"
+        zle split-undo
+        BUFFER="$savebuf" CURSOR="$savecur"
+    fi
+}
+# patching it dirtly
+# https://unix.stackexchange.com/questions/450043/overwrite-and-reuse-existing-function-in-zsh
+functions[zle-line-init]="
+    $functions[zle-line-init]
+    after_zle-line-init
+"
+
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
 # unset zle_bracketed_paste
