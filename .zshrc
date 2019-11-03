@@ -43,6 +43,7 @@ plugins=(
   zsh-completions
   #virtualenvwrapper
   git
+  git-auto-fetch
   ansible
   pass
   #notes
@@ -63,6 +64,9 @@ function my_source () {
 ZSH="${HOME}/.oh-my-zsh"
 ZSH_CUSTOM="${HOME}/.oh-my-zsh-custom"
 : ${ZSH_THEME=powerlevel10k/powerlevel10k}
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 #my_source "${HOME}/.zshrc.d/powerlevel0krc.zsh"
 my_source "${HOME}/.zshrc.d/p10k-lean.zsh"
 my_source "${HOME}/.zshrc.d/after-p10k-lean.zsh"
@@ -71,11 +75,12 @@ my_source "$ZSH/oh-my-zsh.sh"
 my_source "${HOME}/.zshrc.d/env.zsh"
 my_source "${HOME}/.zshrc.d/completion.zsh"
 my_source "${HOME}/.zshrc.d/keybinds.zsh"
-my_source "${HOME}/.zshrc.d/agents.zsh"
+#my_source "${HOME}/.zshrc.d/agents.zsh"
 my_source "${HOME}/.zshrc.d/virtenvwrapper.zsh"
 
 my_source "${HOME}/.bashrc.d/50_function"
 my_source "${HOME}/.bashrc.d/60_alias"
+my_source "${HOME}/.zshrc.d/alias.zsh"
 my_source "${HOME}/.$(hostname).src"
 
 my_source "${HOME}/.zshrc.d/testing.zsh"
