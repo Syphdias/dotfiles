@@ -95,6 +95,11 @@ fi
 
 [[ "$state" == "charging" ]] && msg+="⚡"
 
+# Pop-Up
+[[ "$state" == "disconnected" ]] && (( bat_percent < 5 )) && notify-send Battery "is at ${bat_percent}%" -u critical
+[[ "$state" == "disconnected" ]] && (( bat_percent < 2 )) && notify-send Battery "is at ${bat_percent}%" -u critical
+[[ "$state" == "disconnected" ]] && (( bat_percent < 2 )) && notify-send Battery "is at ${bat_percent}%" -u critical
+
 #echo $state $2 "$bg" "$_P9K_BATTERY_STATES[$state]" $icon 0 '' $msg
 if [[ "$state" == "charged" || "$state" == "disconnected" ]]; then
   echo "$msg"
