@@ -25,11 +25,12 @@ set $up    l
 set $right odiaeresis
 
 # assign default output for work
-workspace $ws1 output DP-2-2
-workspace $ws2 output DP-2-1
-workspace $ws3 output DP-2-1
-workspace $ws9 output eDP-1
-workspace $ws0 output eDP-1
+workspace $ws1 output DP-2-2 HDMI-0
+workspace $ws2 output DP-2-1 DP-2
+workspace $ws3 output DP-2-1 DP-2
+workspace $ws8 output DP-2
+workspace $ws9 output eDP-1 HDMI-0
+workspace $ws0 output eDP-1 HDMI-0
 # assign programs to workspaces
 assign [class="Rambox"] $ws9
 assign [class="Atom"] $ws3
@@ -54,7 +55,13 @@ for_window [title="Tabs Outliner"] move left
 # Calendar
 for_window [class="Zenity"] move position mouse
 # gimp
-for_window [class="gimp-2.10"] $ws5
+assign [class="gimp-2.10"] $ws5
+# games
+assign [class="csgo_linux64"] $ws8
+assign [class="TeamSpeak 3"] $ws9
+assign [class="Steam"] $ws8
+for_window [title="Friends List"] resize set width 300px
+for_window [title="Friends List"] move right
 
 #---------------------------------------------------------------------------------------------------
 # theme/style
@@ -174,7 +181,9 @@ bindsym control+mod1+l exec --no-startup-id ~/.i3/lock.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id glipper
+exec --no-startup-id clipit
 exec --no-startup-id pasystray
+exec --no-startup-id ibus-daemon -drx
 
 ## autostart
 exec --no-startup-id spotify
@@ -205,7 +214,7 @@ bindsym $mod+shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 ## app launchers (requires xcape)
-bindsym $mod+Escape exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'"
+bindsym $mod+Escape exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" --usage-log .config/j4-dmenu-desktop-usage-log
 bindsym mod1+F2 exec --no-startup-id /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
 exec --no-startup-id ~/.i3/xcape.sh
 bindsym $mod+shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -lines 3 -eh 2 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
@@ -339,6 +348,7 @@ bindsym control+Print   exec flameshot gui
 bindsym $mod+comma      exec cinnamon-settings
 bindsym $mod+n          exec nm-connection-editor
 bindsym $mod+m          exec pavucontrol
+bindsym $mod+b          bar mode toggle
 #bindsym --release control+shift+dead_acute exec --no-startup-id xdotool sleep 0.1 type '````'
 bindsym control+mod1+shift+k exec --no-startup-id xdotool sleep 0.5 type 'thisisunsafe'
 #---------------------------------------------------------------------------------------------------
