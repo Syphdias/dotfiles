@@ -26,6 +26,7 @@ typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     vcs #gitstatus
     root_indicator
     newline
+    time
     prompt_char
 )
 typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
@@ -138,3 +139,20 @@ typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=$(_pp_c 003 011)
 # Use terse signal names: "INT" instead of "SIGINT(2)".
 typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
 typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION='↵'
+
+# simplifying prompt on enter
+#typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
+POWERLEVEL9K_TRANSIENT_PROMPT=off
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+function p10k-on-pre-prompt() {
+    #p10k display '1|2/right'=show '|empty_line'=hide
+    p10k display '1|*/right'=show '2/left/time|empty_line'=hide
+}
+
+function p10k-on-post-prompt() {
+    #[[ $last_prompt_dir == $PWD ]] && p10k display '1/left|2/right'=hide 'empty_line'=show
+    [[ $last_prompt_dir == $PWD ]] \
+        && p10k display '1|*/right'=hide '2/left/time|empty_line'=show \
+        || p10k display '*/right|empty_line'=hide '2/left/time'=show
+    last_prompt_dir=$PWD
+}

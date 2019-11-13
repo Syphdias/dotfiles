@@ -34,6 +34,9 @@ functions[zle-line-init]="
     after_zle-line-init
 "
 
+# omz breaks non-num-lock return key https://github.com/robbyrussell/oh-my-zsh/issues/6159
+bindkey -s "^[OM" "^M"
+
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
 # unset zle_bracketed_paste
