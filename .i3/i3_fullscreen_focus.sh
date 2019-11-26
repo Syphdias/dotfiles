@@ -3,7 +3,7 @@
 
 # changes window in fullscreen modus
 if i3-msg -t get_tree \
-    | jq -e 'recurse(.nodes[]; .nodes) | select(.focused).fullscreen_mode == 1'
+    | jq -e 'recurse(.nodes[]; .nodes) | select(.focused and .type=="con").fullscreen_mode == 1'
 then
     i3-msg	"fullscreen; focus $1; fullscreen"
 else
