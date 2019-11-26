@@ -1,9 +1,9 @@
 function dl () {
     cd ~/Downloads
     if [[ -n "$2" ]]; then
-        noglob aria2c -x 16 -s 64 "$1" -o "$2"
+        aria2c -x 16 -s 64 "$1" -o "$2"
     else
-        noglob aria2c -x 16 -s 64 "$1"
+        aria2c -x 16 -s 64 "$1"
     fi
 }
 alias dl='noglob dl'

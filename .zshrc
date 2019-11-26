@@ -3,7 +3,7 @@
 
 # fixes https://gnunn1.github.io/tilix-web/manual/vteconfig/
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte-2.91.sh
+  source /etc/profile.d/vte.sh
 fi
 
 # TODO:
@@ -80,6 +80,7 @@ my_source "${HOME}/.zshrc.d/virtenvwrapper.zsh"
 
 my_source "${HOME}/.bashrc.d/50_function"
 my_source "${HOME}/.bashrc.d/60_alias"
+my_source "${HOME}/.zshrc.d/function.zsh"
 my_source "${HOME}/.zshrc.d/alias.zsh"
 my_source "${HOME}/.$(hostname).src"
 
