@@ -1,0 +1,12 @@
+[Unit]
+Description=Execute %i 17.5min±2.5min after Boot and about every 4 hours
+
+[Timer]
+Unit=%i.service
+OnBootSec=15min
+OnUnitActiveSec=4h
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target
+

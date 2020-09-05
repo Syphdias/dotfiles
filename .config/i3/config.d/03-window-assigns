@@ -1,0 +1,83 @@
+# assign programs to workspaces
+
+### To Code Workspace ($ws3)
+assign [class="Atom"] $ws3
+assign [class="^code-oss"] $ws3     # vscode
+### To Media Workspace ($ws5)
+assign [class="vlc"] $ws5
+assign [class="zoom"] $ws5
+assign [class="^gimp"] $ws5
+### To Lobby ($ws8)
+assign [instance="battle.net.exe"] $ws8
+assign [class="Steam"] $ws8
+assign [class="Lutris"] $ws8
+assign [class="minecraft-launcher"] $ws8
+for_window [title="Friends List"] resize set width 300px, move right
+### To Communication Workspace ($ws9)
+assign [class="Rambox"] $ws9
+assign [class="discord"] $ws9
+assign [class="TeamSpeak 3"] $ws9
+### To Sound Workspace ($ws0)
+for_window [class="Spotify"] move to workspace $ws0
+### To Dedicated Workspace ($gws)
+for_window [instance="overwatch.exe"] move to workspace $gws
+assign [class="csgo_linux64"] $gws
+assign [instance="gw2-64.exe"] $gws
+assign [class="Tabletop Simulator.x86_64"] $gws
+for_window [class="^Minecraft"] move to workspace $gws
+assign [class="battle.net.exe"] $gws
+
+# floating
+for_window [window_role="pop-up"]         floating enable
+for_window [window_role="task_dialog"]    floating enable
+for_window [class="Pavucontrol"]          floating enable
+for_window [class="Skype"]                floating enable
+for_window [class="Nemo"]                 floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Cinnamon-settings.py"] floating enable
+for_window [class="Gnome-calculator"]     floating enable
+for_window [class="Arandr"]               floating enable
+for_window [class="Gtimelog"]             floating enable
+#for_window [class="zoom"]                floating enable
+for_window [class="^Cssh$"]               floating enable
+for_window [title="CLUSTERSSH: "]         floating enable
+for_window [title="alsamixer"]            floating enable border pixel 1
+for_window [class="calamares"]            floating enable border normal
+for_window [class="Clipgrab"]             floating enable
+for_window [title="File Transfer*"]       floating enable
+for_window [class="fpakman"]              floating enable
+for_window [class="GParted"]              floating enable border normal
+for_window [class="Lightdm-settings"]     floating enable
+for_window [class="Lxappearance"]         floating enable sticky enable border normal
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"]             floating enable sticky enable border normal
+for_window [class="octopi"]               floating enable
+for_window [title="About Pale Moon"]      floating enable
+for_window [class="Pamac-manager"]        floating enable
+for_window [class="Pavucontrol"]          floating enable
+for_window [class="qt5ct"]                floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"]         floating enable sticky enable border normal
+for_window [class="Simple-scan"]          floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Timeset-gui"]          floating enable border normal
+for_window [class="(?i)virtualbox"]       floating enable border normal
+for_window [class="Xfburn"]               floating enable
+for_window [class="Thunar"]               floating enable
+for_window [class="Lutris"]               floating enable
+for_window [class="TeamViewer"]           floating enable
+for_window [instance="battle.net.exe"]    floating enable
+
+# Tabs Outliner
+for_window [title="Tabs Outliner"] floating disable
+for_window [title="Tabs Outliner"] resize set width 350px
+for_window [title="Tabs Outliner"] move left
+# Calendar
+for_window [class="(?i)gsimplecal"] floating enable pixel 1
+for_window [class="(?i)gsimplecal"] border pixel 1
+for_window [class="(?i)gsimplecal"] move position mouse, move up 20px
+# Various
+for_window [instance="crx_abjcfabbhafbcdfjoecdgepllmpfceif"] kill   # kill Magic Actions for YouTube pop-up
+for_window [class="Tilix"] border normal 2
+
+#---------------------------------------------------------------------------------------------------

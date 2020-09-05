@@ -1,0 +1,6 @@
+[Unit]
+Description=Checks for contents in ~/inbox
+
+[Service]
+Type=oneshot
+ExecStart=sh -c "(( $(ls -a ~/inbox |tail -n +3 |wc -l) > 0 )) && notify-send '~/inbox' 'Check ~/inbox' || true"

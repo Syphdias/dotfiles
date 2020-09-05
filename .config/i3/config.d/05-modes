@@ -1,0 +1,63 @@
+# modes
+
+## Session Management
+set $mode_system System (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (k)exec, (w)inboot, (S)hutdown
+mode "$mode_system" {
+   bindsym l exec --no-startup-id ~/.local/bin/exit.sh lock, mode "default"
+   bindsym e exec --no-startup-id ~/.local/bin/exit.sh logout, mode "default"
+   bindsym s exec --no-startup-id ~/.local/bin/exit.sh suspend, mode "default"
+   bindsym h exec --no-startup-id ~/.local/bin/exit.sh hibernate, mode "default"
+   bindsym r exec --no-startup-id ~/.local/bin/exit.sh reboot, mode "default"
+   bindsym k exec --no-startup-id ~/.local/bin/exit.sh kexec, mode "default"
+   bindsym w exec --no-startup-id ~/.local/bin/exit.sh winboot, mode "default"
+   bindsym shift+s exec --no-startup-id ~/.local/bin/exit.sh shutdown, mode "default"
+   bindsym Return mode "default"
+   bindsym Escape mode "default"
+}
+#bindsym control+mod1+Delete mode "$mode_system"
+
+## System // Power Management // Ctrl-Alt-Del ##
+bindsym control+mod1+Delete exec --no-startup-id ~/.local/bin/menu_powermenu.sh
+
+## Display Management
+# https://github.com/Ventto/mons
+# make install PREFIX=~/.local
+# alternative: https://github.com/chmln/enact
+set $mons ~/.local/bin/mons
+set $display_layout [←↑↓→] , [d]uplicate, [m]irror, [s]ol[o], [Shift+s]econd-only, [a]uto
+mode "$display_layout" {
+    bindsym $mod+p  exec --no-startup-id arandr,                  mode "default";
+    bindsym p       exec --no-startup-id arandr,                  mode "default";
+    bindsym a       exec --no-startup-id autorandr -c -d default, mode "default";
+    bindsym Shift+d exec --no-startup-id autorandr -c default,    mode "default";
+    # only laptop
+    bindsym s exec --no-startup-id "\
+        xrandr --output eDP-1 --auto                         \
+               --output DP-1   --off --output DP-2   --off   \
+               --output DP-2-1 --off --output DP-2-2 --off   \
+               --output HDMI-1 --off --output HDMI-2 --off", $resetmode, $exec_bg;
+    # work with laptop on right
+    bindsym w exec --no-startup-id "\
+        xrandr --output eDP-1  --mode 1360x768  --pos 3840x432         \
+               --output DP-2-1 --mode 1920x1200 --pos 1920x0 --primary \
+               --output DP-2-2 --mode 1920x1200 --pos    0x0", $resetmode, $exec_bg;
+
+    bindsym Left    exec $mons -e left,   $resetmode, $exec_bg;
+    bindsym $left   exec $mons -e left,   $resetmode, $exec_bg;
+    bindsym Down    exec $mons -e bottom, $resetmode, $exec_bg;
+    bindsym $down   exec $mons -e bottom, $resetmode, $exec_bg;
+    bindsym Up      exec $mons -e top,    $resetmode, $exec_bg;
+    bindsym $up     exec $mons -e top,    $resetmode, $exec_bg;
+    bindsym Right   exec $mons -e right,  $resetmode, $exec_bg;
+    bindsym $right  exec $mons -e right,  $resetmode, $exec_bg;
+    bindsym d       exec $mons -d,        $resetmode, $exec_bg;
+    bindsym m       exec $mons -m,        $resetmode, $exec_bg;
+    bindsym Shift+s exec $mons -s,        $resetmode, $exec_bg;
+    bindsym o       exec $mons -o,        $resetmode, $exec_bg;
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+## System // Monitor Management //  + p ##
+bindsym $mod+p mode "$display_layout"
+
+#---------------------------------------------------------------------------------------------------

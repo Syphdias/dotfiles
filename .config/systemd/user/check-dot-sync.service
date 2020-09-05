@@ -1,0 +1,7 @@
+[Unit]
+Description=Check if dotfiles are synced with remote
+
+[Service]
+Type=oneshot
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=%h/.local/bin/check-dot-sync.sh

@@ -1,0 +1,58 @@
+# theme/style
+font pango:System San Francisco Display 9pt
+#font xft:URWGothic-Book 11
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 2
+default_floating_border normal
+hide_edge_borders none  # used to be both
+
+set_from_resource $term_background background
+set_from_resource $term_foreground foreground
+set_from_resource $term_color0     color0
+set_from_resource $term_color1     color1
+set_from_resource $term_color2     color2
+set_from_resource $term_color3     color3
+set_from_resource $term_color4     color4
+set_from_resource $term_color5     color5
+set_from_resource $term_color6     color6
+set_from_resource $term_color7     color7
+set_from_resource $term_color8     color8
+set_from_resource $term_color9     color9
+set_from_resource $term_color10    color10
+set_from_resource $term_color11    color11
+set_from_resource $term_color12    color12
+set_from_resource $term_color13    color13
+set_from_resource $term_color14    color14
+set_from_resource $term_color15    color15
+
+set $bg-color            #2f343f
+set $inactive-bg-color   #454b56
+#set $inactive-bg-color   #3f4550
+#set $inactive-bg-color   #343944
+set $text-color          #f3f4f5
+set $inactive-text-color #848c9b
+#set $inactive-text-color #676E7D
+#set $urgent-bg-color     #E53935
+set $urgent-bg-color     #A9C03F
+set $indicator-color     #bbbbbb
+
+for_window [class=".*"] title_format "  %title"
+
+# window colors         border              background         text                 indicator        child_border
+client.focused          $urgent-bg-color    $urgent-bg-color   #000000              $indicator-color $urgent-bg-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color
+
+## Theme colors
+## class                   border  backgr. text    indic.   child_border
+#  client.focused          #556064 #556064 #80FFF9 #FDF6E3
+#  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+#  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+#  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+#  client.placeholder      #000000 #0c0c0c #ffffff #000000
+#
+#  client.background       #2B2C2B
+
+#---------------------------------------------------------------------------------------------------

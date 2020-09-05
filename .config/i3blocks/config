@@ -1,0 +1,104 @@
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+# https://github.com/vivien/i3blocks/wiki/Writing-Your-Own-Blocklet
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/lib/i3blocks/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=15
+markup=none
+#color=#f3f4f5
+color=#848c9b
+#color=#2ebd59
+
+# CPU usage
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+interval=10
+separator=false
+#min_width=CPU: 100.00%
+
+[load_average]
+interval=10
+
+# Memory usage
+[memory]
+instance=mem
+separator=false
+interval=30
+
+[memory]
+instance=swap
+interval=30
+
+# Network interface monitoring
+# If the `instance` is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+[iface]
+interval=10
+separator=false
+[wifi]
+interval=10
+separator=false
+[bandwidth]
+interval=5
+separator=false
+
+# OpenVPN support
+# Support multiple VPN, with colors.
+[openvpn]
+interval=20
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+#[mediaplayer]
+#instance=spotify
+#interval=5
+#signal=10
+
+[song]
+command=~/.local/bin/spotify.py
+markup=pango
+#label=
+interval=3
+#color=#2ebd59
+
+# Temperature
+#
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+interval=10
+
+[battery]
+command=~/.local/bin/battery.zsh
+markup=pango
+instance=1
+interval=30
+
+[time]
+command=case $BLOCK_BUTTON in 1) gsimplecal; date '+%a KW %V %F %H:%M  ' ;; *) date '+%a KW %V %F %H:%M  ' ;; esac
+interval=5

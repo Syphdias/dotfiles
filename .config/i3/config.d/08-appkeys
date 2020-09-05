@@ -1,0 +1,65 @@
+# app keys
+## app launchers (requires xcape)
+#exec --no-startup-id ~/.local/bin/xcape.sh
+bindsym $mod+Escape exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/tilix
+bindsym $mod+D      exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/tilix
+bindsym mod1+F2 exec --no-startup-id /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
+bindsym $mod+shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -lines 3 -eh 2 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+Tab exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show window -i -lines 10 -eh 1 -width 50 -padding 50 -opacity "85" -font "Cousine Nerd Font Regular 16"
+#bindsym $mod+shift+d --release exec --no-startup-id LC_ALL=en_US.UTF-8 i3-dmenu-desktop --dmenu='rofi -dmenu -i -lines 10 -eh 1 -width 70 -padding 50 -opacity "85" -font "System San Francisco Display 18"'
+#bindsym $mod+d exec dmenu_run # default
+#bindsym $mod+Tab exec rofi -show window -i -lines 10 -eh 1 -width 50 -padding 50 -opacity "85" -font "System San Francisco Display 16" 
+
+## Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle
+
+## Screen brightness controls (requires xbacklight)
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+
+## Media player controls (requires playerctl)
+bindsym XF86AudioPlay              exec playerctl play-pause
+bindsym shift+XF86AudioMute        exec playerctl play-pause
+bindsym XF86AudioNext              exec playerctl next
+bindsym shift+XF86AudioRaiseVolume exec playerctl next
+bindsym XF86AudioPrev              exec playerctl previous
+bindsym shift+XF86AudioLowerVolume exec playerctl previous
+
+## shotcuts for applications
+## Applications // Terminal //  + Return ##
+bindsym $mod+Return              exec tilix
+bindsym $mod+KP_Enter            exec tilix
+## Applications // Screenshot // Ctrl + Print ##
+bindsym control+Print            exec flameshot gui
+## Applications // Settings //  + Ctrl + , ##
+bindsym $mod+control+comma       exec manjaro-settings-manager || gnome-control-center || cinnamon-settings
+## Applications // NetworkManager Connections //  + Ctrl + n ##
+bindsym $mod+control+n           exec nm-connection-editor
+## Applications // Pulseaudio Volumne Control //  + Ctrl + m ##
+bindsym $mod+control+m           exec pkill pavucontrol || pavucontrol
+## Applications // File Explorer //  + Ctrl + e ##
+bindsym $mod+control+e           exec --no-startup-id thunar
+## Applications // xkill //  + Ctrl + x ##
+bindsym $mod+control+x --release exec --no-startup-id xkill
+## Applications // gtimelog //  + Ctrl + t ##
+bindsym $mod+control+t           exec pkill gtimelog || ~/.local/bin/gtimelog
+
+## Various // Switch Audio Sink //  + Ctrl + o ##
+bindsym $mod+control+o           exec --no-startup-id ~/.local/bin/switch-audio-sink.sh -t -n '(Core|UE|GP104)'
+## Various // Switch Jabra Profile //  + Ctrl + Shift + o ##
+bindsym $mod+control+Shift+o     exec --no-startup-id ~/.local/bin/switch-jabra-profile.sh
+## Various // Toggle Status Bar //  + Ctrl + b ##
+bindsym $mod+control+b           bar mode toggle
+
+## i3 // Reload //  + Shift + c ##
+bindsym $mod+shift+c reload
+## i3 // Restart //  + Shift + r ##
+bindsym $mod+shift+r restart
+
+## various
+#bindsym --release control+shift+dead_acute exec --no-startup-id xdotool sleep 0.1 type '````'
+bindsym control+mod1+shift+k exec --no-startup-id xdotool sleep 0.5 type 'thisisunsafe'
+
+#---------------------------------------------------------------------------------------------------

@@ -1,0 +1,57 @@
+# auto starts and daemons
+# TODO: split this up?
+
+## daemons
+### notification daemon (_always make it possible to kill and restart i3 for new config)
+exec_always --no-startup-id dunst
+# bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+
+### Power Management
+#exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xss-lock -- ~/.local/bin/lock.sh
+# TODO: exec --no-startup-id xautolock -time 10 -locker blurlock # was manjaro default
+#exec --no-startup-id xautolock -time 5 -locker "~/.local/bin/lock.sh"
+# TODO: replace xautolock with xss-lock? (needs: 5m -> lock; lock before sus/hiber/...; lid close lock?)
+### (auto)lock and screenoff requires: scrot convert xautolock xss-lock
+
+### Compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
+exec        --no-startup-id picom -b --config ~/.config/compton.conf
+## Shortcut // Kill Compositor //  + o ##
+bindsym $mod+o exec killall picom compton
+# bindsym $mod+t exec --no-startup-id pkill compton
+# bindsym $mod+Ctrl+t exec --no-startup-id compton -b
+
+
+## fix initial monitor setup
+exec --no-startup-id autorandr --change --default single
+
+## Background (requires feh)
+exec_always --no-startup-id $background
+
+## applets
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id glipper
+exec --no-startup-id clipit
+exec --no-startup-id pasystray
+exec --no-startup-id ibus-daemon -drx # exec_always --no-startup-id sbxkb
+exec --no-startup-id conky
+
+## autostart
+exec --no-startup-id spotify
+exec --no-startup-id rambox
+exec --no-startup-id i3-msg 'workspace $ws2, exec google-chrome-stable'
+
+## keys changes
+exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
+exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+exec        --no-startup-id numlockx on                            # enable numlock (requires numlockx)
+exec        --no-startup-id fix_xcursor                            # fixes changing mouse cursor theme
+exec_always --no-startup-id ff-theme-util                          # fixes gtk themes?
+exec        --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # TODO: What do I need this for?
+
+## alternating vsplit|hsplit (requires i3-py (pip3))
+# exec_always --no-startup-id ~/.local/bin/alternating_layouts.py
+# disabled since unexpected behaviour can occur and it should be rewriten with i3ipc
+
+#---------------------------------------------------------------------------------------------------

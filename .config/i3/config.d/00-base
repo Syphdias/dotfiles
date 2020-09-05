@@ -1,0 +1,51 @@
+# Config writen with Remontoire in mind
+## <category> // <action> // <keybinding> ## <reserved for user notes>
+# generating ${XDG_CONFIG_HOME:-${HOME}/.config}/i3/config:
+#   update-conf.py -f "${XDG_CONFIG_HOME:-${HOME}/.config}/i3/config" -v
+
+# setting modifier key for float actions (move/resize)
+set $mod Mod4
+floating_modifier $mod
+workspace_auto_back_and_forth yes
+# mouse_warping all?? (valid: output(default) none)
+focus_on_window_activation none #default: smart
+focus_follows_mouse yes         #default: yes
+
+# workspaces
+set $ws1 "1:Project"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5:Media"
+set $ws6 "6"
+set $ws7 "7:Reading"
+set $ws8 "8:Lobby"
+set $ws9 "9:Messaging"
+set $ws0 "10:Audio"
+set $gws "11:Game"
+
+# background
+set $background          feh --bg-fill ~/Pictures/current/ --randomize
+set $exec_bg             exec --no-startup-id $background
+set $resetmode           mode "default"
+
+# (vim) directions
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+# assign default output
+workspace $ws1 output DP-2-2 DP-0
+workspace $ws2 output DP-2-1 DP-4
+workspace $ws3 output DP-2-1 DP-4
+#workspace $ws4
+workspace $ws5 output DP-0
+#workspace $ws6
+#workspace $ws7
+workspace $ws8 output DP-4
+workspace $ws9 output eDP-1 DP-0
+workspace $ws0 output eDP-1 DP-0
+workspace $gws output DP-4
+
+#---------------------------------------------------------------------------------------------------
