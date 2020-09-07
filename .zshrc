@@ -16,7 +16,7 @@ zstyle ':z4h:'                auto-update-days 7
 zstyle ':z4h:'                cd-key           alt
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' forward-char     accept
+zstyle ':z4h:autosuggestions' forward-char     partial-accept
 
 # Clone additional Git repositories from GitHub. This doesn't do anything
 # apart from cloning the repository and keeping it up-to-date. Cloned
