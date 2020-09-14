@@ -12,17 +12,17 @@ focus_on_window_activation none #default: smart
 focus_follows_mouse yes         #default: yes
 
 # workspaces
-set $ws1 "1:Project"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5:Media"
-set $ws6 "6"
-set $ws7 "7:Reading"
-set $ws8 "8:Lobby"
+#set $ws1 "1:Project"
+#set $ws2 "2"
+#set $ws3 "3"
+#set $ws4 "4"
+#set $ws5 "5:Media:5"
+#set $ws6 "6"
+#set $ws7 "7:Reading"
+#set $ws8 "8:Lobby"
 set $ws9 "9:Messaging"
-set $ws0 "10:Audio"
-set $gws "11:Game"
+set $ws0 "10:Audio:10"
+set $gws "11:Game:11"
 
 # background
 set $background          feh --bg-fill ~/Pictures/current/ --randomize
@@ -36,16 +36,16 @@ set $up    k
 set $right l
 
 # assign default output
-workspace $ws1 output DP-2-2 DP-0
-workspace $ws2 output DP-2-1 DP-4
-workspace $ws3 output DP-2-1 DP-4
-#workspace $ws4
-workspace $ws5 output DP-0
-#workspace $ws6
-#workspace $ws7
-workspace $ws8 output DP-4
-workspace $ws9 output eDP-1 DP-0
-workspace $ws0 output eDP-1 DP-0
+#workspace $ws1 output DP-2-2 DP-0
+#workspace $ws2 output DP-2-1 DP-4
+#workspace $ws3 output DP-2-1 DP-4
+##workspace $ws4
+#workspace $ws5 output DP-0
+##workspace $ws6
+##workspace $ws7
+#workspace $ws8 output DP-4
+#workspace $ws9 output eDP-1 DP-0
+#workspace $ws0 output eDP-1 DP-0
 workspace $gws output DP-4
 
 #---------------------------------------------------------------------------------------------------

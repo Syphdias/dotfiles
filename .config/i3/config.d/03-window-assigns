@@ -1,22 +1,23 @@
 # assign programs to workspaces
 
 ### To Code Workspace ($ws3)
-assign [class="Atom"] $ws3
-assign [class="^code-oss"] $ws3     # vscode
+#assign [class="Atom"] $ws3
+#assign [class="^code-oss"] $ws3     # vscode
 ### To Media Workspace ($ws5)
-assign [class="vlc"] $ws5
-assign [class="zoom"] $ws5
-assign [class="^gimp"] $ws5
+#assign [class="vlc"] $ws5
+#assign [class="zoom"] $ws5
+#assign [class="^gimp"] $ws5
 ### To Lobby ($ws8)
-assign [instance="battle.net.exe"] $ws8
-assign [class="Steam"] $ws8
-assign [class="Lutris"] $ws8
-assign [class="minecraft-launcher"] $ws8
+assign [instance="battle.net.exe"] $gws
+assign [class="Steam"] $gws
+assign [class="Lutris"] $gws
+assign [class="minecraft-launcher"] $gws
 for_window [title="Friends List"] resize set width 300px, move right
 ### To Communication Workspace ($ws9)
 assign [class="Rambox"] $ws9
 assign [class="discord"] $ws9
 assign [class="TeamSpeak 3"] $ws9
+assign [class="TelegramDesktop"] $ws9
 ### To Sound Workspace ($ws0)
 for_window [class="Spotify"] move to workspace $ws0
 ### To Dedicated Workspace ($gws)
