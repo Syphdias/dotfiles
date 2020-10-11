@@ -47,7 +47,7 @@ bindsym $mod+control+x --release exec --no-startup-id xkill
 bindsym $mod+control+t           exec pkill gtimelog || ~/.local/bin/gtimelog
 
 ## Various // Switch Audio Sink //  + Ctrl + o ##
-bindsym $mod+control+o           exec --no-startup-id ~/.local/bin/switch-audio-sink.sh -t -n '(Core|UE|GP104)'
+bindsym $mod+control+o           exec --no-startup-id ~/.local/bin/switch-audio-sink.sh -t -n '(Core|UE|GP104|Jabra)'
 ## Various // Switch Jabra Profile //  + Ctrl + Shift + o ##
 bindsym $mod+control+Shift+o     exec --no-startup-id ~/.local/bin/switch-jabra-profile.sh
 ## Various // Toggle Status Bar //  + Ctrl + b ##
