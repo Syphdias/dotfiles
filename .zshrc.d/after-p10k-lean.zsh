@@ -22,6 +22,7 @@ fi
 
 typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     virtualenv #pyenv rbenv
+    openstack
     timewarrior
     dir_writable dir #newline dir
     my_git_dir vcs

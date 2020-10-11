@@ -114,6 +114,7 @@ z4h source ~/.zshrc.d/function.zsh  # Define functions and completions
 z4h source ~/.$(hostname).src       # Host-specific functions, etc.
 z4h source ~/.zshrc.d/after-p10k-lean.zsh
 z4h source ~/.zshrc.d/gitrepos.zsh
+z4h source ~/.zshrc.d/openstack.zsh
 
 # omz completion
 #z4h source $Z4H/ohmyzsh/ohmyzsh/lib/completion.zsh  # omz-complete
@@ -136,6 +137,7 @@ setopt pushd_ignore_dups
 setopt pushd_minus
 setopt no_hist_ignore_dups # _do_ store duplications
 setopt list_packed         # make the completion list smaller (non-fzf)
+setopt extended_history    # save duration in seconds to histfile
 
 # Load virtualenvwrapper
 if [[ -f ~/.local/bin/virtualenvwrapper.sh ]]; then
