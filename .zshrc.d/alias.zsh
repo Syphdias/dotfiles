@@ -18,7 +18,7 @@ alias gcsm='git commit -S -m'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gpl='git pull --ff-only'
-alias gps='git pull --ff-only && git push'
+alias gps='git push'
 alias gsf='git submodule foreach'
 ## other
 alias ls="${aliases[ls]:-ls} -A" # Add flags to existing aliases

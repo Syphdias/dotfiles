@@ -390,3 +390,15 @@ function syu() {
         command sudo yum upgrade
     fi
 }
+
+how-long-to-zero-with() {
+    #[[ $# -eq 0 ]] && echo "how-log-to-zero-with 20 5 12:00 13:00" && return
+    [[ $# -eq 0 ]] && echo "how-log-to-zero-with 13:00 5 12:00 20" && return
+    time_delta_in_sec=$(($(date +%s -d "$1")-$(date +%s -d "$3")));
+    done_delta=$(($4 - $2)); done_delta=$((done_delta*1.))
+    rate=$((done_delta/time_delta_in_sec))
+    time_in_sec=$(($2/rate))
+    done_time="$(date -d "@$(($(date +%s -d "$3")+time_in_sec))0")"
+    human_time="$(time_in_sec=$(sed 's/\..*//' <<<$time_in_sec) bash -c 'echo $((time_in_sec/3600))h $((time_in_sec%3600/60))min')"
+    echo "done with $rate/s in $human_time at $done_time"
+}
