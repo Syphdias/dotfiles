@@ -20,7 +20,10 @@ set smartcase     " except when using capital letters
 set foldlevel=5   " to expand yaml folds by default
 
 if has("autocmd") " save cursor position
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
 endif
 
 se undofile                " maintain persistent undo history
