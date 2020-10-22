@@ -49,9 +49,11 @@ filetype plugin indent on "https://blog.netways.de/2012/10/30/puppet-und-vim/
 autocmd filetype markdown setlocal textwidth=80
 autocmd FileType gitcommit setlocal spell textwidth=80
 
+set statusline=%f\ %h%w%m%r\            " from default
 set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%=%(%l,%c%V\ %=\ %P%)	" from default
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
