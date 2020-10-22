@@ -30,14 +30,14 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+shift+q kill
 
 ## Windows // (Fullscreen) Focus //  + ←↑↓→ ##
-bindsym $mod+Left   exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh left
-bindsym $mod+$left  exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh left
-bindsym $mod+Down   exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh down
-bindsym $mod+$down  exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh down
-bindsym $mod+Up     exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh up
-bindsym $mod+$up    exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh up
-bindsym $mod+Right  exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh right
-bindsym $mod+$right exec --no-startup-id ~/.local/bin/i3_fullscreen_focus.sh right
+bindsym $mod+Left   focus left
+bindsym $mod+$left  focus left
+bindsym $mod+Down   focus down
+bindsym $mod+$down  focus down
+bindsym $mod+Up     focus up
+bindsym $mod+$up    focus up
+bindsym $mod+Right  focus right
+bindsym $mod+$right focus right
 
 ## Windows // Move and Focus Con on WS # //  + ⇧ + 0-9 ##
 # requires i3-workspace-groups
