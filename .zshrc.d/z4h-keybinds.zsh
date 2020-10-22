@@ -134,7 +134,7 @@ bindkey   '^[/'     redo                           # alt+/
 bindkey   '^ '      z4h-expand                     # ctrl+space
 if (( _z4h_use[fzf-tab] )); then
   # Generic command completion.
-  bindkey '^I'      z4h-expand-or-complete         # tab
+  bindkey '^I'      z4h-fzf-complete               # tab
 fi
 if (( _z4h_use[fzf] )); then
   # Command history.

@@ -8,15 +8,38 @@ fi
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
-zstyle ':z4h:'                auto-update      ask
+zstyle ':z4h:'                auto-update      'ask'
 # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
-zstyle ':z4h:'                auto-update-days 7
-# Bind alt-arrows or ctrl-arrows to change current directory?
-# The other key modifier will be bound to cursor movement by words.
-zstyle ':z4h:'                cd-key           alt
+zstyle ':z4h:'                auto-update-days '28'
+
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey'         keyboard         'pc'
+# When fzf menu opens on TAB, another TAB moves the cursor down ('tab:down')
+# or accepts the selection and triggers another TAB-completion ('tab:repeat')?
+zstyle ':z4h:fzf-complete'    fzf-bindings     'tab:repeat' \
+                                               'ctrl-a:toggle-all' 'ctrl-k:up'
+#zstyle ':z4h:(fzf-complete|fzf-history|cd-down)' fzf-bindings 'ctrl-k:up'
+zstyle ':z4h:fzf-complete'    fzf-flags        --no-exact   # EXPERIMENTAL
+#zstyle ':z4h:fzf-history'    fzf-bindings     'tab:repeat' # history key binds
+zstyle ':z4h:fzf-history'     fzf-flags        --no-preview # history extra flags
+
+# When fzf menu opens on Alt+Down, TAB moves the cursor down ('tab:down')
+# or accepts the selection and triggers another Alt+Down ('tab:repeat')?
+zstyle ':z4h:cd-down'         fzf-bindings     'tab:down'
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' forward-char     partial-accept
+zstyle ':z4h:autosuggestions' forward-char     'partial-accept'
+
+# Send these files over to the remote host when connecting over ssh.
+# Multiple files can be listed here.
+zstyle ':z4h:ssh:*'           send-extra-files '~/.iterm2_shell_integration.zsh'
+# Disable automatic teleportation of z4h over ssh when connecting to some-host.
+# This makes `ssh some-host` equivalent to `command ssh some-host`.
+zstyle ':z4h:ssh:some-host'   passthrough      'yes'
+
+# Move the cursor to the end when Up/Down fetches a command from history?
+zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
+zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 
 # Clone additional Git repositories from GitHub. This doesn't do anything
 # apart from cloning the repository and keeping it up-to-date. Cloned
@@ -26,9 +49,9 @@ z4h install so-fancy/diff-so-fancy || return
 #z4h install zsh-users/zsh-history-substring-search || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
-# initialize Zsh. After this point console I/O is unavailable. Everything
-# that requires user interaction or can perform network I/O must be done
-# above. Everything else is best done below.
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
 z4h init || return
 
 # Export environment variables.
@@ -51,7 +74,6 @@ LISTMAX=0               # In the line editor, the number of matches to list with
 export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
-export FZF_DEFAULT_OPTS='--no-mouse --exact'
 export SCREENRC="${XDG_CONFIG_HOME:-$HOME/.config}/screen/screenrc"
 
 # Extend PATH.
@@ -79,11 +101,10 @@ z4h source ~/.iterm2_shell_integration.zsh
 z4h source /usr/share/autojump/autojump.zsh
 
 # Define key bindings.
-bindkey -v
-bindkey '^H'          z4h-backward-kill-word  # Ctrl+H/Ctrl+Backspace: delete prev word
-bindkey -M emacs '^H' backward-kill-word
-bindkey '^[^H'        z4h-backward-kill-zword # Ctrl+Alt+Backspace        => Delete previous shell word.
-bindkey '^U'          backward-kill-line
+bindkey -e
+z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
+z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
+z4h bindkey backward-kill-line  Ctrl+U
 #bindkey '^[o'        z4h-stash-buffer      # save buffer to "history" but not to HISTFILE
 # emacsification of viins
 bindkey -M viins '^A' beginning-of-line
@@ -95,15 +116,8 @@ bindkey -M viins '^[h' z4h-run-help
 z4h source ~/.zshrc.d/z4h-keybinds.zsh # rebinding viins, vicmd
 z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
 
-# Sort completion candidates when pressing Tab?
-zstyle ':completion:*'                           sort               false
-# Also complete .. -> ../
-zstyle ':completion:*' special-dirs true
-# Keep cursor position unchanged when Up/Down fetches a command from history?
-zstyle ':zle:(up|down)-line-or-beginning-search' leave-cursor       true
-# When presented with the list of choices upon hitting Tab, accept selection
-# and trigger another completion with this key binding.
-zstyle ':fzf-tab:*'                              continuous-trigger tab
+# Sort completion candidates when pressing Tab? TODO: rm this?
+#zstyle ':completion:*'                           sort               false
 
 # Autoload functions.
 autoload -Uz zmv
@@ -132,6 +146,7 @@ z4h source ~/.zshrc.d/openstack.zsh
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots           # glob matches files starting with dot; `ls *` -> `ls *(D)`
+setopt no_auto_menu        # require an extra TAB press to open the completion menu
 setopt no_hup              # don't send SIGHUP to background processes
 setopt pushd_ignore_dups
 setopt pushd_minus

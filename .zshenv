@@ -1,9 +1,10 @@
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v3/README.md.
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v4/README.md.
 #
 # Do not modify this file unless you know exactly what you are doing.
-# Keep all shell customization and configuration (including exported
-# environment variables such as PATH) in ~/.zshrc or in files sourced
-# from ~/.zshrc.
+# It is strongly recommended to keep all shell customization and configuration
+# (including exported environment variables such as PATH) in ~/.zshrc or in
+# files sourced from ~/.zshrc. If you are certain that you must export some
+# environment variables in ~/.zshenv, do it where indicated by comments below.
 
 if [ -n "${ZSH_VERSION-}" ]; then
   : ${ZDOTDIR:=~}
@@ -15,11 +16,10 @@ if [ -n "${ZSH_VERSION-}" ]; then
   unset Z4H_BOOTSTRAPPING
 fi
 
-Z4H_URL="https://raw.githubusercontent.com/romkatv/zsh4humans/v3"
-: "${Z4H:=${XDG_CACHE_HOME:-$HOME/.cache}/zsh4humans/v3}"
+Z4H_URL="https://raw.githubusercontent.com/romkatv/zsh4humans/v4"
+: "${Z4H:=${XDG_CACHE_HOME:-$HOME/.cache}/zsh4humans/v4}"
 
-# Do not create world-accessable files by default.
-umask 027
+umask o-w
 
 if [ ! -e "$Z4H"/z4h.zsh ]; then
   mkdir -p -- "$Z4H" || return
