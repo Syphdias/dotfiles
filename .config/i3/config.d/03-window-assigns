@@ -79,6 +79,5 @@ for_window [class="(?i)gsimplecal"] border pixel 1
 for_window [class="(?i)gsimplecal"] move position mouse, move up 20px
 # Various
 for_window [instance="crx_abjcfabbhafbcdfjoecdgepllmpfceif"] kill   # kill Magic Actions for YouTube pop-up
-for_window [class="Tilix"] border normal 2
 
 #---------------------------------------------------------------------------------------------------
