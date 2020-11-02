@@ -116,6 +116,12 @@ bindkey -M viins '^[h' z4h-run-help
 z4h source ~/.zshrc.d/z4h-keybinds.zsh # rebinding viins, vicmd
 z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
 
+# cd on keybind
+z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
+z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
+
 # Sort completion candidates when pressing Tab? TODO: rm this?
 #zstyle ':completion:*'                           sort               false
 #zstyle ':completion:*' matcher-list "m:{a-z}={A-Z}" "l:|=* r:|=*"   # from romkatv
