@@ -118,6 +118,10 @@ z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
 
 # Sort completion candidates when pressing Tab? TODO: rm this?
 #zstyle ':completion:*'                           sort               false
+#zstyle ':completion:*' matcher-list "m:{a-z}={A-Z}" "l:|=* r:|=*"   # from romkatv
+#zstyle ':completion:*' matcher-list "m:{a-z}={A-Z}"                 # z4h default
+#                        case-insensitive,hyphen-insensitive   ?????   same-as-romkatv
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 
 # Autoload functions.
 autoload -Uz zmv
@@ -155,9 +159,9 @@ setopt list_packed         # make the completion list smaller (non-fzf)
 setopt extended_history    # save duration in seconds to histfile
 
 # Load virtualenvwrapper
-if [[ -f ~/.local/bin/virtualenvwrapper.sh ]]; then
+if [[ -f ~/.local/bin/virtualenvwrapper.sh || -f /usr/bin/virtualenvwrapper.sh ]]; then
     export WORKON_HOME="${HOME}/.virtualenvs"
     export PROJECT_HOME="${HOME}/ves"
     export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
-    source ~/.local/bin/virtualenvwrapper.sh
+    source ~/.local/bin/virtualenvwrapper.sh 2>/dev/null || source /usr/bin/virtualenvwrapper.sh
 fi
