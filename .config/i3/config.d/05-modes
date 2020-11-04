@@ -26,8 +26,9 @@ bindsym control+mod1+Delete exec --no-startup-id ~/.local/bin/menu_powermenu.sh
 set $mons ~/.local/bin/mons
 set $display_layout [←↑↓→] , [d]uplicate, [m]irror, [s]ol[o], [Shift+s]econd-only, [a]uto
 mode "$display_layout" {
-    bindsym $mod+p  exec --no-startup-id arandr,                  mode "default";
-    bindsym p       exec --no-startup-id arandr,                  mode "default";
+    set $arandr pkill arandr || arandr
+    bindsym $mod+p  exec --no-startup-id $arandr,                 mode "default";
+    bindsym p       exec --no-startup-id $arandr,                 mode "default";
     bindsym a       exec --no-startup-id autorandr -c -d default, mode "default";
     bindsym Shift+d exec --no-startup-id autorandr -c default,    mode "default";
     # only laptop
