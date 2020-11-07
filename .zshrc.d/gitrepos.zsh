@@ -1,7 +1,13 @@
 function toggle-gitdir() {
+    if [[ "$1" == "reverse" ]]; then
+        sorting_glob="on" # on is the default and _o_rders by _n_ame
+    else
+        sorting_glob="On" # On orders in reverse by name
+    fi
+
     () {
         emulate -L zsh
-        local -a repos=("${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit"/*(/))
+        local -a repos=("${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit"/*(/${sorting_glob}))
         local -i current_idx=repos[(I)${GIT_DIR}]
 
         if [[ -n "${GIT_DIR}" \
@@ -25,6 +31,12 @@ function toggle-gitdir() {
 }
 zle -N toggle-gitdir
 bindkey '^P' toggle-gitdir
+
+function toggle-gitdir-reverse() {
+    toggle-gitdir reverse
+}
+zle -N toggle-gitdir-reverse
+bindkey '^N' toggle-gitdir-reverse
 
 # p10k segment
 # https://github.com/romkatv/dotfiles-public/blob/ae571837d2ab612397411608fa931bc89bb7e23a/.zshrc

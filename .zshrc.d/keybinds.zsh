@@ -23,16 +23,6 @@ functions[zle-line-init]="
     after_zle-line-init
 "
 
-# bind control-N to cycle thru most recent files
-# https://twitter.com/dailyzshtip/status/1194542636851486721
-zstyle ':completion:most-recent-file:*' completer _files
-zle -C most-recent-file menu-complete _generic
-bindkey "^N" most-recent-file
-zstyle ':completion:most-recent-file:*' match-original both
-zstyle ':completion:most-recent-file:*' file-sort modification
-zstyle ':completion:most-recent-fitterns' '*(.)'
-zstyle ':completion:most-recent-file:*' hidden all
-
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
 # unset zle_bracketed_paste
