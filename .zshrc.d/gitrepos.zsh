@@ -57,7 +57,7 @@ function prompt_my_git_dir() {
 # - hook is also being called in toggle-gitdir
 function un-git-dir() {
     if [[ -n "$GIT_DIR" ]] && command env -u GIT_DIR git -C . rev-parse 2>&- >&-; then
-        echo -e "\e[33mWARNING: \e[31mGIT_DIR\e[33m ist still set\e[0m" >&2
+        echo -e "\e[33mWARNING: \e[31mGIT_DIR\e[33m ist still set to ${GIT_DIR}\e[0m" >&2
         #unset GIT_DIR
         #unset GIT_WORK_TREE
     fi
