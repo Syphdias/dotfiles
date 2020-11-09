@@ -122,6 +122,9 @@ z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
 z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
 
+# remind Shift+Arrow to same as Ctrl-Arrow
+for l in {A..D}; do bindkey -s '^[[1;2'$l '^[[1;5'$l; done
+
 # Sort completion candidates when pressing Tab? TODO: rm this?
 #zstyle ':completion:*'                           sort               false
 #zstyle ':completion:*' matcher-list "m:{a-z}={A-Z}" "l:|=* r:|=*"   # from romkatv
