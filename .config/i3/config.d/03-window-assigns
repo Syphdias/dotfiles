@@ -74,9 +74,9 @@ for_window [title="Tabs Outliner"] floating disable
 for_window [title="Tabs Outliner"] resize set width 350px
 for_window [title="Tabs Outliner"] move left
 # Calendar
-for_window [class="(?i)gsimplecal"] floating enable pixel 1
-for_window [class="(?i)gsimplecal"] border pixel 1
-for_window [class="(?i)gsimplecal"] move position mouse, move up 20px
+for_window [class="(?i)(gsimplecal|zenity)"] floating enable pixel 1
+for_window [class="(?i)(gsimplecal|zenity)"] border pixel 1
+for_window [class="(?i)(gsimplecal|zenity)"] move position mouse, move up 20px
 # Various
 for_window [instance="crx_abjcfabbhafbcdfjoecdgepllmpfceif"] kill   # kill Magic Actions for YouTube pop-up
 
