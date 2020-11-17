@@ -370,6 +370,11 @@
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}"
       where=${(V)VCS_STATUS_LOCAL_BRANCH}
+      if [[ -n $VCS_STATUS_TAG ]]; then
+          res+="${clean}${where//\%/%%}"  # escape %
+          res+=" ${meta}#"
+          where=${(V)VCS_STATUS_TAG}
+      fi
     elif [[ -n $VCS_STATUS_TAG ]]; then
       res+="${meta}#"
       where=${(V)VCS_STATUS_TAG}
