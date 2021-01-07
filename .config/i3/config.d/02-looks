@@ -5,7 +5,7 @@ font pango:System San Francisco Display 9pt
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 2
 default_floating_border normal
-hide_edge_borders none  # used to be both
+hide_edge_borders smart  # used to be both
 
 set_from_resource $term_background background
 set_from_resource $term_foreground foreground
