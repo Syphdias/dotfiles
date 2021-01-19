@@ -25,7 +25,7 @@ set $ws0 "10:Audio:10"
 set $gws "11:Game:11"
 
 # background
-set $background          feh --bg-fill ~/Pictures/current/ --randomize
+set $background          feh --bg-fill ~/Pictures/wallpapers/current/ --randomize
 set $exec_bg             exec --no-startup-id $background
 set $resetmode           mode "default"
 
