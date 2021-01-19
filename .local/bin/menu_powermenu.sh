@@ -6,7 +6,7 @@
 ## Reddit : @adi1090x
 ## Url    : https://github.com/adi1090x/rofi
 
-rofi_command="rofi -theme themes/menu/powermenu.rasi"
+rofi_command="rofi -theme card_square"
 uptime=$(uptime -p | sed -e 's/up //g')
 #mem=$( free -h | grep -i mem | awk -F ' ' '{print $3}')
 cpu=$(sh ~/.config/rofi/bin/usedcpu)
@@ -36,6 +36,7 @@ chosen="$(echo -e "$options" \
                 -kb-select-6 h \
                 -kb-select-7 w \
                 -kb-select-8 e )"
+
 case $chosen in
     $shutdown)
         cancel_action="Shutdown"
