@@ -47,6 +47,7 @@ zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 # files can be used after `z4h init`.
 z4h install ohmyzsh/ohmyzsh || return
 z4h install so-fancy/diff-so-fancy || return
+z4h install syl20bnr/spacemacs || return
 #z4h install zsh-users/zsh-history-substring-search || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
