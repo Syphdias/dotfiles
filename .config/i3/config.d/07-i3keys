@@ -62,6 +62,7 @@ bindsym $mod+shift+9    move container to workspace number $ws9; workspace numbe
 bindsym $mod+shift+KP_9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+shift+0    move container to workspace number $ws0; workspace number $ws0
 bindsym $mod+shift+KP_0 move container to workspace number $ws0; workspace number $ws0
+bindsym $mod+shift+ssharp move container to workspace number $gws; workspace number $gws
 
 ## Windows // Move Container to WS //  + Ctrl + 0-9 ##
 bindsym $mod+control+1    $exec_i3_groups move-to-number 1
@@ -84,6 +85,7 @@ bindsym $mod+control+9    move container to workspace number $ws9
 bindsym $mod+control+KP_9 move container to workspace number $ws9
 bindsym $mod+control+0    move container to workspace number $ws0
 bindsym $mod+control+KP_0 move container to workspace number $ws0
+bindsym $mod+control+ssharp move container to workspace number $gws
 
 # TODO: issue: focuses OTHER container on that workspace after move...sometimes
 ## Windows // Move Container (and Mouse) //  + ⇧ + ←↑↓→ ##
