@@ -8,25 +8,25 @@
 #assign [class="zoom"] $ws5
 #assign [class="^gimp"] $ws5
 ### To Lobby ($ws8)
-assign [instance="battle.net.exe"] $gws
-assign [class="Steam"] $gws
-assign [class="Lutris"] $gws
-assign [class="minecraft-launcher"] $gws
+assign [instance="battle.net.exe"] number $gws
+assign [class="Steam"] number $gws
+assign [class="Lutris"] number $gws
+assign [class="minecraft-launcher"] number $gws
 for_window [title="Friends List"] resize set width 300px, move right
 ### To Communication Workspace ($ws9)
-assign [class="Rambox"] $ws9
-assign [class="discord"] $ws9
-assign [class="TeamSpeak 3"] $ws9
-assign [class="TelegramDesktop"] $ws9
+assign [class="Rambox"] number $ws9
+assign [class="discord"] number $ws9
+assign [class="TeamSpeak 3"] number $ws9
+assign [class="TelegramDesktop"] number $ws9
 ### To Sound Workspace ($ws0)
-for_window [class="Spotify"] move to workspace $ws0
+for_window [class="Spotify"] move --no-auto-back-and-forth to workspace number $ws0
 ### To Dedicated Workspace ($gws)
-for_window [instance="overwatch.exe"] move to workspace $gws
-assign [class="csgo_linux64"] $gws
-assign [instance="gw2-64.exe"] $gws
-assign [class="Tabletop Simulator.x86_64"] $gws
-for_window [class="^Minecraft"] move to workspace $gws
-assign [class="battle.net.exe"] $gws
+assign [class="Tabletop Simulator.x86_64"] number $gws
+assign [class="battle.net.exe"] number $gws
+assign [class="csgo_linux64"] number $gws
+assign [instance="gw2-64.exe"] number $gws
+for_window [class="^Minecraft"] move --no-auto-back-and-forth to workspace number $gws
+for_window [instance="overwatch.exe"] move --no-auto-back-and-forth to workspace number $gws
 
 # floating
 for_window [window_role="pop-up"]         floating enable
