@@ -1,3 +1,7 @@
+function gitdir() {
+    export GIT_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/${1}"
+}
+
 function toggle-gitdir() {
     if [[ "$1" == "reverse" ]]; then
         sorting_glob="on" # on is the default and _o_rders by _n_ame
