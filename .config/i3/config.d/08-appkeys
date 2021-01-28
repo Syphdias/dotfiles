@@ -40,7 +40,8 @@ bindsym $mod+control+n           exec nm-connection-editor
 ## Applications // Pulseaudio Volumne Control //  + Ctrl + m ##
 bindsym $mod+control+m           exec pkill pavucontrol || pavucontrol
 ## Applications // File Explorer //  + Ctrl + e ##
-bindsym $mod+control+e           exec --no-startup-id thunar
+bindsym $mod+control+e           exec --no-startup-id tilix -e ranger
+bindsym $mod+shift+control+e     exec --no-startup-id thunar    # fallback
 ## Applications // xkill //  + Ctrl + x ##
 bindsym $mod+control+x --release exec --no-startup-id xkill
 ## Applications // gtimelog //  + Ctrl + t ##
