@@ -7,3 +7,6 @@
 [submodule ".vim/pack/myplugins/opt/fugitive"]
   path = .vim/pack/myplugins/opt/fugitive
   url = git@github.com:tpope/vim-fugitive.git
+[submodule ".vim/pack/myplugins/start/suda"]
+	path = .vim/pack/myplugins/start/suda
+	url = git@github.com:lambdalisue/suda.vim.git
