@@ -12,17 +12,17 @@ focus_on_window_activation none #default: smart
 focus_follows_mouse yes         #default: yes
 
 # workspaces
-set $ws1 "1:​​​​1"
-set $ws2 "100002:​​​​2"
-#set $ws3 "3"
-#set $ws4 "4"
-#set $ws5 "5:Media:5"
-#set $ws6 "6"
-#set $ws7 "7:Reading"
-#set $ws8 "8:Lobby"
-set $ws9 "100009:​​Messaging​​:9"
-set $ws0 "10:Audio:10"
-set $gws "11:Game:11"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10:Audio"
+set $gws "11:Game"
 
 # background
 set $background          feh --bg-fill ~/Pictures/wallpapers/current/ --randomize

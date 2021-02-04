@@ -8,11 +8,15 @@
  */
 
 * {
-  background:       #141c21;
+  accent:           #A9C03F;
   background-alt:   #1C252A;
-  foreground:       #93a1a1;
-  border:           #FFF;
+  background-light: #1C252A;
+  background:       #141c21;
   border-alt:       #000;
+  border:           #FFF;
+  foreground:       #93a1a1;
+  off:              #DE635E;
+  on:               #5BB462;
   selected:         #A9C03F;
   urgent:           #5BB462;
 }
