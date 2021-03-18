@@ -47,7 +47,7 @@ nmap <C-n> :set invnumber invrelativenumber <CR>
 filetype plugin indent on "https://blog.netways.de/2012/10/30/puppet-und-vim/
 
 autocmd filetype markdown setlocal textwidth=80
-autocmd FileType gitcommit setlocal spell textwidth=80
+autocmd FileType gitcommit setlocal spell spl=de,en textwidth=80
 
 set statusline=%f\ %h%w%m%r\            " from default
 set statusline+=%#warningmsg#
