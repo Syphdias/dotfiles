@@ -1,7 +1,50 @@
+# dotrepot utilities
+function dot() {
+    if [[ "$1" == "off" ]]; then
+        unset GIT_DIR
+        unset GIT_WORK_TREE
+    elif [[ "$1" == "on" ]]; then
+        export GIT_DIR="$2"
+    else
+        for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
+            echo -e "\e[33m${d}\e[0m"
+            command git --git-dir="${d}/" $@
+        done
+    fi
+}
+compdef '_dispatch git git' dot
+compdef '_files -g "~/.config/dotgit/*(/)"' dot on
+
+function sudogit() {
+    [[ -z "$GIT_DIR" ]] && echo >&2 "no GIT_DIR" && return
+    sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git --git-dir="$GIT_DIR" $@
+    # fix permissions if broken by sudo
+    sudo find "$GIT_DIR" -user root -exec chown $USER: {} \;
+}
+compdef '_dispatch git git' sudogit
+
 function gitdir() {
     export GIT_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/${1}"
 }
 
+
+# maintenance functions
+function dot-find-duplicates () {
+    dot ls-files | awk '
+        /\/dotgit\// {d=$1}
+        ! /\/dotgit\// {count[$0]++; repo[$0]=repo[$0]""d"\n"}
+        END {
+            for (f in count) {
+                if (count[f] > 1)
+                    printf("%s in:\n%s\n", f, repo[f])
+        }}'
+}
+# TODO: deal with broken ls-files in sysconfig repos
+# TODO: check if permissions broke with sysconfig checkouts -> develop solution
+
+
+
+# function to cycle through dotrepos with <Ctrl-N> and <Ctrl-P>
 function toggle-gitdir() {
     if [[ "$1" == "reverse" ]]; then
         sorting_glob="on" # on is the default and _o_rders by _n_ame
@@ -53,7 +96,9 @@ function prompt_my_git_dir() {
   p10k segment -b 0 -f 208 -t ${repo//\%/%%}
 }
 
-# TODO chpwd hook
+
+# chpwd hook to warn if GIT_DIR is set but you moved to a git directory
+# TODOs:
 # - reset on cd into git repo
 #   command env -u GIT_DIR git -C . rev-parse -q
 # - maybe: reset on cd into non managed dir

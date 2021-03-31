@@ -160,31 +160,6 @@ function ssh() {
      command ssh $@
 }
 
-# dotfiles
-function dot() {
-    if [[ "$1" == "off" ]]; then
-        unset GIT_DIR
-        unset GIT_WORK_TREE
-    elif [[ "$1" == "on" ]]; then
-        export GIT_DIR="$2"
-    else
-        for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
-            echo -e "\e[33m${d}\e[0m"
-            command git --git-dir="${d}/" $@
-        done
-    fi
-}
-compdef '_dispatch git git' dot
-compdef '_files -g "~/.config/dotgit/*(/)"' dot on
-
-function sudogit() {
-    [[ -z "$GIT_DIR" ]] && echo >&2 "no GIT_DIR" && return
-    sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git --git-dir="$GIT_DIR" $@
-    # fix permissions if broken by sudo
-    sudo find "$GIT_DIR" -user root -exec chown $USER: {} \;
-}
-compdef '_dispatch git git' sudogit
-
 # do git stuff for all directories in current working directory
 all () {
     cur_pwd=$(pwd)
