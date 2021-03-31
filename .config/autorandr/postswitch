@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-feh --bg-fill ~/Pictures/wallpapers/current/ --randomize
+feh --bg-fill /home/syphdias/.local/share/dynamic-wallpaper/firewatch/$(($(date +\%k)/1)).*
+#feh --bg-fill ~/Pictures/wallpapers/current/ --randomize

@@ -22,7 +22,7 @@ zstyle ':z4h:fzf-complete'    fzf-bindings     'tab:repeat' \
 #zstyle ':z4h:(fzf-complete|fzf-history|cd-down)' fzf-bindings 'ctrl-k:up'
 zstyle ':z4h:fzf-complete'    fzf-flags        --no-exact   # EXPERIMENTAL
 #zstyle ':z4h:fzf-history'    fzf-bindings     'tab:repeat' # history key binds
-zstyle ':z4h:fzf-history'     fzf-flags        --no-preview --height 50% # history extra flags
+zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
 
 # When fzf menu opens on Alt+Down, TAB moves the cursor down ('tab:down')
 # or accepts the selection and triggers another Alt+Down ('tab:repeat')?
