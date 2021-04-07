@@ -49,7 +49,7 @@ bindsym $mod+control+t           exec pkill gtimelog || ~/.local/bin/gtimelog
 
 ## Various // Switch Audio Sink //  + Ctrl + o ##
 bindsym $mod+control+o           exec --no-startup-id "~/.local/bin/pulse-audio-cycle.py --notify \
-                                    -c 'alsa_card.pci-0000_0[59]_00' \
+                                    -c 'alsa_card.pci-0000_0[59]_00|Jabra_Link' \
                                     -p 'alsa_card.pci-0000_09_00.1' 'hdmi-stereo-extra.'\
                                     -p 'Jabra_Link' 'analog-stereo\+input:mono|analog-stereo$'"
 ## Various // Switch Jabra Profile //  + Ctrl + Shift + o ##
