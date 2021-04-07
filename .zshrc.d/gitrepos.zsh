@@ -63,9 +63,20 @@ function dot-status() {
 
 # show if in sync
 function dot-up-to-date() {
-    # TODO: red for behind/ahead
-    command git log --oneline -1
+    local branch_info="$(git branch -v |grep -F '*' )"
+    local out="up-to-date"
+    local amount
+    if amount=$(grep -Po '(?<=\[behind )([0-9]+)(?=\])' <<< $branch_info); then
+        out="\e[31m$amount behind\e[0m"
+    elif amount=$(grep -Po '(?<=\[ahead )([0-9]+)(?=\])' <<< $branch_info); then
+        out="\e[31m$amount ahead\e[0m"
+    fi
+    print $out
 }
+
+# TODO: only show not synced
+alias dot-utd="dot exec 'dot-up-to-date; dot-status' NE"
+
 # TODO: deal with broken ls-files in sysconfig repos
 # TODO: check if permissions broke with sysconfig checkouts -> develop solution
 
