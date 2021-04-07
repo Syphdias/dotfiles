@@ -75,7 +75,7 @@ function dot-up-to-date() {
 }
 
 # TODO: only show not synced
-alias dot-utd="dot exec 'dot-up-to-date; dot-status' NE"
+alias dot-utd="dot exec 'dot-up-to-date |tr -d \"\n\"; echo -n \"   \"; dot-status' NE"
 
 # TODO: deal with broken ls-files in sysconfig repos
 # TODO: check if permissions broke with sysconfig checkouts -> develop solution
