@@ -71,7 +71,7 @@ function dot-up-to-date() {
     elif amount=$(grep -Po '(?<=\[ahead )([0-9]+)(?=\])' <<< $branch_info); then
         out="\e[31m$amount ahead\e[0m"
     fi
-    print $out
+    echo $out
 }
 
 # TODO: only show not synced
