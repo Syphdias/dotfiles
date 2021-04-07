@@ -5,6 +5,11 @@ function dot() {
         unset GIT_WORK_TREE
     elif [[ "$1" == "on" ]]; then
         export GIT_DIR="$2"
+    elif [[ "$1" == "exec" ]]; then
+        for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
+            echo -e "\e[33m${d}\e[0m"
+            GIT_DIR="$d" eval "$2"
+        done
     else
         for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
             echo -e "\e[33m${d}\e[0m"
@@ -29,7 +34,7 @@ function gitdir() {
 
 
 # maintenance functions
-function dot-find-duplicates () {
+function dot-find-duplicates() {
     dot ls-files | awk '
         /\/dotgit\// {d=$1}
         ! /\/dotgit\// {count[$0]++; repo[$0]=repo[$0]""d"\n"}
@@ -38,6 +43,28 @@ function dot-find-duplicates () {
                 if (count[f] > 1)
                     printf("%s in:\n%s\n", f, repo[f])
         }}'
+}
+
+# check file status
+function dot-status() {
+    command git status --porcelain \
+        | awk '
+            BEGIN {
+                unstaged=0; staged=0; untracked=0
+            }
+            /^M/    {unstaged++}
+            /^.M/   {staged++}
+            /^\?\?/ {untracked++}
+            END {
+                print unstaged, "unstaged ", staged, "staged ", untracked, "untracked"
+            }' \
+        | sed -E $'s,([0-9]+[0-9]|[1-9]),\e[31m\\1\e[0m,g'
+}
+
+# show if in sync
+function dot-up-to-date() {
+    # TODO: red for behind/ahead
+    command git log --oneline -1
 }
 # TODO: deal with broken ls-files in sysconfig repos
 # TODO: check if permissions broke with sysconfig checkouts -> develop solution
