@@ -5,7 +5,12 @@
 # autoload bashcompinit && bashcompinit
 
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
-zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' special-dirs ..    # offer `..`
+
+# Disable requiring a prefix, e.g. `git <tab>` -> offer nothing if setting is true
+# (not all completion even honors this setting, e.g. git...)
+zstyle ':completion::complete:*::options' prefix-needed false
+
 
 # TODO: include recommendations /etc/zsh/newuser.zshrc.recommended
 # TODO: find out if I want these

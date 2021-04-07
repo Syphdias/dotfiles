@@ -147,6 +147,7 @@ z4h source ~/.$(hostname).src       # Host-specific functions, etc.
 z4h source ~/.zshrc.d/after-p10k-lean.zsh
 z4h source ~/.zshrc.d/gitrepos.zsh
 z4h source ~/.zshrc.d/openstack.zsh
+z4h source ~/.zshrc.d/completion.zsh
 
 # omz completion
 #z4h source $Z4H/ohmyzsh/ohmyzsh/lib/completion.zsh  # omz-complete
