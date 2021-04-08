@@ -52,11 +52,11 @@ function dot-status() {
             BEGIN {
                 unstaged=0; staged=0; untracked=0
             }
-            /^M/    {unstaged++}
-            /^.M/   {staged++}
-            /^\?\?/ {untracked++}
+            /^[MD]/  {staged++}
+            /^.[MD]/ {unstaged++}
+            /^\?\?/  {untracked++}
             END {
-                print unstaged, "unstaged ", staged, "staged ", untracked, "untracked"
+                print staged, "staged ", unstaged, "unstaged ", untracked, "untracked"
             }' \
         | sed -E $'s,([0-9]+[0-9]|[1-9]),\e[31m\\1\e[0m,g'
 }
@@ -65,11 +65,10 @@ function dot-status() {
 function dot-up-to-date() {
     local branch_info="$(git branch -v |grep -F '*' )"
     local out="up-to-date"
-    local amount
-    if amount=$(grep -Po '(?<=\[behind )([0-9]+)(?=\])' <<< $branch_info); then
-        out="\e[31m$amount behind\e[0m"
-    elif amount=$(grep -Po '(?<=\[ahead )([0-9]+)(?=\])' <<< $branch_info); then
-        out="\e[31m$amount ahead\e[0m"
+    local amount=$(grep -Po '(?<=\[)(ahead|behind) [0-9]+(?=\])' <<< $branch_info)
+    if [[ -n "$amount" ]]; then
+        amount="${${amount}[1]} ${${=amount}[1]}"
+        out="\e[31m${(r:10:)amount}\e[0m"
     fi
     echo $out
 }
