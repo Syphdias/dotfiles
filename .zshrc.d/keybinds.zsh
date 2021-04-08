@@ -32,8 +32,8 @@ z4h bindkey z4h-cd-forward          Alt+Right  # cd into the next directory
 
 # cd back into last_cd if shell just started
 function z4h-cd-back-or-cached() {
-    if [[ -f ~/.cache/last_cd && ${#$(dirs -v)} == 2 ]]; then
-        cd $(<~/.cache/last_cd)
+    if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd && ${#$(dirs -v)} == 2 ]]; then
+        cd $(<${XDG_CACHE_HOME:-~/.cache}/last_cd)
         # This must run with user options (because of reset-prompt).
         local f
         for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
@@ -50,13 +50,21 @@ zle -N z4h-cd-back-or-cached
 # automatically save last cd to last_cd
 function set-cd-cache() {
     if [[ $PWD != ~ ]]; then
-        <<<"${PWD}" > ~/.cache/last_cd
+        echo "${PWD}" >| ${XDG_CACHE_HOME:-~/.cache}/last_cd
     fi
 }
 add-zsh-hook chpwd set-cd-cache
 
 # manually save pwd to last_cd
 alias d='<<<"${PWD}" > ~/.cache/last_cd'
+
+# autojump to last_cd if it was modified in the last 10s
+if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd \
+        && ${#$(dirs -v)} == 2 \
+        && $(zstat -F '%s' +mtime -- ${XDG_CACHE_HOME:-~/.cache}/last_cd) -ge $(date +%s)-10 \
+    ]]; then
+    cd $(<${XDG_CACHE_HOME:-~/.cache}/last_cd)
+fi
 
 
 
