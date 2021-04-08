@@ -67,7 +67,7 @@ function dot-up-to-date() {
     local out="up-to-date"
     local amount=$(grep -Po '(?<=\[)(ahead|behind) [0-9]+(?=\])' <<< $branch_info)
     if [[ -n "$amount" ]]; then
-        amount="${${amount}[1]} ${${=amount}[1]}"
+        amount="${${=amount}[2]} ${${=amount}[1]}"
         out="\e[31m${(r:10:)amount}\e[0m"
     fi
     echo $out
