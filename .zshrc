@@ -118,11 +118,6 @@ bindkey -M viins '^[h' z4h-run-help
 z4h source ~/.zshrc.d/z4h-keybinds.zsh # rebinding viins, vicmd
 z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
 
-# cd on keybind
-z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
-z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
-#z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
-z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
 
 # rebind Shift+Arrow to same as Ctrl-Arrow
 for l in {A..D}; do bindkey -s '^[[1;2'$l '^[[1;5'$l; done

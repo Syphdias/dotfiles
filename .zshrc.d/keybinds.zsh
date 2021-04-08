@@ -23,6 +23,43 @@ functions[zle-line-init]="
     after_zle-line-init
 "
 
+
+# cd on keybind
+z4h bindkey z4h-cd-up               Alt+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down             Alt+Down   # cd into a child directory
+z4h bindkey z4h-cd-back-or-cached   Alt+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward          Alt+Right  # cd into the next directory
+
+# cd back into last_cd if shell just started
+function z4h-cd-back-or-cached() {
+    if [[ -f ~/.cache/last_cd && ${#$(dirs -v)} == 2 ]]; then
+        cd $(<~/.cache/last_cd)
+        # This must run with user options (because of reset-prompt).
+        local f
+        for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
+            [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
+        done
+        zle .reset-prompt
+        zle -R
+    else
+        z4h-cd-back
+    fi
+}
+zle -N z4h-cd-back-or-cached
+
+# automatically save last cd to last_cd
+function set-cd-cache() {
+    if [[ $PWD != ~ ]]; then
+        <<<"${PWD}" > ~/.cache/last_cd
+    fi
+}
+add-zsh-hook chpwd set-cd-cache
+
+# manually save pwd to last_cd
+alias d='<<<"${PWD}" > ~/.cache/last_cd'
+
+
+
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
 # unset zle_bracketed_paste
