@@ -24,6 +24,7 @@ for_window [class="Spotify"] move --no-auto-back-and-forth to workspace number $
 assign [class="Tabletop Simulator.x86_64"] number $gws
 assign [class="battle.net.exe"] number $gws
 assign [class="csgo_linux64"] number $gws
+assign [class="dota2"] number $gws
 assign [instance="gw2-64.exe"] number $gws
 for_window [class="^Minecraft"] move --no-auto-back-and-forth to workspace number $gws
 for_window [instance="overwatch.exe"] move --no-auto-back-and-forth to workspace number $gws
