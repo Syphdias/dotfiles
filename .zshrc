@@ -24,18 +24,14 @@ zstyle ':z4h:' prompt-at-bottom 'yes'
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard 'pc'
 
-# When fzf menu opens on TAB, another TAB moves the cursor down ('tab:down')
-# or accepts the selection and triggers another TAB-completion ('tab:repeat')?
-zstyle ':z4h:fzf-complete'    fzf-bindings     'tab:repeat' \
-                                               'ctrl-a:toggle-all' 'ctrl-k:up'
-zstyle ':z4h:(fzf-complete|fzf-history|cd-down|fzf-dir-history)' \
-                              fzf-bindings     'ctrl-k:up' \
-                                               'ctrl-j:down'
-zstyle ':z4h:fzf-dir-history' fzf-bindings     'tab:repeat' \
-                                               'ctrl-k:up' \
-                                               'ctrl-j:down'
+# Set key bindings for fzf menus
+# toggle-all: only for fzf-complete
+# repeat: `accept`s for fzf-history and fzf-dir-history
+zstyle ':z4h:(fzf-complete|fzf-history|fzf-dir-history|cd-down)' \
+                              fzf-bindings     'tab:repeat' \
+                                               'ctrl-a:toggle-all' \
+                                               'ctrl-k:up' 'ctrl-j:down'
 zstyle ':z4h:fzf-complete'    fzf-flags        --no-exact   # EXPERIMENTAL
-#zstyle ':z4h:fzf-history'    fzf-bindings     'tab:repeat' # history key binds
 #zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
 
 # Right-arrow key accepts one character ('partial-accept') from
