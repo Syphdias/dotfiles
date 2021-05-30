@@ -148,17 +148,18 @@ function histrm () {
     set +v
 }
 
-function ssh() {
-    local -a z4h_ssh_hosts=($(awk '/Host .*#z4h/ {for (i=2; i<NF; i++) print $i;}' ~/.ssh/config**/*))
-    local use_z4h_ssh=false
-    for h in $z4h_ssh_hosts; do
-        if [[ $@[(I)$h] != 0 ]]; then
-            z4h ssh $@
-            return
-        fi
-     done
-     command ssh $@
-}
+# Disabled in favour of z4h native `z4h ssh` detection
+#function ssh() {
+#    local -a z4h_ssh_hosts=($(awk '/Host .*#z4h/ {for (i=2; i<NF; i++) print $i;}' ~/.ssh/config**/*))
+#    local use_z4h_ssh=false
+#    for h in $z4h_ssh_hosts; do
+#        if [[ $@[(I)$h] != 0 ]]; then
+#            z4h ssh $@
+#            return
+#        fi
+#     done
+#     command ssh $@
+#}
 
 # do git stuff for all directories in current working directory
 all () {

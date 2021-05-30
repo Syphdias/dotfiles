@@ -1,4 +1,4 @@
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v3/README.md.
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 # fixes https://gnunn1.github.io/tilix-web/manual/vteconfig/
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte*.sh
@@ -9,42 +9,65 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/${UID}}"
 
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
-zstyle ':z4h:'                auto-update      'ask'
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'ask'
 # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
-zstyle ':z4h:'                auto-update-days '28'
+zstyle ':z4h:' auto-update-days '28'
+
+# Automaticaly wrap TTY with a transparent tmux ('integrated'), or start a
+# full-fledged tmux ('system'), or disable features that require tmux ('no').
+zstyle ':z4h:' start-tmux       'integrated'
+# Move prompt to the bottom when zsh starts up so that it's always in the
+# same position. Has no effect if start-tmux is 'no'.
+zstyle ':z4h:' prompt-at-bottom 'yes'
 
 # Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:bindkey'         keyboard         'pc'
+zstyle ':z4h:bindkey' keyboard 'pc'
+
 # When fzf menu opens on TAB, another TAB moves the cursor down ('tab:down')
 # or accepts the selection and triggers another TAB-completion ('tab:repeat')?
 zstyle ':z4h:fzf-complete'    fzf-bindings     'tab:repeat' \
                                                'ctrl-a:toggle-all' 'ctrl-k:up'
-#zstyle ':z4h:(fzf-complete|fzf-history|cd-down)' fzf-bindings 'ctrl-k:up'
+zstyle ':z4h:(fzf-complete|fzf-history|cd-down|fzf-dir-history)' \
+                              fzf-bindings     'ctrl-k:up' \
+                                               'ctrl-j:down'
+zstyle ':z4h:fzf-dir-history' fzf-bindings     'tab:repeat' \
+                                               'ctrl-k:up' \
+                                               'ctrl-j:down'
 zstyle ':z4h:fzf-complete'    fzf-flags        --no-exact   # EXPERIMENTAL
 #zstyle ':z4h:fzf-history'    fzf-bindings     'tab:repeat' # history key binds
-zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
+#zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
 
-# When fzf menu opens on Alt+Down, TAB moves the cursor down ('tab:down')
-# or accepts the selection and triggers another Alt+Down ('tab:repeat')?
-zstyle ':z4h:cd-down'         fzf-bindings     'tab:down'
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:autosuggestions' forward-char     'partial-accept'
 
-# Send these files over to the remote host when connecting over ssh.
-# Multiple files can be listed here.
-zstyle ':z4h:ssh:*'           send-extra-files '~/.iterm2_shell_integration.zsh'
-# Disable automatic teleportation of z4h over ssh when connecting to some-host.
-# This makes `ssh some-host` equivalent to `command ssh some-host`.
-zstyle ':z4h:ssh:some-host'   passthrough      'yes'
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
+
+# Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# ssh when connecting to these hosts.
+zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
+zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
+# The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:*'                   enable 'no'
+
+# Send these files over to the remote host when connecting over ssh to the
+# enabled hosts.
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 
 # Move the cursor to the end when Up/Down fetches a command from history?
 zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
 zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 
-# Clone additional Git repositories from GitHub. This doesn't do anything
-# apart from cloning the repository and keeping it up-to-date. Cloned
-# files can be used after `z4h init`.
+# Misc
+zstyle ':z4h:' iterm2-integration 'yes'
+
+# Clone additional Git repositories from GitHub.
+#
+# This doesn't do anything apart from cloning the repository and keeping it
+# up-to-date. Cloned files can be used after `z4h init`. This is just an
+# example. If you don't plan to use Oh My Zsh, delete this line.
 z4h install ohmyzsh/ohmyzsh || return
 z4h install so-fancy/diff-so-fancy || return
 z4h install syl20bnr/spacemacs || return
@@ -56,37 +79,27 @@ z4h install syl20bnr/spacemacs || return
 # perform network I/O must be done above. Everything else is best done below.
 z4h init || return
 
-# Export environment variables.
-export TERMINAL=tilix
-export EDITOR=nvim
-#export PAGER='vim -u ~/.config/vim/vimrc.less -'
-# This affects every invocation of `less`.
-#   -R   color
-#   -F   exit if there is less than one page of content
-#   -X   keep content on screen after exit
-#   -M   show more info at the bottom prompt line
-#   -x4  tabs are 4 instead of 8
-export LESS='-iR'
-export SYSTEMD_PAGER='cat'
-export GPG_TTY=$TTY
-export TIMEFMT="%J  %U user %S system %P cpu %MM memory %*E total"
-export MAILCHECK=0
-export WORDCHARS='-'    # ignore these chars on ctrl-w
-LISTMAX=0               # In the line editor, the number of matches to list without asking first.
-export PYENV_ROOT="$HOME/.pyenv"
-export GOPATH="$HOME/go"
-export GOBIN="$HOME/go/bin"
-export SCREENRC="${XDG_CONFIG_HOME:-$HOME/.config}/screen/screenrc"
-
 # Extend PATH.
-path=(~/.local/bin $PYENV_ROOT/bin /usr/local/bin $GOPATH/bin ~/bin $path)
+path=(~/bin $path)
+
+# Export environment variables.
+export GPG_TTY=$TTY
+
+# Source additional local files if they exist.
+z4h source ~/.env.zsh
+
+# Extend PATH further
+path=(/usr/local/bin $path)
+[[ -n "$GOPATH" ]] && path=($GOPATH/bin $path)
+[[ -n "$PYENV_ROOT" ]] && path=($PYENV_ROOT/bin $path)
+path=(~/.local/bin $path)
 
 # Use additional Git repositories pulled in with `z4h install`.
-plugins=(
+plugins=(               # needed?
     #command-not-found  # maybe
-    extract             # needed
+    extract             # yes
     git                 # maybe
-    git-auto-fetch      # needed
+    git-auto-fetch      # yes
 )
 for plugin in $plugins; do
     z4h source $Z4H/ohmyzsh/ohmyzsh/plugins/$plugin/$plugin.plugin.zsh
@@ -99,7 +112,6 @@ fpath+=(
 )
 
 # Source additional local files if they exist.
-z4h source ~/.iterm2_shell_integration.zsh
 z4h source /usr/share/autojump/autojump.zsh
 
 # Define key bindings.
@@ -107,7 +119,6 @@ bindkey -e
 z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
 z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
 z4h bindkey backward-kill-line  Ctrl+U
-#bindkey '^[o'        z4h-stash-buffer      # save buffer to "history" but not to HISTFILE
 # emacsification of viins
 bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
@@ -120,10 +131,10 @@ z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
 
 
 # rebind Shift+Arrow to same as Ctrl-Arrow
-for l in {A..D}; do bindkey -s '^[[1;2'$l '^[[1;5'$l; done
+#for l in {A..D}; do bindkey -s '^[[1;2'$l '^[[1;5'$l; done
 # rebind Alt+jk to same as Arrows Up/Down (will overwrite (parent/child) cd)
-bindkey -s '^[j' '^[[A' # z4h-up-local-history
-bindkey -s '^[k' '^[[B' # z4h-down-local-history
+bindkey -s '^[j' '^[[A' # z4h-up-substring-local
+bindkey -s '^[k' '^[[B' # z4h-down-substring-local
 
 # Sort completion candidates when pressing Tab? TODO: rm this?
 #zstyle ':completion:*'                           sort               false

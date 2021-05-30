@@ -16,6 +16,8 @@ after_zle-line-init () {
         BUFFER="$savebuf" CURSOR="$savecur"
     fi
 }
+bindkey "^[_" redo
+
 # patching it dirtly
 # https://unix.stackexchange.com/questions/450043/overwrite-and-reuse-existing-function-in-zsh
 functions[zle-line-init]="

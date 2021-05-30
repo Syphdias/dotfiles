@@ -77,21 +77,19 @@ bindkey   '^[[D'    backward-char                  # left
 # Move cursor one char forward.
 bindkey   '^[[C'    forward-char                   # right
 # Move cursor one line up or fetch the previous command from LOCAL history.
-bindkey   '^P'      z4h-up-local-history           # ctrl+p
-bindkey   '^[[A'    z4h-up-local-history           # up
+bindkey   '^P'      z4h-up-substring-local           # ctrl+p
+bindkey   '^[[A'    z4h-up-substring-local           # up
 #bindkey   '^P'      z4h-up-prefix-local           # ctrl+p  # z4hv5 https://github.com/romkatv/zsh4humans/issues/35#issuecomment-735225554
 #bindkey   '^[[A'    z4h-up-prefix-local           # up  # z4hv5 
 # Move cursor one line down or fetch the next command from LOCAL history.
-bindkey   '^N'      z4h-down-local-history         # ctrl+n
-bindkey   '^[[B'    z4h-down-local-history         # down
+bindkey   '^N'      z4h-down-substring-local         # ctrl+n
+bindkey   '^[[B'    z4h-down-substring-local         # down
 #bindkey   '^N'      z4h-down-prefix-local         # ctrl+n  # z4hv5
 #bindkey   '^[[B'    z4h-down-prefix-local         # down  # z4hv5
 # Move cursor one line up or fetch the previous command from GLOBAL history.
-bindkey   '^[[1;5A' z4h-up-global-history          # ctrl+up
-#bindkey   '^[[1;5A' z4h-up-prefix-global          # ctrl+up  # z4hv5
+bindkey   '^[[1;5A' z4h-up-prefix-global          # ctrl+up  # z4hv5
 # Move cursor one line down or fetch the next command from GLOBAL history.
-bindkey   '^[[1;5B' z4h-down-global-history        # ctrl+down
-#bindkey   '^[[1;5B' z4h-down-prefix-global        # ctrl+down  # z4hv5
+bindkey   '^[[1;5B' z4h-down-prefix-global        # ctrl+down  # z4hv5
 # Move cursor to the beginning of line.
 bindkey   '^[[H'    beginning-of-line              # home
 # Move cursor to the end of line.
