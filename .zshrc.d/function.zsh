@@ -348,7 +348,7 @@ function ssh-until-up() {
 }
 
 function aww() {
-    awk "{print ${1}}"
+    awk "{print ${1}}" ${@:2}
 }
 
 function syu() {
