@@ -109,7 +109,6 @@ fpath+=(
 z4h source /usr/share/autojump/autojump.zsh
 
 # Define key bindings.
-bindkey -e
 z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
 z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
 z4h bindkey backward-kill-line  Ctrl+U
