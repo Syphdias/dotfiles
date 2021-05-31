@@ -85,10 +85,8 @@ export GPG_TTY=$TTY
 z4h source ~/.env.zsh
 
 # Extend PATH further
-path=(/usr/local/bin $path)
-[[ -n "$GOPATH" ]] && path=($GOPATH/bin $path)
-[[ -n "$PYENV_ROOT" ]] && path=($PYENV_ROOT/bin $path)
-path=(~/.local/bin $path)
+[[ -n "$GOPATH" ]] && path+=($GOPATH/bin)
+[[ -n "$PYENV_ROOT" ]] && path+=($PYENV_ROOT/bin)
 
 # Use additional Git repositories pulled in with `z4h install`.
 plugins=(               # needed?
