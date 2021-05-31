@@ -49,6 +49,7 @@ alias fixmonworkright='xrandr --output eDP-1 --mode 1360x768 --pos 3840x432 --ou
 alias winboot='win_id=$(sudo grep -ie "^menuentry '\''" -e "^submenu '\''" /boot/grub/grub.cfg --color |awk -v nr=99999 '\''/Windows/ && NR < nr {nr=NR; print NR-1}'\'') ; sudo grub-reboot $win_id'
 alias zshrc="vim ~/.zshrc"
 alias vim='nvim'
+alias aecho=' echo; echo'
 
 # zsh aliases
 # extra files?
