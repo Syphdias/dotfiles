@@ -10,3 +10,6 @@
 [submodule ".vim/pack/myplugins/start/suda"]
 	path = .vim/pack/myplugins/start/suda
 	url = git@github.com:lambdalisue/suda.vim.git
+[submodule ".vim/pack/myplugins/opt/yaml-folds/plugin"]
+	path = .vim/pack/myplugins/opt/yaml-folds/plugin
+	url = git@github.com:pedrohdz/vim-yaml-folds.git
