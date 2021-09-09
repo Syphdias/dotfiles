@@ -7,7 +7,7 @@
 ## Url    : https://github.com/adi1090x/rofi
 
 PATH=~/.local/bin:$PATH
-rofi_command="rofi -theme card_square"
+rofi_command="rofi -theme ${1:-card_square}"
 uptime=$(uptime -p | sed -e 's/up //g')
 #mem=$( free -h | grep -i mem | awk -F ' ' '{print $3}')
 cpu=$(~/.config/rofi/bin/usedcpu)
