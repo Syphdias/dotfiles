@@ -51,6 +51,9 @@ interval=30
 instance=swap
 interval=30
 
+[gpu-load]
+interval=10
+
 # Network interface monitoring
 # If the `instance` is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
@@ -98,6 +101,11 @@ command=~/.local/bin/battery.zsh
 markup=pango
 instance=1
 interval=30
+
+[dunst]
+markup=pango
+format=json
+interval=5
 
 [time]
 command=case $BLOCK_BUTTON in 1) gsimplecal; date '+%a KW %V %F %H:%M  ' ;; *) date '+%a KW %V %F %H:%M  ' ;; esac
