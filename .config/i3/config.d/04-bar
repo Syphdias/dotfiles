@@ -15,6 +15,8 @@ bar {
         tray_output primary
         position bottom
 
+        wheel_up_cmd nop
+        wheel_down_cmd nop
         # bindsym button4 nop
         # bindsym button5 nop
         # font xft:URWGothic-Book 11
