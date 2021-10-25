@@ -1,8 +1,4 @@
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
-# fixes https://gnunn1.github.io/tilix-web/manual/vteconfig/
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte*.sh
-fi
 
 # Export XDG environment variables. Other environment variables are exported later.
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
