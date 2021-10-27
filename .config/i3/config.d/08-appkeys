@@ -6,13 +6,16 @@ bindsym $mod+D      exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmen
 bindsym mod1+F2 exec --no-startup-id /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
 bindsym $mod+shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -lines 3 -eh 2 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 bindsym $mod+Tab exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show window -i -lines 10 -eh 1 -width 50 -padding 50 -opacity "85" -font "MesloLGS NF Regular 16"
+bindsym $mod+Shift+Tab exec --no-startup-id GTK_IM_MODULE=ibus SWT_GTK3=1 GDK_SYNCHRONIZE=1 ~/go/bin/wsmgr
 #bindsym $mod+shift+d --release exec --no-startup-id LC_ALL=en_US.UTF-8 i3-dmenu-desktop --dmenu='rofi -dmenu -i -lines 10 -eh 1 -width 70 -padding 50 -opacity "85" -font "System San Francisco Display 18"'
 #bindsym $mod+d exec dmenu_run # default
 #bindsym $mod+Tab exec rofi -show window -i -lines 10 -eh 1 -width 50 -padding 50 -opacity "85" -font "System San Francisco Display 16" 
 
 ## Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.local/bin/smart-volume-adjust.py --notify --default-to-sink +.05 "Spotify" "Google Chrome" ""
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.local/bin/smart-volume-adjust.py --notify --default-to-sink -.05 "Spotify" "Google Chrome" ""
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle
 
 ## Screen brightness controls (requires xbacklight)
@@ -43,7 +46,7 @@ bindsym $mod+control+m           exec pkill pavucontrol || pavucontrol
 bindsym $mod+control+e           exec --no-startup-id tilix -e ranger
 bindsym $mod+shift+control+e     exec --no-startup-id thunar    # fallback
 ## Applications // xkill //  + Ctrl + x ##
-bindsym $mod+control+x --release exec --no-startup-id xkill
+bindsym $mod+control+x --release exec --no-startup-id pkill xkill || xkill
 ## Applications // gtimelog //  + Ctrl + t ##
 bindsym $mod+control+t           exec pkill gtimelog || ~/.local/bin/gtimelog
 
