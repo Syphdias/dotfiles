@@ -15,7 +15,7 @@ zstyle ':z4h:' auto-update-days '28'
 zstyle ':z4h:' start-tmux       'integrated'
 # Move prompt to the bottom when zsh starts up so that it's always in the
 # same position. Has no effect if start-tmux is 'no'.
-zstyle ':z4h:' prompt-at-bottom 'yes'
+zstyle ':z4h:' prompt-at-bottom 'no'
 
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard 'pc'
