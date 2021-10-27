@@ -6,10 +6,18 @@ function dot() {
     elif [[ "$1" == "on" ]]; then
         export GIT_DIR="$2"
     elif [[ "$1" == "exec" ]]; then
+        local TMP_GIT_DIR="$GIT_DIR"
         for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
             echo -e "\e[33m${d}\e[0m"
-            GIT_DIR="$d" eval "$2"
+            export GIT_DIR="$d"
+            eval "$2"
         done
+        GIT_DIR="${TMP_GIT_DIR}"
+    elif [[ "$1" == "search" ]]; then
+        dot ls-files \
+            | grep -Fe "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/" -e "$2" \
+            | grep -B1 "$2" \
+            | grep -F "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"
     else
         for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
             echo -e "\e[33m${d}\e[0m"
