@@ -12,7 +12,7 @@ zstyle ':z4h:' auto-update-days '28'
 
 # Automaticaly wrap TTY with a transparent tmux ('integrated'), or start a
 # full-fledged tmux ('system'), or disable features that require tmux ('no').
-zstyle ':z4h:' start-tmux       'integrated'
+zstyle ':z4h:' start-tmux       'no'
 # Move prompt to the bottom when zsh starts up so that it's always in the
 # same position. Has no effect if start-tmux is 'no'.
 zstyle ':z4h:' prompt-at-bottom 'no'
@@ -28,7 +28,7 @@ zstyle ':z4h:(fzf-complete|fzf-history|fzf-dir-history|cd-down)' \
                                                'ctrl-a:toggle-all' \
                                                'ctrl-k:up' 'ctrl-j:down'
 zstyle ':z4h:fzf-complete'    fzf-flags        --no-exact   # EXPERIMENTAL
-#zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
+zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
 
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
