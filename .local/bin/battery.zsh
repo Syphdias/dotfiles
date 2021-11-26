@@ -96,7 +96,7 @@ fi
 [[ "$state" == "charging" ]] && msg+="⚡"
 
 # Pop-Up
-(( ! is_charching && bat_percent < 15 )) && notify-send "Battery below 15%" "is at ${bat_percent}%" -u critical
+(( ! is_charching && bat_percent < 13 )) && notify-send "Battery below 13%" "is at ${bat_percent}%" -u critical
 (( ! is_charching && bat_percent < 4 )) && notify-send "Battery below 4%" "is at ${bat_percent}%" -u critical
 (( ! is_charching && bat_percent < 2 )) && notify-send "Battery below 2%" "is at ${bat_percent}%" -u critical
 
