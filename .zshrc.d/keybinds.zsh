@@ -1,3 +1,5 @@
+z4h bindkey z4h-forward-word Alt+L
+
 foreground-vi() {
     fg %nvim 2>/dev/null || fg %vi
 }
