@@ -205,11 +205,7 @@ if [[ "${TERM}" = screen* ]]; then
 fi
 
 goodnight () {
-    if [ -z "$1" ]; then
-        local delaytime="1"
-    else
-        local delaytime="$1"
-    fi
+    local delaytime="${1:-1}"
     sudo aptitude update && sudo aptitude upgrade && \
     echo -e "\e[31m" && sudo shutdown -h ${delaytime} 2>&1 && echo -e "\e[0m"
 }
