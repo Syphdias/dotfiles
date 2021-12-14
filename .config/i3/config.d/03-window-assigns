@@ -72,6 +72,8 @@ for_window [class="TeamViewer"]           floating enable
 for_window [instance="battle.net.exe"]    floating enable
 for_window [instance="origin.exe"]        floating enable
 
+# Obsidian
+for_window [class="obsidian"] border pixel 2
 # Tabs Outliner
 for_window [title="Tabs Outliner"] floating disable
 for_window [title="Tabs Outliner"] resize set width 350px
