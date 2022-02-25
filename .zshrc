@@ -63,6 +63,7 @@ zstyle ':z4h:' iterm2-integration 'yes'
 z4h install ohmyzsh/ohmyzsh || return
 z4h install so-fancy/diff-so-fancy || return
 z4h install syl20bnr/spacemacs || return
+z4h install vim-syntastic/syntastic || return
 #z4h install zsh-users/zsh-history-substring-search || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and

@@ -36,14 +36,13 @@ set undodir=~/.vim/undodir " folder with undo files
 " Keybinds
 map <F2> :TableModeRealign <CR>
 nmap <C-n> :set invnumber invrelativenumber <CR>
+nmap <C-h> :nohlsearch <CR>
 
 " http://vim.wikia.com/wiki/Example_vimrc
 
 " set spell spl=de,en sps=20 spf=~/.vim/spell/de.add
 
 " syntastic 'defaults'
-"execute pathogen#infect()
-"call pathogen#infect()
 filetype plugin indent on "https://blog.netways.de/2012/10/30/puppet-und-vim/
 
 autocmd filetype markdown setlocal spell spl=de,en textwidth=80
@@ -51,7 +50,7 @@ autocmd FileType gitcommit setlocal spell spl=de,en textwidth=72
 
 set statusline=%f\ %h%w%m%r\            " from default
 set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=%=%(%l,%c%V\ %=\ %P%)	" from default
 
