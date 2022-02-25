@@ -64,6 +64,11 @@ z4h install ohmyzsh/ohmyzsh || return
 z4h install so-fancy/diff-so-fancy || return
 z4h install syl20bnr/spacemacs || return
 z4h install vim-syntastic/syntastic || return
+z4h install tpope/vim-sensible || return
+z4h install godlygeek/tabular || return
+z4h install tpope/vim-fugitive || return
+z4h install lambdalisue/suda.vim || return
+
 #z4h install zsh-users/zsh-history-substring-search || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
