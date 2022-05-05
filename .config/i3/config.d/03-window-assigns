@@ -44,7 +44,7 @@ for_window [class="Gtimelog"]             floating enable
 #for_window [class="zoom"]                floating enable
 for_window [class="^Cssh$"]               floating enable
 for_window [title="(CSSH|CLUSTERSSH): "]  floating enable
-for_window [title="alsamixer"]            floating enable border pixel 1
+for_window [title="alsamixer"]            floating enable border pixel 2
 for_window [class="calamares"]            floating enable border normal
 for_window [class="Clipgrab"]             floating enable
 for_window [title="File Transfer*"]       floating enable
@@ -71,9 +71,13 @@ for_window [class="Lutris"]               floating enable
 for_window [class="TeamViewer"]           floating enable
 for_window [instance="battle.net.exe"]    floating enable
 for_window [instance="origin.exe"]        floating enable
+for_window [instance="steam_app_1182480"] floating enable
 
-# Obsidian
+# Fix applications that hint "no decorations"
 for_window [class="obsidian"] border pixel 2
+for_window [class="Microsoft Teams"] border pixel 2
+for_window [class="(?i).*gnome.*"] border pixel 2
+for_window [class="Evince"] border pixel 2
 # Tabs Outliner
 for_window [title="Tabs Outliner"] floating disable
 for_window [title="Tabs Outliner"] resize set width 350px
