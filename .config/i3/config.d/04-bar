@@ -4,12 +4,13 @@ bar {
         # (requires i3blocks)
         status_command i3blocks
         colors {
-                background $bg-color
+                background $base_dark
                 separator #757575
-                #                  border             background         text
-                focused_workspace  $bg-color          $bg-color          $text-color
-                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+                #separator $text_dim
+                #                  border      background  text
+                focused_workspace  $base_dark  $base_dark  $text_light
+                inactive_workspace $base_light $base_light $text_dim
+                urgent_workspace   $urgent     $urgent     $text_light
         }
         strip_workspace_numbers no
         tray_output primary
