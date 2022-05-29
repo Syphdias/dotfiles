@@ -128,8 +128,8 @@ z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
 # rebind Shift+Arrow to same as Ctrl-Arrow
 #for l in {A..D}; do bindkey -s '^[[1;2'$l '^[[1;5'$l; done
 # rebind Alt+jk to same as Arrows Up/Down (will overwrite (parent/child) cd)
-bindkey -s '^[j' '^[[A' # z4h-up-substring-local
-bindkey -s '^[k' '^[[B' # z4h-down-substring-local
+bindkey -s '^[k' '^[[A' # z4h-up-substring-local
+bindkey -s '^[j' '^[[B' # z4h-down-substring-local
 
 # Sort completion candidates when pressing Tab? TODO: rm this?
 #zstyle ':completion:*'                           sort               false
