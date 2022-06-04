@@ -15,6 +15,7 @@ assign [class="minecraft-launcher"] number $gws
 for_window [title="Friends List"] resize set width 300px, move right
 ### To Communication Workspace ($ws9)
 assign [class="Rambox"] number $ws9
+assign [class="Ferdi"] number $ws9
 assign [class="discord"] number $ws9
 assign [class="TeamSpeak 3"] number $ws9
 assign [class="TelegramDesktop"] number $ws9
