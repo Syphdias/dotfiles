@@ -39,7 +39,7 @@ typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     vpn_ip
     time #newline
     #battery
-    #context
+    context
 )
 
 # general
