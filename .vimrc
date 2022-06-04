@@ -1,5 +1,11 @@
 syntax on
-set bg=dark
+    let g:jellybeans_overrides = {
+    \    'Search': { 'guifg': '303030', 'guibg': 'f0f000',
+    \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+    \              'attr': 'bold' },
+    \}
+colorscheme jellybeans
+"set bg=dark
 "set clipboard=autoselect,exclude:.*
 set viminfo='100,<1000,s100,h
 set tabstop=8 softtabstop=4 expandtab shiftwidth=4 smarttab
@@ -18,6 +24,9 @@ set incsearch     " Highlight every mached char you type (jumps for partials and
 set ignorecase    " Use case insensitive search
 set smartcase     " except when using capital letters
 set foldlevel=5   " to expand yaml folds by default
+set cindent       " https://vim.fandom.com/wiki/Restoring_indent_after_typing_hash
+set cinkeys-=0#   "   prevent inserting # from indenting (also next line)
+set indentkeys-=0# "  -> does not work!?
 
 if has("autocmd") " save cursor position
   autocmd BufReadPost *
