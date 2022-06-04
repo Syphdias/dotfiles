@@ -42,6 +42,8 @@ for_window [class="Gnome-calculator"]     floating enable
 for_window [class="Arandr"]               floating enable
 for_window [class="Gtimelog"]             floating enable
 for_window [title="^zoom$"]               floating enable
+for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
+for_window [class="zoom" title="Zoom Meeting"]            floating disable
 for_window [class="^Cssh$"]               floating enable
 for_window [title="(CSSH|CLUSTERSSH): "]  floating enable
 for_window [title="alsamixer"]            floating enable border pixel 2
