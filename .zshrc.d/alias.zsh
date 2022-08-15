@@ -50,6 +50,7 @@ alias winboot='win_id=$(sudo grep -ie "^menuentry '\''" -e "^submenu '\''" /boot
 alias zshrc="vim ~/.zshrc"
 alias vim='nvim'
 alias aecho=' echo; echo'
+alias k='kubectl'
 
 # zsh aliases
 # extra files?

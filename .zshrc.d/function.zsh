@@ -374,3 +374,8 @@ how-long-to-zero-with() {
     human_time="$(time_in_sec=$(sed 's/\..*//' <<<$time_in_sec) bash -c 'echo $((time_in_sec/3600))h $((time_in_sec%3600/60))min')"
     echo "done with $rate/s in $human_time at $done_time"
 }
+
+function kgetall {
+    kubectl api-resources --verbs=list --namespaced -o name \
+        | xargs -t -n1 kubectl get --show-kind --ignore-not-found "$@"
+}
