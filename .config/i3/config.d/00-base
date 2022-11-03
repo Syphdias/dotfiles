@@ -35,6 +35,23 @@ set $down  j
 set $up    k
 set $right l
 
+# fix for neo layer 4
+set $left2  Mod3+Left
+set $down2  Mod3+Down
+set $up2    Mod3+Up
+set $right2 Mod3+Right
+set $1      Mod3+KP_1
+set $2      Mod3+KP_2
+set $3      Mod3+KP_3
+set $4      Mod3+KP_4
+set $5      Mod3+KP_5
+set $6      Mod3+KP_6
+set $7      Mod3+KP_7
+set $8      Mod3+KP_8
+set $9      Mod3+KP_9
+set $0      Mod3+KP_0
+set $return Mod3+Return
+
 # with <sep> = 0xe2808b or \u200B (Zero Width Space)
 # id ":" <sep> group <sep> ":" ws_name <sep> <sep> ":" local_id
 # first defined workspace will open on login (on that output)

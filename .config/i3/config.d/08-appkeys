@@ -37,6 +37,7 @@ bindsym shift+XF86AudioLowerVolume exec playerctl previous
 ## Applications // Terminal //  + Return ##
 bindsym $mod+Return              exec tilix
 bindsym $mod+KP_Enter            exec tilix
+bindsym $mod+$return             exec tilix
 ## Applications // Screenshot // Ctrl + Print ##
 bindsym control+Print            exec flameshot gui
 ## Applications // Settings //  + Ctrl + , ##

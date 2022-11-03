@@ -32,93 +32,129 @@ bindsym $mod+shift+q kill
 ## Windows // (Fullscreen) Focus //  + ←↑↓→ ##
 bindsym $mod+Left   focus left
 bindsym $mod+$left  focus left
+bindsym $mod+$left2 focus left
 bindsym $mod+Down   focus down
 bindsym $mod+$down  focus down
+bindsym $mod+$down2 focus down
 bindsym $mod+Up     focus up
 bindsym $mod+$up    focus up
+bindsym $mod+$up2   focus up
 bindsym $mod+Right  focus right
 bindsym $mod+$right focus right
+bindsym $mod+$right2 focus right
 
 ## Windows // Move and Focus Con on WS # //  + ⇧ + 0-9 ##
 # requires i3-workspace-groups
 set $exec_i3_groups exec --no-startup-id ~/.local/bin/i3-workspace-groups
 bindsym $mod+shift+1    move container to workspace number $ws1; workspace number $ws1
 bindsym $mod+shift+KP_1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+shift+$1   move container to workspace number $ws1; workspace number $ws1
 bindsym $mod+shift+2    move container to workspace number $ws2; workspace number $ws2
 bindsym $mod+shift+KP_2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+shift+$2   move container to workspace number $ws2; workspace number $ws2
 bindsym $mod+shift+3    move container to workspace number $ws3; workspace number $ws3
 bindsym $mod+shift+KP_3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+shift+$3   move container to workspace number $ws3; workspace number $ws3
 bindsym $mod+shift+4    move container to workspace number $ws4; workspace number $ws4
 bindsym $mod+shift+KP_4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+shift+$4   move container to workspace number $ws4; workspace number $ws4
 bindsym $mod+shift+5    move container to workspace number $ws5; workspace number $ws5
 bindsym $mod+shift+KP_5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+shift+$5   move container to workspace number $ws5; workspace number $ws5
 bindsym $mod+shift+6    move container to workspace number $ws6; workspace number $ws6
 bindsym $mod+shift+KP_6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+shift+$6   move container to workspace number $ws6; workspace number $ws6
 bindsym $mod+shift+7    move container to workspace number $ws7; workspace number $ws7
 bindsym $mod+shift+KP_7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+shift+$7   move container to workspace number $ws7; workspace number $ws7
 bindsym $mod+shift+8    move container to workspace number $ws8; workspace number $ws8
 bindsym $mod+shift+KP_8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+shift+$8   move container to workspace number $ws8; workspace number $ws8
 bindsym $mod+shift+9    move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+shift+KP_9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+shift+$9   move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+shift+0    move container to workspace number $ws0; workspace number $ws0
 bindsym $mod+shift+KP_0 move container to workspace number $ws0; workspace number $ws0
+bindsym $mod+shift+$0   move container to workspace number $ws0; workspace number $ws0
 bindsym $mod+shift+ssharp move container to workspace number $gws; workspace number $gws
 
 ## Windows // Move Container to WS //  + Ctrl + 0-9 ##
 bindsym $mod+control+1    move container to workspace number $ws1
 bindsym $mod+control+KP_1 move container to workspace number $ws1
+bindsym $mod+control+$1   move container to workspace number $ws1
 bindsym $mod+control+2    move container to workspace number $ws2
 bindsym $mod+control+KP_2 move container to workspace number $ws2
+bindsym $mod+control+$2   move container to workspace number $ws2
 bindsym $mod+control+3    move container to workspace number $ws3
 bindsym $mod+control+KP_3 move container to workspace number $ws3
+bindsym $mod+control+$3   move container to workspace number $ws3
 bindsym $mod+control+4    move container to workspace number $ws4
 bindsym $mod+control+KP_4 move container to workspace number $ws4
+bindsym $mod+control+$4   move container to workspace number $ws4
 bindsym $mod+control+5    move container to workspace number $ws5
 bindsym $mod+control+KP_5 move container to workspace number $ws5
+bindsym $mod+control+$5   move container to workspace number $ws5
 bindsym $mod+control+6    move container to workspace number $ws6
 bindsym $mod+control+KP_6 move container to workspace number $ws6
+bindsym $mod+control+$6   move container to workspace number $ws6
 bindsym $mod+control+7    move container to workspace number $ws7
 bindsym $mod+control+KP_7 move container to workspace number $ws7
+bindsym $mod+control+$7   move container to workspace number $ws7
 bindsym $mod+control+8    move container to workspace number $ws8
 bindsym $mod+control+KP_8 move container to workspace number $ws8
+bindsym $mod+control+$8   move container to workspace number $ws8
 bindsym $mod+control+9    move container to workspace number $ws9
 bindsym $mod+control+KP_9 move container to workspace number $ws9
+bindsym $mod+control+$9   move container to workspace number $ws9
 bindsym $mod+control+0    move container to workspace number $ws0
 bindsym $mod+control+KP_0 move container to workspace number $ws0
+bindsym $mod+control+$0   move container to workspace number $ws0
 bindsym $mod+control+ssharp move container to workspace number $gws
 
 # TODO: issue: focuses OTHER container on that workspace after move...sometimes
 ## Windows // Move Container (and Mouse) //  + ⇧ + ←↑↓→ ##
 bindsym $mod+shift+Left   move left 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+$left  move left 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
+bindsym $mod+shift+$left2 move left 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+Down   move down 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+$down  move down 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
+bindsym $mod+shift+$down2 move down 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+Up     move up 50px;    exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+$up    move up 50px;    exec --no-startup-id ~/.local/bin/warpmouse.sh
+bindsym $mod+shift+$up2   move up 50px;    exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+Right  move right 50px; exec --no-startup-id ~/.local/bin/warpmouse.sh
 bindsym $mod+shift+$right move right 50px; exec --no-startup-id ~/.local/bin/warpmouse.sh
+bindsym $mod+shift+$right2 move right 50px; exec --no-startup-id ~/.local/bin/warpmouse.sh
 
 ## Windows // Mv (+Focus) Con to Out //  + Ctrl + ⇧ + ←→ ## may be 1 char too long
 ## Windows // "Max" to free WS //  + Ctrl + ⇧ + ↑ ##
 ## Windows // Mv Con to previous WS //  + Ctrl + ⇧ + ↓ ##
 bindsym $mod+control+shift+Left   move container to output left;  focus output left
 bindsym $mod+control+shift+$left  move container to output left;  focus output left
+bindsym $mod+control+shift+$left2 move container to output left;  focus output left
 bindsym $mod+control+shift+Right  move container to output right; focus output right
 bindsym $mod+control+shift+$right move container to output right; focus output right
+bindsym $mod+control+shift+$right2 move container to output right; focus output right
 bindsym $mod+control+shift+Up     exec --no-startup-id ~/.local/bin/i3empty.py -m
 bindsym $mod+control+shift+$up    exec --no-startup-id ~/.local/bin/i3empty.py -m
+bindsym $mod+control+shift+$up2   exec --no-startup-id ~/.local/bin/i3empty.py -m
 bindsym $mod+control+shift+Down   move container to workspace back_and_forth; workspace back_and_forth
 bindsym $mod+control+shift+$down  move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+control+shift+$down2 move container to workspace back_and_forth; workspace back_and_forth
 
 ## Windows // Resize Container //  + Alt +  ←↑↓→ ##
 bindsym $mod+mod1+Left   resize shrink width  50 px
 bindsym $mod+mod1+$left  resize shrink width  50 px
+bindsym $mod+mod1+$left2 resize shrink width  50 px
 bindsym $mod+mod1+Down   resize grow   height 50 px
 bindsym $mod+mod1+$down  resize grow   height 50 px
+bindsym $mod+mod1+$down2 resize grow   height 50 px
 bindsym $mod+mod1+Up     resize shrink height 50 px
 bindsym $mod+mod1+$up    resize shrink height 50 px
+bindsym $mod+mod1+$up2   resize shrink height 50 px
 bindsym $mod+mod1+Right  resize grow   width  50 px
 bindsym $mod+mod1+$right resize grow   width  50 px
+bindsym $mod+mod1+$right2 resize grow   width  50 px
 
 ## Windows // Focus parent container //  + D ##
 bindsym $mod+a focus parent
@@ -131,30 +167,46 @@ bindsym $mod+a focus parent
 ## Workspace // Focus to free WS // Ctrl + Alt + ↑ ##
 ## Workspace // Focus back to last WS // Ctrl + Alt + ↓ ##
 bindsym $mod+1 workspace number $ws1
+bindsym $mod+$1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
+bindsym $mod+$2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
+bindsym $mod+$3 workspace number $ws3
 bindsym $mod+4 workspace number $ws4
+bindsym $mod+$4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
+bindsym $mod+$5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
+bindsym $mod+$6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
+bindsym $mod+$7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
+bindsym $mod+$8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
+bindsym $mod+$9 workspace number $ws9
 bindsym $mod+0 workspace number $ws0
+bindsym $mod+$0 workspace number $ws0
 bindsym $mod+ssharp workspace number $gws
 bindsym control+mod1+Left   workspace prev
 bindsym control+mod1+$left  workspace prev
+bindsym control+mod1+$left2 workspace prev
 bindsym control+mod1+Right  workspace next
 bindsym control+mod1+$right workspace next
+bindsym control+mod1+$right2 workspace next
 bindsym control+mod1+Up     exec --no-startup-id ~/.local/bin/i3empty.py
 #bindsym control+mod1+$up    exec --no-startup-id ~/.local/bin/i3empty.py
+bindsym control+mod1+$up2   exec --no-startup-id ~/.local/bin/i3empty.py
 bindsym control+mod1+Down   workspace back_and_forth
 bindsym control+mod1+$down  workspace back_and_forth
+bindsym control+mod1+$down2 workspace back_and_forth
 
 ## Workspace // Move WS to Output // Ctrl + ⇧ + Alt + ←→ ##
 bindsym control+shift+mod1+Left   move workspace to output left
 bindsym control+shift+mod1+$left  move workspace to output left
+bindsym control+shift+mod1+$left2 move workspace to output left
 bindsym control+shift+mod1+Right  move workspace to output right
 bindsym control+shift+mod1+$right move workspace to output right
+bindsym control+shift+mod1+$right2 move workspace to output right
 
 # Switch active workspace group
 bindsym $mod+g exec --no-startup-id ~/.local/bin/i3-switch-active-workspace-group

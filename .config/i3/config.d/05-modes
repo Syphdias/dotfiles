@@ -12,6 +12,7 @@ mode "$mode_system" {
    bindsym w exec --no-startup-id ~/.local/bin/exit.sh winboot, mode "default"
    bindsym shift+s exec --no-startup-id ~/.local/bin/exit.sh shutdown, mode "default"
    bindsym Return mode "default"
+   bindsym $return mode "default"
    bindsym Escape mode "default"
 }
 #bindsym control+mod1+Delete mode "$mode_system"
@@ -45,17 +46,22 @@ mode "$display_layout" {
 
     bindsym Left    exec $mons -e left,   $resetmode, $exec_bg;
     bindsym $left   exec $mons -e left,   $resetmode, $exec_bg;
+    bindsym $left2  exec $mons -e left,   $resetmode, $exec_bg;
     bindsym Down    exec $mons -e bottom, $resetmode, $exec_bg;
     bindsym $down   exec $mons -e bottom, $resetmode, $exec_bg;
+    bindsym $down2  exec $mons -e bottom, $resetmode, $exec_bg;
     bindsym Up      exec $mons -e top,    $resetmode, $exec_bg;
     bindsym $up     exec $mons -e top,    $resetmode, $exec_bg;
+    bindsym $up2    exec $mons -e top,    $resetmode, $exec_bg;
     bindsym Right   exec $mons -e right,  $resetmode, $exec_bg;
     bindsym $right  exec $mons -e right,  $resetmode, $exec_bg;
+    bindsym $right2 exec $mons -e right,  $resetmode, $exec_bg;
     bindsym d       exec $mons -d,        $resetmode, $exec_bg;
     bindsym m       exec $mons -m,        $resetmode, $exec_bg;
     bindsym Shift+s exec $mons -s,        $resetmode, $exec_bg;
     bindsym o       exec $mons -o,        $resetmode, $exec_bg;
     bindsym Return mode "default"
+    bindsym $return mode "default"
     bindsym Escape mode "default"
 }
 ## System // Monitor Management //  + p ##
