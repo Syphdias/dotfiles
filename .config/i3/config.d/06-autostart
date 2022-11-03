@@ -49,7 +49,7 @@ exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lo
 exec        --no-startup-id numlockx on                            # enable numlock (requires numlockx)
 exec        --no-startup-id fix_xcursor                            # fixes changing mouse cursor theme
 exec_always --no-startup-id ff-theme-util                          # fixes gtk themes?
-exec        --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # TODO: What do I need this for?
+exec        --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
 
 ## alternating vsplit|hsplit (requires i3-py (pip3))
 # exec_always --no-startup-id ~/.local/bin/alternating_layouts.py
