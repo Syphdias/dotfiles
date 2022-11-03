@@ -80,6 +80,7 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_enable_signs=1
 "let g:syntastic_puppet_puppetlint_args="--no-140chars-check"
 let g:syntastic_puppet_puppetlint_args="--no-140chars-check --no-autoloader_layout-check"
+let g:syntastic_python_flake8_args="--append-config ~/.config/flake8"
 
 " neovim only
 if has('nvim')
