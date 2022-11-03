@@ -29,6 +29,8 @@ bindsym XF86AudioPrev              exec playerctl previous
 bindsym shift+XF86AudioLowerVolume exec playerctl previous
 
 ## shotcuts for applications
+## Help
+bindsym $mod+control+mod1+ssharp exec pkill remontoire || remontoire -s $I3SOCK
 ## Applications // Terminal //  + Return ##
 bindsym $mod+Return              exec tilix
 bindsym $mod+KP_Enter            exec tilix
