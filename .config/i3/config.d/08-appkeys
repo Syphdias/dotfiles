@@ -1,6 +1,6 @@
 # app keys
 ## app launchers (requires xcape)
-#exec --no-startup-id ~/.local/bin/xcape.sh
+#exec --no-startup-id ~/bin/xcape.sh
 bindsym $mod+D      exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/tilix
 bindsym mod1+F2 exec --no-startup-id /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
 bindsym $mod+shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -lines 3 -eh 2 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"

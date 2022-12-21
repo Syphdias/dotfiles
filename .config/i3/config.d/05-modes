@@ -22,9 +22,8 @@ bindsym control+mod1+Delete exec --no-startup-id ~/.local/bin/menu_powermenu.sh
 
 ## Display Management
 # https://github.com/Ventto/mons
-# make install PREFIX=~/.local
 # alternative: https://github.com/chmln/enact
-set $mons ~/.local/bin/mons
+set $mons ~/bin/mons
 set $display_layout [←↑↓→] , [d]uplicate, [m]irror, [s]ol[o], [Shift+s]econd-only, [a]uto
 mode "$display_layout" {
     set $arandr pkill arandr || arandr
