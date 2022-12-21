@@ -82,7 +82,7 @@ interval=20
 #signal=10
 
 [song]
-command=~/.local/bin/spotify.py
+command=~/bin/spotify.py
 markup=pango
 #label=
 interval=3
@@ -97,7 +97,7 @@ interval=3
 interval=10
 
 [battery]
-command=~/.local/bin/battery.zsh
+command=~/bin/battery.zsh
 markup=pango
 instance=1
 interval=30
