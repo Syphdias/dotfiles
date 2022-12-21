@@ -1,13 +1,19 @@
+export GITWERE_ROOT="${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit"
+
 # dotrepot utilities
 function dot() {
     if [[ "$1" == "off" ]]; then
         unset GIT_DIR
         unset GIT_WORK_TREE
     elif [[ "$1" == "on" ]]; then
-        export GIT_DIR="$2"
+        if [[ -d "${GITWERE_ROOT}/$2" ]]; then
+            export GIT_DIR="${GITWERE_ROOT}/$2"
+        else
+            export GIT_DIR="$2"
+        fi
     elif [[ "$1" == "exec" ]]; then
         local TMP_GIT_DIR="$GIT_DIR"
-        for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
+        for d in "${GITWERE_ROOT}/"*(/); do
             echo -e "\e[33m${d}\e[0m"
             export GIT_DIR="$d"
             eval "$2"
@@ -15,29 +21,21 @@ function dot() {
         GIT_DIR="${TMP_GIT_DIR}"
     elif [[ "$1" == "search" ]]; then
         dot ls-files \
-            | grep -Fe "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/" -e "$2" \
+            | grep -Fe "${GITWERE_ROOT}/" -e "$2" \
             | grep -B1 "$2" \
-            | grep -F "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"
+            | grep -F "${GITWERE_ROOT}/"
     else
-        for d in "${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/"*(/); do
+        for d in "${GITWERE_ROOT}/"*(/); do
             echo -e "\e[33m${d}\e[0m"
             command git --git-dir="${d}/" $@
         done
     fi
 }
 compdef '_dispatch git git' dot
-compdef '_files -g "~/.config/dotgit/*(/)"' dot on
-
-function sudogit() {
-    [[ -z "$GIT_DIR" ]] && echo >&2 "no GIT_DIR" && return
-    sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git --git-dir="$GIT_DIR" $@
-    # fix permissions if broken by sudo
-    sudo find "$GIT_DIR" -user root -exec chown $USER: {} \;
-}
-compdef '_dispatch git git' sudogit
+compdef '_files -g "${GITWERE_ROOT}/*(/)"' dot on
 
 function gitdir() {
-    export GIT_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit/${1}"
+    export GIT_DIR="${GITWERE_ROOT}/${1}"
 }
 
 
@@ -99,7 +97,7 @@ function toggle-gitdir() {
 
     () {
         emulate -L zsh
-        local -a repos=("${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit"/*(/${sorting_glob}))
+        local -a repos=("${GITWERE_ROOT}"/*(/${sorting_glob}))
         local -i current_idx=repos[(I)${GIT_DIR}]
 
         if [[ -n "${GIT_DIR}" \
@@ -157,4 +155,3 @@ function un-git-dir() {
     fi
 }
 add-zsh-hook chpwd un-git-dir
-
