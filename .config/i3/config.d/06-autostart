@@ -8,9 +8,9 @@ exec_always --no-startup-id dunst
 
 ### Power Management
 #exec --no-startup-id xfce4-power-manager
-exec --no-startup-id xss-lock -- ~/.local/bin/lock.sh
+exec --no-startup-id xss-lock -- ~/bin/lock.sh
 # TODO: exec --no-startup-id xautolock -time 10 -locker blurlock # was manjaro default
-#exec --no-startup-id xautolock -time 5 -locker "~/.local/bin/lock.sh"
+#exec --no-startup-id xautolock -time 5 -locker "~/bin/lock.sh"
 # TODO: replace xautolock with xss-lock? (needs: 5m -> lock; lock before sus/hiber/...; lid close lock?)
 ### (auto)lock and screenoff requires: scrot convert xautolock xss-lock
 

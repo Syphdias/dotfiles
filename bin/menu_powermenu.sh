@@ -76,9 +76,9 @@ esac
 
 if [[ -n "$cancel_action" ]]; then
     # start 3s countdown (+race conditon prevention .1s) i3lock#95
-    (sleep 3.1s && ~/.local/bin/exit.sh $exit_param) &
+    (sleep 3.1s && ~/bin/exit.sh $exit_param) &
 elif [[ -n "$exit_param" ]]; then
-    ~/.local/bin/exit.sh $exit_param
+    ~/bin/exit.sh $exit_param
 else
     exit 1
 fi

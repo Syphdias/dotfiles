@@ -113,18 +113,18 @@ bindsym $mod+control+ssharp move container to workspace number $gws
 
 # TODO: issue: focuses OTHER container on that workspace after move...sometimes
 ## Windows // Move Container (and Mouse) //  + ⇧ + ←↑↓→ ##
-bindsym $mod+shift+Left   move left 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$left  move left 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$left2 move left 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+Down   move down 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$down  move down 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$down2 move down 50px;  exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+Up     move up 50px;    exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$up    move up 50px;    exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$up2   move up 50px;    exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+Right  move right 50px; exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$right move right 50px; exec --no-startup-id ~/.local/bin/warpmouse.sh
-bindsym $mod+shift+$right2 move right 50px; exec --no-startup-id ~/.local/bin/warpmouse.sh
+bindsym $mod+shift+Left   move left 50px;  exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$left  move left 50px;  exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$left2 move left 50px;  exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+Down   move down 50px;  exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$down  move down 50px;  exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$down2 move down 50px;  exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+Up     move up 50px;    exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$up    move up 50px;    exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$up2   move up 50px;    exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+Right  move right 50px; exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$right move right 50px; exec --no-startup-id ~/bin/warpmouse.sh
+bindsym $mod+shift+$right2 move right 50px; exec --no-startup-id ~/bin/warpmouse.sh
 
 ## Windows // Mv (+Focus) Con to Out //  + Ctrl + ⇧ + ←→ ## may be 1 char too long
 ## Windows // "Max" to free WS //  + Ctrl + ⇧ + ↑ ##
