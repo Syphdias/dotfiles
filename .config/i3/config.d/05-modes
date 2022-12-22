@@ -1,22 +1,5 @@
 # modes
 
-## Session Management
-set $mode_system System (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (k)exec, (w)inboot, (S)hutdown
-mode "$mode_system" {
-   bindsym l exec --no-startup-id ~/bin/exit.sh lock, mode "default"
-   bindsym e exec --no-startup-id ~/bin/exit.sh logout, mode "default"
-   bindsym s exec --no-startup-id ~/bin/exit.sh suspend, mode "default"
-   bindsym h exec --no-startup-id ~/bin/exit.sh hibernate, mode "default"
-   bindsym r exec --no-startup-id ~/bin/exit.sh reboot, mode "default"
-   bindsym k exec --no-startup-id ~/bin/exit.sh kexec, mode "default"
-   bindsym w exec --no-startup-id ~/bin/exit.sh winboot, mode "default"
-   bindsym shift+s exec --no-startup-id ~/bin/exit.sh shutdown, mode "default"
-   bindsym Return mode "default"
-   bindsym $return mode "default"
-   bindsym Escape mode "default"
-}
-#bindsym control+mod1+Delete mode "$mode_system"
-
 ## System // Power Management // Ctrl-Alt-Del ##
 bindsym control+mod1+Delete exec --no-startup-id ~/bin/menu_powermenu.sh
 
