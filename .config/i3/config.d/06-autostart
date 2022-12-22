@@ -17,9 +17,7 @@ exec --no-startup-id xss-lock -- ~/bin/lock.sh
 ### Compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
 exec        --no-startup-id picom -b --config ~/.config/compton.conf
 ## Shortcut // Kill Compositor //  + o ##
-bindsym $mod+o exec killall picom compton
-# bindsym $mod+t exec --no-startup-id pkill compton
-# bindsym $mod+Ctrl+t exec --no-startup-id compton -b
+bindsym $mod+o exec killall picom || picom -b --config ~/.config/compton.conf
 
 
 ## fix initial monitor setup
@@ -31,8 +29,6 @@ exec_always --no-startup-id $background
 ## applets
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec --no-startup-id glipper
-exec --no-startup-id clipit
 exec --no-startup-id parcellite
 exec --no-startup-id pasystray
 exec_always --no-startup-id ibus-daemon -drxR # exec_always --no-startup-id sbxkb
@@ -44,11 +40,9 @@ exec --no-startup-id ferdi
 #exec --no-startup-id i3-msg 'workspace $ws2, exec google-chrome-stable'
 
 ## keys changes
-exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
+#exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
 #exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
 #exec        --no-startup-id numlockx on                            # enable numlock (requires numlockx)
-exec        --no-startup-id fix_xcursor                            # fixes changing mouse cursor theme
-exec_always --no-startup-id ff-theme-util                          # fixes gtk themes?
 exec        --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
 
 ## alternating vsplit|hsplit (requires i3-py (pip3))
