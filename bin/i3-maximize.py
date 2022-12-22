@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# 
+# move container to new workspace (lowsest available number)
+# go to the new workspace
 from i3ipc import Connection
 
 
