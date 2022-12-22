@@ -146,7 +146,7 @@ autoload -Uz zmv
 # Define aliases, functions and completions.
 z4h source ~/.zshrc.d/alias.zsh
 z4h source ~/.zshrc.d/function.zsh  # Define functions and completions
-z4h source ~/.$(hostname).src       # Host-specific functions, etc.
+z4h source ~/.$(hostnamectl hostname).src       # Host-specific functions, etc.
 z4h source ~/.zshrc.d/after-p10k-lean.zsh
 z4h source ~/.zshrc.d/gitrepos.zsh
 z4h source ~/.zshrc.d/openstack.zsh
