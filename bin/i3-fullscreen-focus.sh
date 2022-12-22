@@ -7,7 +7,7 @@ if i3-msg -t get_tree \
 then
     i3-msg "fullscreen; focus $1; fullscreen"
 else
-    i3-msg "focus $1" && ~/.local/bin/warpmouse.sh
+    i3-msg "focus $1" && ~/bin/warpmouse.sh
 fi
 
 # issue 1
