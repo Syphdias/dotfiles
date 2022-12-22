@@ -135,9 +135,9 @@ bindsym $mod+control+shift+$left2 move container to output left;  focus output l
 bindsym $mod+control+shift+Right  move container to output right; focus output right
 bindsym $mod+control+shift+$right move container to output right; focus output right
 bindsym $mod+control+shift+$right2 move container to output right; focus output right
-bindsym $mod+control+shift+Up     exec --no-startup-id ~/.local/bin/i3empty.py -m
-bindsym $mod+control+shift+$up    exec --no-startup-id ~/.local/bin/i3empty.py -m
-bindsym $mod+control+shift+$up2   exec --no-startup-id ~/.local/bin/i3empty.py -m
+bindsym $mod+control+shift+Up     exec --no-startup-id ~/bin/i3empty.py -m
+bindsym $mod+control+shift+$up    exec --no-startup-id ~/bin/i3empty.py -m
+bindsym $mod+control+shift+$up2   exec --no-startup-id ~/bin/i3empty.py -m
 bindsym $mod+control+shift+Down   move container to workspace back_and_forth; workspace back_and_forth
 bindsym $mod+control+shift+$down  move container to workspace back_and_forth; workspace back_and_forth
 bindsym $mod+control+shift+$down2 move container to workspace back_and_forth; workspace back_and_forth
@@ -193,9 +193,9 @@ bindsym control+mod1+$left2 workspace prev
 bindsym control+mod1+Right  workspace next
 bindsym control+mod1+$right workspace next
 bindsym control+mod1+$right2 workspace next
-bindsym control+mod1+Up     exec --no-startup-id ~/.local/bin/i3empty.py
-#bindsym control+mod1+$up    exec --no-startup-id ~/.local/bin/i3empty.py
-bindsym control+mod1+$up2   exec --no-startup-id ~/.local/bin/i3empty.py
+bindsym control+mod1+Up     exec --no-startup-id ~/bin/i3empty.py
+#bindsym control+mod1+$up    exec --no-startup-id ~/bin/i3empty.py
+bindsym control+mod1+$up2   exec --no-startup-id ~/bin/i3empty.py
 bindsym control+mod1+Down   workspace back_and_forth
 bindsym control+mod1+$down  workspace back_and_forth
 bindsym control+mod1+$down2 workspace back_and_forth
