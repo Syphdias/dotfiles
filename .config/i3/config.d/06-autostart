@@ -47,7 +47,7 @@ exec        --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-ag
 
 ## alternating vsplit|hsplit (requires i3-py (pip3))
 #exec_always --no-startup-id autotiling
-exec_always --no-startup-id /home/syphdias/git/private/autotiling/autotiling/main.py --limit 2 --ratio 1.25
+exec_always --no-startup-id python /home/syphdias/git/private/autotiling/autotiling/main.py --limit 2 --splitratio 1.25 #--experimental
 # disabled since unexpected behaviour can occur and it should be rewriten with i3ipc
 
 #---------------------------------------------------------------------------------------------------
