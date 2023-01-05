@@ -15,9 +15,9 @@ exec --no-startup-id xss-lock -- ~/bin/lock.sh
 ### (auto)lock and screenoff requires: scrot convert xautolock xss-lock
 
 ### Compositor (b:daemon c:shadow C:noshaowdock i:opacity vsync)
-exec        --no-startup-id picom -b --config ~/.config/compton.conf
+exec        --no-startup-id picom -b --config ~/.config/picom.conf
 ## Shortcut // Kill Compositor //  + o ##
-bindsym $mod+o exec killall picom || picom -b --config ~/.config/compton.conf
+bindsym $mod+o exec killall picom || picom -b --config ~/.config/picom.conf
 
 
 ## fix initial monitor setup
