@@ -25,7 +25,7 @@ set $ws0 "10:Audio"
 set $gws "11:Game"
 
 # background
-set $background          ~/.config/autorandr/postswitch
+set $background          ~/bin/set-background.sh
 set $exec_bg             exec --no-startup-id $background
 set $resetmode           mode "default"
 

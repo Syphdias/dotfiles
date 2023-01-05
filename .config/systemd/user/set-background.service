@@ -1,0 +1,5 @@
+[Unit]
+Description=~/bin/set-background.sh
+
+[Service]
+ExecStart=%h/bin/set-background.sh

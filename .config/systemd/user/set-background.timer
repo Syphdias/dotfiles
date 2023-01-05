@@ -1,0 +1,6 @@
+[Unit]
+Description=~/bin/set-background.sh
+
+[Timer]
+OnCalendar=*:00:00
+RemainAfterElapse=no
