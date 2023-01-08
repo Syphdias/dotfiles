@@ -85,6 +85,7 @@ path=(~/bin $path)
 
 # Export environment variables.
 export GPG_TTY=$TTY
+PROMPT_EOL_MARK=$'%{\e]8;;\a\e]8;;\a%}%K{red} %k'  # reset OSC 8: romkatv/powerlevel10k#2148
 
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
