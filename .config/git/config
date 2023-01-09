@@ -1,0 +1,67 @@
+[include]
+	path = ~/.config/git/user
+[includeIf "gitdir:~/git/private/"]
+	path = ~/git/private/.private.gitconfig
+[core]
+	pager = ~/.cache/zsh4humans/v5/so-fancy/diff-so-fancy/diff-so-fancy |less -RFXx4
+	excludesfile = ~/.config/git/gitignore-global
+	attributesfile = ~/.config/git/gitattributes-global
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %G? %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %G? %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg = !"git lg1"
+	d = difftool
+	wdiff = diff --word-diff=color --unified=1
+	yolo = !git commit -m \"$(curl -s whatthecommit.com/index.txt) YOLO\"
+	serve = daemon --reuseaddr --base-path=. --export-all --verbose
+	git = !git
+	cloner = clone --recursive
+	co = checkout
+	web = "!xdg-open $(git remote get-url ${1:-origin} |sed -E 's,ssh://,,; s,git@,https://,; s,(:.*):[0-9]*,\\1/,; s,([^:])//,\\1/,;')"
+	recent = branch --sort=-committerdate --format=\"%(committerdate:relative)%09%(refname:short)\"
+	delete-merged-branches = !git branch --merged | grep -Ev '(main|trunk|master)' | xargs -prn1 git branch -d
+[diff]
+	tool = vimdiff
+	algorithm = patience
+[difftool]
+	prompt = false
+[diff "pandoc"]
+	textconv=pandoc --to=markdown
+	prompt = false
+[diff "odf"]
+	binary = true
+	textconv=odt2txt
+[diff "gpg"]
+	binary = true
+	textconv = gpg -d --quiet --yes --compress-algo=none --no-encrypt-to --batch --use-agent
+[diff "ansible-vault"]
+	textconv = ansible-vault view 2>/dev/null
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 227
+	frag = magenta bold
+	commit = 227 bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[commit]
+	gpgsign = true
+[rebase]
+	stat = true
+	autosquash = true
+[rerere]
+	enabled = true
+[log]
+	follow = true
+[help]
+	autoCorrect = prompt

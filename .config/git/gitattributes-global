@@ -1,0 +1,5 @@
+*.gpg diff=gpg
+*_vault.yaml diff=ansible-vault
+vault_*.yaml diff=ansible-vault
+*_vault.yml diff=ansible-vault
+vault_*.yml diff=ansible-vault

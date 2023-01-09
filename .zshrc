@@ -164,8 +164,9 @@ z4h source ~/.zshrc.d/completion.zsh
 # do i need that?
 #zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-# Define named directories: ~w <=> Windows home directory on WSL.
-[[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
+# Define named directories
+hash -d o=~/Documents/obsidian-palace/
+[[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home  # ~w <=> Windows home directory on WSL.
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots           # glob matches files starting with dot; `ls *` -> `ls *(D)`
