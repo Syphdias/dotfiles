@@ -70,7 +70,7 @@ z4h install godlygeek/tabular || return
 z4h install tpope/vim-fugitive || return
 z4h install lambdalisue/suda.vim || return
 z4h install pedrohdz/vim-yaml-folds || return
-
+z4h install alexanderjeurissen/ranger_devicons || return
 z4h install SL-RU/ranger_udisk_menu || return
 #z4h install zsh-users/zsh-history-substring-search || return
 
