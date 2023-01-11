@@ -47,7 +47,7 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 
 # Send these files over to the remote host when connecting over ssh to the
 # enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.zshrc.d/env.zsh'
 
 # Move the cursor to the end when Up/Down fetches a command from history?
 zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
@@ -89,7 +89,7 @@ export GPG_TTY=$TTY
 PROMPT_EOL_MARK=$'%{\e]8;;\a\e]8;;\a%}%K{red} %k'  # reset OSC 8: romkatv/powerlevel10k#2148
 
 # Source additional local files if they exist.
-z4h source ~/.env.zsh
+z4h source ~/.zshrc.d/env.zsh
 
 # Extend PATH further
 [[ -n "$GOPATH" ]] && path+=($GOPATH/bin)
