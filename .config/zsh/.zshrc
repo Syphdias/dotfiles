@@ -4,6 +4,9 @@
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/${UID}}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+# ZDOTDIR is set in .profile to have it available before window manager starts
+# and thus before zsh starts. Alternatives: .xinitrc, .pam_environment (deprecated)
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
 # You can manually run `z4h update` to update everything.
@@ -47,7 +50,7 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 
 # Send these files over to the remote host when connecting over ssh to the
 # enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.zshrc.d/env.zsh'
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' "${ZDOTDIR}/env.zsh"
 
 # Move the cursor to the end when Up/Down fetches a command from history?
 zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
@@ -89,7 +92,7 @@ export GPG_TTY=$TTY
 PROMPT_EOL_MARK=$'%{\e]8;;\a\e]8;;\a%}%K{red} %k'  # reset OSC 8: romkatv/powerlevel10k#2148
 
 # Source additional local files if they exist.
-z4h source ~/.zshrc.d/env.zsh
+z4h source "${ZDOTDIR}/env.zsh"
 
 # Extend PATH further
 [[ -n "$GOPATH" ]] && path+=($GOPATH/bin)
@@ -125,8 +128,8 @@ bindkey -M viins '^K' kill-line
 bindkey -M viins '^[.' insert-last-word
 bindkey -M viins '^[h' z4h-run-help
 # TODO: set z4h vi keys
-z4h source ~/.zshrc.d/z4h-keybinds.zsh # rebinding viins, vicmd
-z4h source ~/.zshrc.d/keybinds.zsh # more complex stuff
+z4h source ${ZDOTDIR}/z4h-keybinds.zsh # rebinding viins, vicmd
+z4h source ${ZDOTDIR}/keybinds.zsh # more complex stuff
 
 
 # rebind Shift+Arrow to same as Ctrl-Arrow
@@ -145,14 +148,13 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|
 # Autoload functions.
 autoload -Uz zmv
 
-# Define aliases, functions and completions.
-z4h source ~/.zshrc.d/alias.zsh
-z4h source ~/.zshrc.d/function.zsh  # Define functions and completions
-z4h source ~/.$(hostnamectl hostname).src       # Host-specific functions, etc.
-z4h source ~/.zshrc.d/after-p10k-lean.zsh
-z4h source ~/.zshrc.d/gitrepos.zsh
-z4h source ~/.zshrc.d/openstack.zsh
-z4h source ~/.zshrc.d/completion.zsh
+z4h source "${ZDOTDIR}/alias.zsh"                    # Define aliases, functions and completions.
+z4h source "${ZDOTDIR}/function.zsh"                 # Define functions and completions
+z4h source "${ZDOTDIR}/$(hostnamectl hostname).zsh"  # Host-specific functions, etc.
+z4h source "${ZDOTDIR}/after-p10k-lean.zsh"
+z4h source "${ZDOTDIR}/gitrepos.zsh"
+z4h source "${ZDOTDIR}/openstack.zsh"
+z4h source "${ZDOTDIR}/completion.zsh"
 
 # omz completion
 #z4h source $Z4H/ohmyzsh/ohmyzsh/lib/completion.zsh  # omz-complete
