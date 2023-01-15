@@ -39,4 +39,5 @@ if block_button := environ.get("BLOCK_BUTTON"):
 spotify_iface = Interface(spotify, "org.freedesktop.DBus.Properties")
 props = spotify_iface.Get("org.mpris.MediaPlayer2.Player", "Metadata")
 
-print(f'{props["xesam:artist"][0]} – {props["xesam:title"]}')
+if props["xesam:artist"]:
+    print(f'{props["xesam:artist"][0]} – {props["xesam:title"]}')
