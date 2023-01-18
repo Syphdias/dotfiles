@@ -1,4 +1,4 @@
-export GITWERE_ROOT="${XDG_CONFIG_HOME:-${HOME}/.config}/dotgit"
+export GITWERE_ROOT="${XDG_CONFIG_HOME:-${HOME}/.config}/gitwhere"
 
 # dotrepot utilities
 function dot() {

@@ -36,7 +36,7 @@ exec --no-startup-id conky
 
 ## autostart
 exec --no-startup-id spotify
-exec --no-startup-id ferdi
+exec --no-startup-id ferdium
 #exec --no-startup-id i3-msg 'workspace $ws2, exec google-chrome-stable'
 
 ## keys changes
