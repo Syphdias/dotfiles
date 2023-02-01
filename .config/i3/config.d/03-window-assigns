@@ -27,6 +27,7 @@ assign [class="battle.net.exe"] number $gws
 assign [class="csgo_linux64"] number $gws
 assign [class="dota2"] number $gws
 assign [class="mono"] number $gws # unrailed
+assign [class="^steam_app_"] number $gws # generic steam
 assign [instance="gw2-64.exe"] number $gws
 for_window [class="^Minecraft"] move --no-auto-back-and-forth to workspace number $gws
 for_window [instance="overwatch.exe"] move --no-auto-back-and-forth to workspace number $gws
@@ -82,6 +83,7 @@ for_window [class="obsidian"] border pixel 2
 for_window [class="Microsoft Teams"] border pixel 2
 for_window [class="(?i).*gnome.*"] border pixel 2
 for_window [class="Evince"] border pixel 2
+for_window [class="^Steam$"] border pixel 2
 # Tabs Outliner
 for_window [title="Tabs Outliner"] floating disable
 for_window [title="Tabs Outliner"] resize set width 350px
