@@ -13,8 +13,8 @@ bindsym $mod+w           layout tabbed
 bindsym $mod+e           layout toggle split
 ## Windows // Floating (toggle) //  + Shift + Space ##
 bindsym $mod+shift+space floating toggle
-## Windows // Focus Floating (toggle) //  + Space ##
-bindsym $mod+space       focus mode_toggle
+## Windows // Focus Floating (toggle) //  + Alt + Space ##
+bindsym $mod+mod1+space  focus mode_toggle
 ## Windows // (Global) Fullscreen //  + (Shift) + f ##
 bindsym $mod+f           fullscreen toggle
 bindsym $mod+shift+f     fullscreen toggle global

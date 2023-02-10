@@ -1,13 +1,24 @@
 # app keys
-## app launchers (requires xcape)
-#exec --no-startup-id ~/bin/xcape.sh
-bindsym $mod+D      exec --no-startup-id j4-dmenu-desktop --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/tilix
-bindsym mod1+F2 exec --no-startup-id /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
-bindsym $mod+shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -lines 3 -eh 2 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
-bindsym $mod+Tab exec --no-startup-id \
-    LC_ALL=en_US.UTF-8 rofi -i -lines 10 -eh 1 -width 50 -padding 50 -opacity 85 -font 'MesloLGS NF Regular 16' \
-    -modi 'combi#rename:~/bin/i3-workspace-rename.py --default-color A9C03F' \
-    -show combi -combi-modi 'rename:~/bin/i3-workspace-rename.py --default-color A9C03F#window'
+## app launchers
+## i3 // Launcher //  + Space ##
+bindsym $mod+space          exec --no-startup-id \
+    j4-dmenu-desktop \
+        --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" \
+        --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/tilix
+bindsym mod1+F2         exec --no-startup-id \
+    /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
+bindsym $mod+shift+d    exec --no-startup-id \
+    rofi -show run \
+        -lines 3 -eh 2 -opacity "85" \
+        -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" \
+        -font "System San Francisco Display 18"
+## i3 // Switch/Rename Window //  + Tab ##
+bindsym $mod+Tab        exec --no-startup-id \
+    rofi -show combi \
+        -combi-modi 'rename:~/bin/i3-workspace-rename.py --default-color A9C03F#window' \
+        -modi 'combi#rename:~/bin/i3-workspace-rename.py --default-color A9C03F' \
+        -i -lines 10 -eh 1 -width 50 -padding 50 -opacity 85 -font 'MesloLGS NF Regular 16'
+
 
 ## Pulse Audio controls
 # unsmart version: pactl set-sink-volume @DEFAULT_SINK@ +5%
