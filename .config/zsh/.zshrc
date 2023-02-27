@@ -149,6 +149,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|
 autoload -Uz zmv
 
 z4h source "${ZDOTDIR}/alias.zsh"                    # Define aliases, functions and completions.
+z4h source "${ZDOTDIR}/utils.zsh"                    # Essential tools for me
 z4h source "${ZDOTDIR}/function.zsh"                 # Define functions and completions
 z4h source "${ZDOTDIR}/$(hostnamectl hostname).zsh"  # Host-specific functions, etc.
 z4h source "${ZDOTDIR}/after-p10k-lean.zsh"

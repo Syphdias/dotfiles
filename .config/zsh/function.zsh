@@ -117,16 +117,6 @@ function gen-i3-conf () {
     fi
 }
 
-function update-arcdps () {
-    pwd="$PWD"
-    curl -SsL https://www.deltaconnected.com/arcdps/x64/d3d9.dll.md5sum |sed 's#x64/##' > ~/Games/guild-wars-2/drive_c/Program\ Files/Guild\ Wars\ 2/bin64/d3d9.dll.md5sum
-    curl -SsL https://www.deltaconnected.com/arcdps/x64/d3d9.dll -o ~/Games/guild-wars-2/drive_c/Program\ Files/Guild\ Wars\ 2/bin64/d3d9.dll
-    cd ~/Games/guild-wars-2/drive_c/Program\ Files/Guild\ Wars\ 2/bin64/
-    md5sum -c d3d9.dll.md5sum
-    cd "$pwd"
-}
-
-
 function zshmode () {
     # kunde|customer|audit -> if 3rd party sees stuff
     #   no autosuggestions
@@ -139,12 +129,6 @@ compdef _pass notes
 zstyle ':completion::complete:notes::' prefix "$HOME/.notes"
 function notes() {
   PASSWORD_STORE_DIR=$HOME/.notes pass $@
-}
-
-function histrm () {
-    set -v
-    sed -i "/$1/d" "$HISTFILE"
-    set +v
 }
 
 # do git stuff for all directories in current working directory
@@ -222,19 +206,6 @@ function llrec () {
     done | column -t
 }
 
-function sshdiff() {
-    if [[ "$1" == "-l" ]]; then
-        shift
-        vimdiff <(eval "$1") <(ssh "$2" ${@:3})
-    else
-        vimdiff <(ssh "$1" ${@:3}) <(ssh "$2" ${@:3})
-    fi
-}
-
-function ssh3diff() {
-    vimdiff <(ssh "$1" ${@:4}) <(ssh "$2" ${@:4}) <(ssh "$3" ${@:4})
-}
-
 function copymode() {
     # features:
     #   - https://github.com/bhilburn/powerlevel9k#disabling--enabling-powerlevel9k
@@ -255,26 +226,6 @@ function copymode() {
 function nocopymode() {
     source /tmp/copymode
     echo copymode off
-}
-
-function recho() {
-    echo -e "\e[33m$@\e[0m"
-}
-
-function ok() {
-    echo -e "\e[32m${@:-ok}\e[0m"
-    return
-}
-
-function nok() {
-    echo -e "\e[31m${@:-notok}\e[0m"
-    return 1
-}
-
-function isok() {
-    rc=$?
-    [ $rc -eq 0 ] && ok $1 || nok $2
-    return $rc
 }
 
 function cs() {
@@ -322,16 +273,6 @@ function fshow() {
             FZF-EOF"
 }
 
-function ssh-until-up() {
-    while ! ssh $@; do
-        sleep 1;
-    done
-}
-
-function aww() {
-    awk "{print ${1}}" ${@:2}
-}
-
 function syu() {
     if command -v paru >/dev/null; then
         command paru -Syu --sudoloop
@@ -348,17 +289,6 @@ function syu() {
     elif command -v yum >/dev/null; then
         command sudo yum upgrade
     fi
-}
-
-function how-long-to-zero-with() {
-    [[ $# -eq 0 ]] && echo "how-log-to-zero-with 13:00 5 12:00 20" && return
-    time_delta_in_sec=$(($(date +%s -d "$1")-$(date +%s -d "$3")));
-    done_delta=$(($4 - $2)); done_delta=$((done_delta*1.))
-    rate=$((done_delta/time_delta_in_sec))
-    time_in_sec=$(($2/rate))
-    done_time="$(date -d "@$(($(date +%s -d "$3")+time_in_sec))0")"
-    human_time="$(time_in_sec=$(sed 's/\..*//' <<<$time_in_sec) bash -c 'echo $((time_in_sec/3600))h $((time_in_sec%3600/60))min')"
-    echo "done with $rate/s in $human_time at $done_time"
 }
 
 function kgetall {
