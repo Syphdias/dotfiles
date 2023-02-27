@@ -1,5 +1,3 @@
-# vim:set syntax=zsh:
-
 function md() {
     [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"
 }
@@ -53,11 +51,12 @@ function n() { [[ $# == 0 ]] && tail ~/.n || echo "$(date +'%F %R'): $*" >>~/.n 
 alias n=' noglob n'
 
 # zombies - list all zombies and their parents to kill
-zombies() {
+function zombies() {
   ps f -eo state,pid,ppid,comm | awk '
     { cmds[$2] = $NF }
     /^Z/ { print $(NF-1) "/" $2 " zombie child of " cmds[$3] "/" $3 }'
 }
+
 # wat - a better and recursive which/whence
 function wat() {
     ( # constrain unalias
@@ -89,7 +88,7 @@ function wat() {
 }
 compdef wat=which
 
-zsh_stats_better() {
+function zsh_stats_better() {
     fc -l 1 \
         | sed -E 's/(;|&&|\|\|)/\nnull /g' \
         | awk '{
@@ -105,7 +104,7 @@ zsh_stats_better() {
         | head -n20
 }
 
-gen-i3-conf () {
+function gen-i3-conf () {
     source /etc/os-release
     update-conf.py -f "${XDG_CONFIG_HOME:-${HOME}/.config}/i3/config" -v
     if [[ "$ID_LIKE" == "debian" ]]; then
@@ -118,7 +117,7 @@ gen-i3-conf () {
     fi
 }
 
-update-arcdps () {
+function update-arcdps () {
     pwd="$PWD"
     curl -SsL https://www.deltaconnected.com/arcdps/x64/d3d9.dll.md5sum |sed 's#x64/##' > ~/Games/guild-wars-2/drive_c/Program\ Files/Guild\ Wars\ 2/bin64/d3d9.dll.md5sum
     curl -SsL https://www.deltaconnected.com/arcdps/x64/d3d9.dll -o ~/Games/guild-wars-2/drive_c/Program\ Files/Guild\ Wars\ 2/bin64/d3d9.dll
@@ -128,7 +127,7 @@ update-arcdps () {
 }
 
 
-zshmode () {
+function zshmode () {
     # kunde|customer|audit -> if 3rd party sees stuff
     #   no autosuggestions
     # copy -> for tickets
@@ -138,7 +137,7 @@ zshmode () {
 
 compdef _pass notes
 zstyle ':completion::complete:notes::' prefix "$HOME/.notes"
-notes() {
+function notes() {
   PASSWORD_STORE_DIR=$HOME/.notes pass $@
 }
 
@@ -148,21 +147,8 @@ function histrm () {
     set +v
 }
 
-# Disabled in favour of z4h native `z4h ssh` detection
-#function ssh() {
-#    local -a z4h_ssh_hosts=($(awk '/Host .*#z4h/ {for (i=2; i<NF; i++) print $i;}' ~/.ssh/config**/*))
-#    local use_z4h_ssh=false
-#    for h in $z4h_ssh_hosts; do
-#        if [[ $@[(I)$h] != 0 ]]; then
-#            z4h ssh $@
-#            return
-#        fi
-#     done
-#     command ssh $@
-#}
-
 # do git stuff for all directories in current working directory
-all () {
+function all () {
     cur_pwd=$(pwd)
 
     for i in $(ls -d *); do
@@ -204,17 +190,13 @@ if [[ "${TERM}" = screen* ]]; then
     ${PROMPT_COMMAND}"
 fi
 
-goodnight () {
+function goodnight () {
     local delaytime="${1:-1}"
     sudo aptitude update && sudo aptitude upgrade && \
     echo -e "\e[31m" && sudo shutdown -h ${delaytime} 2>&1 && echo -e "\e[0m"
 }
 
-apvim () {
-    vim "$@" && apache2ctl configtest && service apache2 restart
-}
-
-ggrep () {
+function ggrep () {
     # just branches + remotes
     git branch -a | tr -d \* | sed '/->/d' | xargs git grep "$1"
 
@@ -228,7 +210,7 @@ ggrep () {
     #)
 }
 
-llrec () {
+function llrec () {
     local f="$1"
     while true; do
         ls -ld "$f"
@@ -240,7 +222,7 @@ llrec () {
     done | column -t
 }
 
-sshdiff() {
+function sshdiff() {
     if [[ "$1" == "-l" ]]; then
         shift
         vimdiff <(eval "$1") <(ssh "$2" ${@:3})
@@ -249,11 +231,11 @@ sshdiff() {
     fi
 }
 
-ssh3diff() {
+function ssh3diff() {
     vimdiff <(ssh "$1" ${@:4}) <(ssh "$2" ${@:4}) <(ssh "$3" ${@:4})
 }
 
-copymode() {
+function copymode() {
     # features:
     #   - https://github.com/bhilburn/powerlevel9k#disabling--enabling-powerlevel9k
     #     prompt_powerlevel9k_teardown + prompt_powerlevel9k_setup
@@ -270,43 +252,46 @@ copymode() {
     echo copymode on
 }
 
-nocopymode() {
+function nocopymode() {
     source /tmp/copymode
     echo copymode off
 }
 
-recho() {
+function recho() {
     echo -e "\e[33m$@\e[0m"
 }
-ok() {
+
+function ok() {
     echo -e "\e[32m${@:-ok}\e[0m"
     return
 }
-nok() {
+
+function nok() {
     echo -e "\e[31m${@:-notok}\e[0m"
     return 1
 }
-isok() {
+
+function isok() {
     rc=$?
     [ $rc -eq 0 ] && ok $1 || nok $2
     return $rc
 }
 
-cs() {
+function cs() {
     wal -i "~/Pictures/1440p" --iterative $@
 }
 
-profzsh() {
+function profzsh() {
     shell=${1-$SHELL}
     ZPROF=true $shell -i -c exit
 }
 
-timezsh() {
+function timezsh() {
     shell=${1-$SHELL}
     for i in $(seq 1 10); do time $shell -i -c exit; done
 }
 
-mans(){
+function mans(){
     man -k . \
     | fzf -n1,2 --preview "echo {} \
     | cut -d' ' -f1 \
@@ -321,7 +306,7 @@ mans(){
       | less -R)"
 }
 
-fshow() {
+function fshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" \
   | fzf --ansi --preview "echo {} \
@@ -332,9 +317,9 @@ fshow() {
             (grep -o '[a-f0-9]\{7\}' \
                 | head -1 \
                 | xargs -I % sh -c 'git show --color=always % \
-                | less -R') << 'FZF-EOF'
+                | less -R') << '-FZF-EOF'
             {}
-FZF-EOF"
+            FZF-EOF"
 }
 
 function ssh-until-up() {
@@ -348,7 +333,9 @@ function aww() {
 }
 
 function syu() {
-    if command -v yay >/dev/null; then
+    if command -v paru >/dev/null; then
+        command paru -Syu --sudoloop
+    elif command -v yay >/dev/null; then
         command yay -Syu --sudoloop
     elif command -v pacman >/dev/null; then
         command sudo pacman -Syu
@@ -363,8 +350,7 @@ function syu() {
     fi
 }
 
-how-long-to-zero-with() {
-    #[[ $# -eq 0 ]] && echo "how-log-to-zero-with 20 5 12:00 13:00" && return
+function how-long-to-zero-with() {
     [[ $# -eq 0 ]] && echo "how-log-to-zero-with 13:00 5 12:00 20" && return
     time_delta_in_sec=$(($(date +%s -d "$1")-$(date +%s -d "$3")));
     done_delta=$(($4 - $2)); done_delta=$((done_delta*1.))
@@ -379,3 +365,14 @@ function kgetall {
     kubectl api-resources --verbs=list --namespaced -o name \
         | xargs -t -n1 kubectl get --show-kind --ignore-not-found "$@"
 }
+complete -F __start_kubectl kgetall
+
+function 2os() {
+    mv -i $1 ~o/_sources/
+}
+function _2os() {
+    local files=(~/Downloads/MarkDownloads/*(.:t))
+    compadd -f -q -P '~/Downloads/MarkDownloads/' -S '' -a files
+}
+compdef _2os 2os
+
