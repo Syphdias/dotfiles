@@ -1,66 +1,61 @@
-# `$(_pp_c x y`) evaluates to `y` if the terminal supports >= 256 colors and to `x` otherwise.
 zmodload zsh/terminfo
 if (( terminfo[colors] >= 256 )); then
-  function _pp_c() { echo -E $2 }
 else
-  function _pp_c() { echo -E $1 }
   typeset -g POWERLEVEL9K_IGNORE_TERM_COLORS=true
 fi
 
-# `$(_pp_s x y`) evaluates to `x` in portable mode and to `y` in fancy mode.
-if [[ ${PURE_POWER_MODE:-fancy} == fancy ]]; then
-  function _pp_s() { echo -E $2 }
-else
-  if [[ $PURE_POWER_MODE != portable ]]; then
-    echo -En "purepower: invalid mode: ${(qq)PURE_POWER_MODE}; " >&2
-    echo -E  "valid options are 'fancy' and 'portable'; falling back to 'portable'" >&2
-    # This is only here to fix broken syntax highlighting in atom"
-  fi
-  function _pp_s() { echo -E $1 }
-  typeset -g POWERLEVEL9K_IGNORE_TERM_COLORS=true
-fi
+function insert_segment_before() {
+    local idx=${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[(Ie)$2]}
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+        ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1,${idx}-1]}
+        $1
+        ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[${idx},${#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS}]}
+    )
+}
+function insert_segment_after() {
+    local idx=${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[(Ie)$1]}
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+        ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1,${idx}]}
+        $2
+        ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[${idx}+1,${#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS}]}
+    )
+}
 
 typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    virtualenv #pyenv rbenv
-    openstack
-    timewarrior
-    dir_writable dir #newline dir
-    my_git_dir vcs
-    root_indicator
-    newline
-    #time       # only with p10k-on-{pre,post}-prompt
-    prompt_char
+    context root_indicator  # user@hostname 
+    dir dir_writable        # current/directory 
+    my_git_dir vcs          # dotfiles git_status
+    newline                 # \n
+    prompt_char             # prompt symbol
 )
-typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    status
-    command_execution_time
-    background_jobs
-    #custom_rprompt
-    vpn_ip
-    time #newline
-    #battery
-    context
+
+# Remove context segment from right promot
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${(@)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#context}")
+
+# Append context segments to left and remove from right
+context_segments=(
+    virtualenv pyenv goenv
+    kubecontext terraform
+    aws azure gcloud openstack
 )
+for context_segment in ${(@)context_segments}; do
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+        "${(@)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#${context_segment}}"
+    )
+    insert_segment_after vcs $context_segment
+done
 
 # general
-typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=
-# typeset -g POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-# typeset -g POWERLEVEL9K_MULTILINE_{FIRST,LAST}_PROMPT_PREFIX=
-# typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%(?.$ok.$err) "
-# typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=
-# typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '
-# typeset -g POWERLEVEL9K_WHITESPACE_BETWEEN_{LEFT,RIGHT}_SEGMENTS=
+typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=  # disable icons for all segments
 
 # dir
-#typeset -g POWERLEVEL9K_SHORTEN_DELIMITER="%F{$(_pp_c 005 101)}*"
-#typeset -g POWERLEVEL9K_SHORTEN_DELIMITER_LENGTH=1
-typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=0
-typeset -g POWERLEVEL9K_DIR_PATH_HIGHLIGHT_FOREGROUND=$(_pp_c 004 039)
-typeset -g POWERLEVEL9K_DIR_{ETC,DEFAULT}_FOREGROUND=$(_pp_c 003 209)
+typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=0                            # always shorten path
+typeset -g POWERLEVEL9K_DIR_PATH_HIGHLIGHT_FOREGROUND=039           # disable bold highlighting
+typeset -g POWERLEVEL9K_DIR_{ETC,DEFAULT}_FOREGROUND=209
 typeset -g POWERLEVEL9K_DIR_{HOME,HOME_SUBFOLDER}_FOREGROUND=white
-typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION=$(_pp_s '#' '')
-typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$(_pp_c 002 076)
-typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=$(_pp_c 001 009)
+typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION=''
+typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=076
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=009
 
 # virtenv
 typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=202
@@ -69,94 +64,26 @@ typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=202
 typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED,LOADING}_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
 typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN=
 POWERLEVEL9K_VCS_RECURSE_UNTRACKED_DIRS=true
-# many TODOs
-# typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=$(_pp_c 002 076)
-# typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=$(_pp_c 006 014)
-# typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=$(_pp_c 003 011)
-# typeset -g POWERLEVEL9K_VCS_LOADING_FOREGROUND=$(_pp_c 005 244)
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_UNTRACKEDFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_UNSTAGEDFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_MODIFIED_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_STAGEDFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_MODIFIED_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_INCOMING_CHANGESFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_CLEAN_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_OUTGOING_CHANGESFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_CLEAN_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_STASHFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_CLEAN_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_{CLEAN,UNTRACKED,MODIFIED}_ACTIONFORMAT_FOREGROUND=001
-# typeset -g POWERLEVEL9K_VCS_LOADING_ACTIONFORMAT_FOREGROUND=$POWERLEVEL9K_VCS_LOADING_FOREGROUND
-# typeset -g POWERLEVEL9K_VCS_COMMIT_ICON=$'\uE729 '
-# typeset -g POWERLEVEL9K_VCS_REMOTE_BRANCH_ICON="  "
-# typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$(_pp_s '<' '⇣')
-# typeset -g POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$(_pp_s '>' '⇡')
-# typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED}_MAX_NUM=99
-# typeset -g POWERLEVEL9K_VCS_REMOTE_BRANCH_ICON=$(_pp_s $'%{\b|%}' $'\uF126 ')
-# typeset -g POWERLEVEL9K_VCS_COMMIT_ICON=$(_pp_s '@' $'\uE729 ')
-# typeset -g POWERLEVEL9K_VCS_UNSTAGED_ICON=$(_pp_s $'%{\b!%}' $'\uF06A ')
-# typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON=$(_pp_s $'%{\b?%}' $'\uF059 ')
-# typeset -g POWERLEVEL9K_VCS_STAGED_ICON=$(_pp_s $'%{\b+%}' $'\uF055 ')
-# typeset -g POWERLEVEL9K_VCS_STASH_ICON=$(_pp_s '*' $'\uF01C ')
-# typeset -g POWERLEVEL9K_VCS_TAG_ICON=$(_pp_s $'%{\b#%}' $'\uF02B ')
-# TODOs gitstatus
-#POWERLEVEL9K_DISABLE_GITSTATUS=true
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED,LOADING}_BACKGROUND=none
-# typeset -g P9K_GITSTATUS_CLEAN_FOREGROUND=076
-# typeset -g P9K_GITSTATUS_UNTRACKED_FOREGROUND=014
-# typeset -g P9K_GITSTATUS_MODIFIED_FOREGROUND=011
-# typeset -g P9K_GITSTATUS_LOADING_FOREGROUND=244
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_UNTRACKEDFORMAT_FOREGROUND=$P9K_GITSTATUS_UNTRACKED_FOREGROUND
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_UNSTAGEDFORMAT_FOREGROUND=$P9K_GITSTATUS_MODIFIED_FOREGROUND
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_STAGEDFORMAT_FOREGROUND=$P9K_GITSTATUS_MODIFIED_FOREGROUND
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_INCOMING_CHANGESFORMAT_FOREGROUND=$P9K_GITSTATUS_CLEAN_FOREGROUND
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_OUTGOING_CHANGESFORMAT_FOREGROUND=$P9K_GITSTATUS_CLEAN_FOREGROUND
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_STASHFORMAT_FOREGROUND=$P9K_GITSTATUS_CLEAN_FOREGROUND
-# typeset -g P9K_GITSTATUS_{CLEAN,UNTRACKED,MODIFIED}_ACTIONFORMAT_FOREGROUND=001
-# typeset -g P9K_GITSTATUS_LOADING_ACTIONFORMAT_FOREGROUND=$P9K_GITSTATUS_LOADING_FOREGROUND
-# typeset -g P9K_GITSTATUS_COMMIT_ICON=$'\uE729 '
-# typeset -g P9K_GITSTATUS_INCOMING_CHANGES_ICON=$'\u2193'
-# typeset -g P9K_GITSTATUS_OUTGOING_CHANGES_ICON=$'\u2191'
 
 # root_indicator
 # TODO: typeset -g POWERLEVEL9K_ROOT_VISUAL_IDENTIFIER_EXPANSION=$'\uF09C'
 
 # background_jobs
-# typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION=$(_pp_s '%%' '☰')
+typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='☰'
 
 # command_execution_time
 typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
-typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$(_pp_c 005 101)
 
 # time
 typeset -g POWERLEVEL9K_TIME_FOREGROUND=244
 typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=true
 
-# vpn_ip
-typeset -g POWERLEVEL9K_VPN_IP_INTERFACE=tun0
-
-# status
-typeset -g POWERLEVEL9K_STATUS_OK=false
-typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=$(_pp_c 001 009)
-
 # context
-typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,REMOTE_SUDO,REMOTE,SUDO}_FOREGROUND=$(_pp_c 007 244)
-typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=$(_pp_c 003 011)
+typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,REMOTE_SUDO,REMOTE,SUDO}_FOREGROUND=244
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=011
 
 # status
-#typeset -g POWERLEVEL9K_STATUS_ERROR_CONTENT_EXPANSION='${${P9K_CONTENT#SIG}//}'
-# Use terse signal names: "INT" instead of "SIGINT(2)".
-typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
-typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION='↵'
-
-# simplifying prompt on enter
-#typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
-POWERLEVEL9K_TRANSIENT_PROMPT=off
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-#function p10k-on-pre-prompt() {
-#    #p10k display '1|2/right'=show '|empty_line'=hide
-#    p10k display '1|*/right'=show '2/left/time|empty_line'=hide
-#}
-#
-#function p10k-on-post-prompt() {
-#    #[[ $last_prompt_dir == $PWD ]] && p10k display '1/left|2/right'=hide 'empty_line'=show
-#    [[ $last_prompt_dir == $PWD ]] \
-#        && p10k display '1|*/right'=hide '2/left/time|empty_line'=show \
-#        || p10k display '*/right|empty_line'=hide '2/left/time'=show
-#    last_prompt_dir=$PWD
-#}
+typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=true
+typeset -g POWERLEVEL9K_STATUS_ERROR=true
+typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_CONTENT_EXPANSION='${P9K_CONTENT#SIG}'
+typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_CONTENT_EXPANSION='${P9K_CONTENT//SIG}'
