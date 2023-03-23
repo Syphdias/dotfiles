@@ -29,20 +29,20 @@ typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     prompt_char             # prompt symbol
 )
 
-# Remove context segment from right promot
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${(@)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#context}")
+# Remove segment context from right prompt
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${(@)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#context}")
 
-# Append context segments to left and remove from right
+# Append context segments to left prompt and remove from right
 context_segments=(
-    virtualenv pyenv goenv
     kubecontext terraform
     aws azure gcloud openstack
+    virtualenv pyenv goenv
 )
 for context_segment in ${(@)context_segments}; do
     POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
         "${(@)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#${context_segment}}"
     )
-    insert_segment_after vcs $context_segment
+    insert_segment_before $context_segment dir
 done
 
 # general
