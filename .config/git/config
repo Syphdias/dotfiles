@@ -12,7 +12,7 @@
 	lg = !"git lg1"
 	d = difftool
 	wdiff = diff --word-diff=color --unified=1
-	yolo = !git commit -m \"$(curl -s whatthecommit.com/index.txt) YOLO\"
+	yolo = !git commit -m \"$(curl -sSL whatthecommit.com/index.txt) YOLO\"
 	serve = daemon --reuseaddr --base-path=. --export-all --verbose
 	git = !git
 	cloner = clone --recursive
