@@ -14,7 +14,7 @@ alias gcm='git commit -m'
 alias gcsm='git commit -S -m'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gpl='git pull --ff-only'
+alias gpl='git pull'
 alias gps='git push'
 alias gsf='git submodule foreach'
 ## other
