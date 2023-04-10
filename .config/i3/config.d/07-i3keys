@@ -18,8 +18,6 @@ bindsym $mod+mod1+space  focus mode_toggle
 ## Windows // (Global) Fullscreen //  + (Shift) + f ##
 bindsym $mod+f           fullscreen toggle
 bindsym $mod+shift+f     fullscreen toggle global
-## Windows // Sticky Floating (toggle) //  + Shift + s ##
-bindsym $mod+Shift+s     sticky toggle
 
 ## Windows // Move Scratchpad //  + Shift + Minus ##
 bindsym $mod+shift+minus move scratchpad

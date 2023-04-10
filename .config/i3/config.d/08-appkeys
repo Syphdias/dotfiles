@@ -47,8 +47,8 @@ bindsym $mod+control+mod1+ssharp exec pkill remontoire || remontoire -s $I3SOCK
 bindsym $mod+Return              exec tilix
 bindsym $mod+KP_Enter            exec tilix
 bindsym $mod+$return             exec tilix
-## Applications // Screenshot // Ctrl + Print ##
-bindsym control+Print            exec flameshot gui
+## Applications // Screenshot //  + Shift + S ##
+bindsym $mod+shift+s             exec flameshot gui
 ## Applications // Settings //  + Ctrl + , ##
 bindsym $mod+control+comma       exec manjaro-settings-manager || gnome-control-center || cinnamon-settings
 ## Applications // NetworkManager Connections //  + Ctrl + n ##
