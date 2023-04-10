@@ -23,9 +23,9 @@ bindsym $mod+Tab        exec --no-startup-id \
 ## Pulse Audio controls
 # unsmart version: pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/smart-volume-adjust.py \
-            --notify --default-to-sink +.05 "Spotify" "Google Chrome" ""
+            --notify --notify-absolute --filter-active --default-to-sink +.05 "Spotify" "Google Chrome" ""
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/bin/smart-volume-adjust.py \
-            --notify --default-to-sink -.05 "Spotify" "Google Chrome" ""
+            --notify --notify-absolute --filter-active --default-to-sink -.05 "Spotify" "Google Chrome" ""
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle
 
 ## Screen brightness controls (requires xbacklight)
