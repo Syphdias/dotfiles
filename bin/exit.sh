@@ -12,7 +12,7 @@ case "$1" in
     shutdown)  systemctl poweroff          ;;
     kexec)     sudo systemctl start kexec-load@linux \
                    && sudo systemctl kexec ;;
-    winboot)   sudo efibootmgr --bootnext 0003 \
+    winboot)   sudo efibootmgr --bootnext $(efibootmgr | awk -F'[ *]' '/Windows Boot Manager/ {print $1; exit}') \
                    && systemctl reboot     ;;
     *)
         echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown|kexec|winboot}"
