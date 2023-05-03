@@ -14,20 +14,20 @@ cpu=$(~/.config/rofi/bin/usedcpu)
 memory=$(~/.config/rofi/bin/usedram)
 
 # Options
-shutdown="襤"
-reboot="ﰇ"
+shutdown="󰐥"
+reboot="󰜉"
 kexec=""
 lock=""
 suspend=""
 logout=""
 winboot=""
-hibernate="鈴"
+hibernate="󰒲"
 
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$kexec\n$lock\n$suspend\n$hibernate\n$winboot\n$logout"
 
 chosen="$(echo -e "$options" \
-            | $rofi_command -p "⏱  $uptime    $cpu    $memory " \
+            | $rofi_command -p "⏱  $uptime  󰍛  $cpu    $memory " \
                 -dmenu -selected-row 3 \
                 -kb-select-1 S \
                 -kb-select-2 r \
@@ -88,7 +88,7 @@ if [[ -n "$cancel_action" ]]; then
     # timeout rofi bacause it captures mouse/kb and create race condition
     # otherwise and prevents i3lock from grab mouse/kb while rofi is still running
     echo "Cancel $cancel_action" \
-        | timeout 3s $rofi_command -p "⏱  $uptime    $cpu    $memory " -dmenu
+        | timeout 3s $rofi_command -p "⏱  $uptime  󰍛  $cpu    $memory " -dmenu
     if [[ $? == 0 || $? == 1 ]]; then
         # only kill background process if rofi didn't time out
         kill $exec_pid
