@@ -71,17 +71,17 @@ function wat() {
             fi
             wat $words[1]
         elif (( $+functions[$cmd] )); then
-            whence -v $cmd
-            whence -f $cmd
+            whence -v -- $cmd
+            whence -f -- $cmd
         elif (( $+commands[$cmd] )); then
             wat $commands[$cmd]
         elif [[ -h $cmd ]]; then
             file $cmd
             wat $cmd:A
         elif [[ -x $cmd ]]; then
-            file $cmd
+            file -- $cmd
         else
-            which $cmd
+            which -- $cmd
         fi
     done
     )
