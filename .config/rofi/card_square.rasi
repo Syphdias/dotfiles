@@ -63,7 +63,7 @@ inputbar {
     expand:                         false;
     border:                         2px;
     border-color:                   #A9C03F;
-    margin:                         0% 46% 0% 0%;
+    margin:                         0% 50% 0% 0%;
     padding:                        0%;
     position:                       center;
 }
@@ -79,7 +79,7 @@ textbox-prompt-colon {
 
 prompt {
     enabled:                        true;
-    padding:                        0.75% 1% 1% 1%;
+    padding:                        1% 1% 1% 1%;
     background-color:               @background-alt;
     text-color:                     @foreground;
     font:                           "Hurmit Nerd Font Mono 14";
@@ -107,7 +107,7 @@ element-text {
     horizontal-align:               0.5;
     vertical-align:                 0.5;
     // controls shape of `element`
-    margin:                         3.9% 2.8%;
+    margin:                         3.25% 2.8%;
 }
 
 element selected {
