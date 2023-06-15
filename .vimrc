@@ -35,7 +35,7 @@ if has("autocmd") " save cursor position
       \ | endif
 endif
 
-se undofile                " maintain persistent undo history
+set undofile               " maintain persistent undo history
 set undodir=~/.vim/undodir " folder with undo files
 
 " status line
@@ -54,8 +54,8 @@ nmap <C-h> :nohlsearch <CR>
 " syntastic 'defaults'
 filetype plugin indent on "https://blog.netways.de/2012/10/30/puppet-und-vim/
 
-autocmd filetype markdown setlocal spell spl=de,en textwidth=80
-autocmd FileType gitcommit setlocal spell spl=de,en textwidth=72
+autocmd filetype markdown setlocal spell spl=en,de_20 textwidth=80
+autocmd FileType gitcommit setlocal spell spl=en,de_20 textwidth=72
 
 set statusline=%f\ %h%w%m%r\            " from default
 set statusline+=%#warningmsg#
