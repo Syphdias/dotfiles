@@ -4,6 +4,8 @@
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/${UID}}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 # ZDOTDIR is set in .profile to have it available before window manager starts
 # and thus before zsh starts. Alternatives: .xinitrc, .pam_environment (deprecated)
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
