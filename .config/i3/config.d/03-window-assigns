@@ -9,7 +9,7 @@
 #assign [class="^gimp"] $ws5
 ### To Lobby ($ws8)
 assign [instance="battle.net.exe"] number $gws
-assign [class="Steam"] number $gws
+assign [class="(?i)steam"] number $gws
 assign [class="Lutris"] number $gws
 assign [class="minecraft-launcher"] number $gws
 for_window [title="Friends List"] resize set width 300px, move right
@@ -83,7 +83,7 @@ for_window [class="obsidian"] border pixel 2
 for_window [class="Microsoft Teams"] border pixel 2
 for_window [class="(?i).*gnome.*"] border pixel 2
 for_window [class="Evince"] border pixel 2
-for_window [class="^Steam$"] border pixel 2
+for_window [class="(?i)^steam$"] border pixel 2
 # Tabs Outliner
 for_window [title="Tabs Outliner"] floating disable
 for_window [title="Tabs Outliner"] resize set width 350px
