@@ -157,6 +157,8 @@ z4h source "${ZDOTDIR}/$(hostnamectl hostname 2>/dev/null || hostname -s).zsh"  
 z4h source "${ZDOTDIR}/after-p10k-lean.zsh"
 z4h source "${ZDOTDIR}/gitrepos.zsh"
 z4h source "${ZDOTDIR}/openstack.zsh"
+z4h source "${ZDOTDIR}/penv.zsh"
+z4h source "${ZDOTDIR}/penv-p10k-segment.zsh"
 z4h source "${ZDOTDIR}/completion.zsh"
 
 # omz completion
