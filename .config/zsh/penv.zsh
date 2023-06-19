@@ -2,6 +2,8 @@
 # this cannot be done in a program because it would fork and not be able to
 # modify the environment
 # Requires go-yq not the jq warpper yq
+# TODO:
+# - don't activate non-existing projects
 typeset -ga PENV=()
 
 function penv() {
@@ -70,7 +72,7 @@ function penv-list() {
 
 function penv-on() {
     eval $(yq '.["'$1'"].env' ~/.config/penv.yaml \
-           |sed 's/: /=/')
+           |sed 's/^/export /; s/: /=/')
     eval $(yq -r '.["'$1'"].commands//[] |.[] + " ;"' ~/.config/penv.yaml)
     if [[ ${PENV[(Ie)$1]} -eq 0 ]]; then
         PENV+=("$1")
