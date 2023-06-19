@@ -68,7 +68,7 @@ function penv-list() {
 }
 
 function penv-on() {
-    eval $(yq '.["'$1'"].env |to_entries[] |.key + "=" + .value' ~/.config/penv.yaml \
+    eval $(yq '.["'$1'"].env |to_entries |.[] |.key + "=" + .value' ~/.config/penv.yaml \
            | sed 's/^"//; s/=/="/')
     eval $(yq -r '.["'$1'"].commands//[] |.[] + " ;"' ~/.config/penv.yaml)
     if [[ ${PENV[(Ie)$1]} -eq 0 ]]; then
