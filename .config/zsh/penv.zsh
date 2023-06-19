@@ -36,7 +36,7 @@ function penv-list() {
         esac
     done
     local project env_project
-    local projects=$(yq -r 'keys[]' ~/.config/penv.yaml)
+    local projects=$(yq -r 'keys |.[]' ~/.config/penv.yaml)
     while read -u 3 project; do
         if [[ ${#PENV[@]} -gt 0 && ${PENV[(Ie)$project]} -gt 0 ]]; then
             sed "s/${project}/${project} */" <<<$project
@@ -48,7 +48,7 @@ function penv-list() {
         fi
 
         if [[ "$verbose" == "1" ]]; then
-            local project_envs=$(yq -r '.["'$project'"].env|"  " +keys[]' ~/.config/penv.yaml)
+            local project_envs=$(yq -r '.["'$project'"].env |keys |"  " + .[]' ~/.config/penv.yaml)
             while read -u 4 project_env; do
                 if [[ $(yq -r '.["'$project'"].env["'$project_env'"]' ~/.config/penv.yaml) == "${(P)project_env}" ]]; then
                     # FIXME: Show which ones are equal
@@ -78,15 +78,15 @@ function penv-on() {
 
 function penv-off() {
     local project
-    local projects=$(yq -r 'keys[]' ~/.config/penv.yaml)
+    local projects=$(yq -r 'keys |.[]' ~/.config/penv.yaml)
     if [[ -n "$1" ]]; then
         # FIXME: catch error for non-existent project
-        unset $(yq -r '.["'$1'"].env |keys[]' ~/.config/penv.yaml  |xargs)
+        unset $(yq -r '.["'$1'"].env |keys |.[]' ~/.config/penv.yaml  |xargs)
         PENV=(${(@)PENV:#${1}})
 
     elif [[ ${#PENV[@]} -gt 0 ]]; then
         for project in $projects; do
-            unset $(yq -r '.["'$project'"].env |keys[]' ~/.config/penv.yaml  |xargs)
+            unset $(yq -r '.["'$project'"].env |keys |.[]' ~/.config/penv.yaml  |xargs)
             PENV=(${(@)PENV:#${project}})
         done
 
@@ -102,7 +102,7 @@ function penv-show() {
     if [[ "${#PENV[@]}" -gt 0 ]]; then
         for project in ${(@)PENV}; do
             echo "${project}"
-            yq -r '.["'${project}'"].env|keys[]' ~/.config/penv.yaml
+            yq -r '.["'${project}'"].env |keys |.[]' ~/.config/penv.yaml
         done
     else
         echo "No active project"
@@ -112,8 +112,8 @@ function penv-show() {
 function penv-clear() {
     local project
     # loop over all projects and unset all envionments
-    for project in $(yq -r 'keys[]' ~/.config/penv.yaml); do
-        unset $(yq -r '.["'$project'"].env |keys[]' ~/.config/penv.yaml |xargs)
+    for project in $(yq -r 'keys |.[]' ~/.config/penv.yaml); do
+        unset $(yq -r '.["'$project'"].env |keys |.[]' ~/.config/penv.yaml |xargs)
     done
     typeset -ga PENV=()
 }
