@@ -3,7 +3,9 @@
 # modify the environment
 # Requires go-yq not the jq warpper yq
 # TODO:
-# - don't activate non-existing projects
+# - help
+# - seperate into repo
+# - write README
 typeset -ga PENV=()
 
 function penv() {
@@ -22,7 +24,9 @@ function penv() {
             ;;
         show)  penv-list -vf ;;
         clear) penv-clear ;;
-        *)     penv-help ;;
+        help|-h|--help)
+               penv-help ;;
+        *)     penv-help; return 1 ;;
     esac
 }
 
@@ -71,9 +75,21 @@ function penv-list() {
 }
 
 function penv-on() {
+    if [[ "$1" == "-p" ]]; then
+        shift
+    else
+        penv clear
+    fi
+
+    if [[ ${(@)$(yq -r 'keys |.[]' ~/.config/penv.yaml)[(Ie)$1]} -eq 0 ]]; then
+        echo "Project \"$1\" not in config file ~/.config/penv.yaml" >&2
+        return 1
+    fi
+
     eval $(yq '.["'$1'"].env' ~/.config/penv.yaml \
            |sed 's/^/export /; s/: /=/')
-    eval $(yq -r '.["'$1'"].commands//[] |.[] + " ;"' ~/.config/penv.yaml)
+    eval "$(yq -r '.["'$1'"].command' ~/.config/penv.yaml)"
+
     if [[ ${PENV[(Ie)$1]} -eq 0 ]]; then
         PENV+=("$1")
     fi
@@ -94,7 +110,7 @@ function penv-off() {
         done
 
     else
-        echo No penv active 2>/dev/null
+        echo No penv active >&2
         return 1
     fi
 }
@@ -123,10 +139,10 @@ function penv-clear() {
 
 function penv-help() {
     cat <<-EOF
-penv list [-v] [-f] # list projects
-penv show           # list projects
-penv on PROJECT     # activate envs from project
-penv off [PROJECT]  # unset envs from active envs
-penv clear          # unset all envs mentioned in the config
+penv list [-v] [-f]  # list projects
+penv show            # list projects
+penv on [-p] PROJECT # activate envs from project
+penv off [PROJECT]   # unset envs from active envs
+penv clear           # unset all envs mentioned in the config
 EOF
 }
