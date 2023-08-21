@@ -34,7 +34,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${(@)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#co
 
 # Append context segments to left prompt and remove from right
 context_segments=(
-    penv
+    prenv
     kubecontext terraform
     aws azure gcloud openstack
     virtualenv pyenv goenv

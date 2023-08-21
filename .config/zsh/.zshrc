@@ -78,6 +78,7 @@ z4h install lambdalisue/suda.vim || return
 z4h install pedrohdz/vim-yaml-folds || return
 z4h install alexanderjeurissen/ranger_devicons || return
 z4h install SL-RU/ranger_udisk_menu || return
+z4h install Syphdias/prenv || return
 #z4h install zsh-users/zsh-history-substring-search || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
@@ -132,6 +133,8 @@ bindkey -M viins '^[h' z4h-run-help
 # TODO: set z4h vi keys
 z4h source ${ZDOTDIR}/z4h-keybinds.zsh # rebinding viins, vicmd
 z4h source ${ZDOTDIR}/keybinds.zsh # more complex stuff
+z4h source $Z4H/Syphdias/prenv/prenv.zsh
+z4h source $Z4H/Syphdias/prenv/prenv-p10k-segment.zsh
 
 
 # rebind Shift+Arrow to same as Ctrl-Arrow
@@ -154,11 +157,11 @@ z4h source "${ZDOTDIR}/alias.zsh"                    # Define aliases, functions
 z4h source "${ZDOTDIR}/utils.zsh"                    # Essential tools for me
 z4h source "${ZDOTDIR}/function.zsh"                 # Define functions and completions
 z4h source "${ZDOTDIR}/$(hostnamectl hostname 2>/dev/null || hostname -s).zsh"  # Host-specific functions, etc.
+z4h source "${ZDOTDIR}/prenv.zsh"
+z4h source "${ZDOTDIR}/prenv-p10k-segment.zsh"
 z4h source "${ZDOTDIR}/after-p10k-lean.zsh"
 z4h source "${ZDOTDIR}/gitrepos.zsh"
 z4h source "${ZDOTDIR}/openstack.zsh"
-z4h source "${ZDOTDIR}/penv.zsh"
-z4h source "${ZDOTDIR}/penv-p10k-segment.zsh"
 z4h source "${ZDOTDIR}/completion.zsh"
 
 # omz completion
