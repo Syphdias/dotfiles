@@ -134,6 +134,7 @@ bindkey -M viins '^[h' z4h-run-help
 z4h source ${ZDOTDIR}/z4h-keybinds.zsh # rebinding viins, vicmd
 z4h source ${ZDOTDIR}/keybinds.zsh # more complex stuff
 z4h source $Z4H/Syphdias/prenv/prenv.zsh
+z4h source $Z4H/Syphdias/prenv/_prenv
 z4h source $Z4H/Syphdias/prenv/prenv-p10k-segment.zsh
 
 
@@ -157,8 +158,6 @@ z4h source "${ZDOTDIR}/alias.zsh"                    # Define aliases, functions
 z4h source "${ZDOTDIR}/utils.zsh"                    # Essential tools for me
 z4h source "${ZDOTDIR}/function.zsh"                 # Define functions and completions
 z4h source "${ZDOTDIR}/$(hostnamectl hostname 2>/dev/null || hostname -s).zsh"  # Host-specific functions, etc.
-z4h source "${ZDOTDIR}/prenv.zsh"
-z4h source "${ZDOTDIR}/prenv-p10k-segment.zsh"
 z4h source "${ZDOTDIR}/after-p10k-lean.zsh"
 z4h source "${ZDOTDIR}/gitrepos.zsh"
 z4h source "${ZDOTDIR}/openstack.zsh"
