@@ -6,3 +6,10 @@ vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to Clipboard" })
 
 -- delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
+
+-- move seletcted block up and down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- fix visual block indent interruption
+vim.keymap.set("i", "<C-c>", "<Esc>")
