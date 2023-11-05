@@ -1,4 +1,5 @@
 #!/bin/sh
+# for ~/bin/mons from https://github.com/Ventto/mons
 #
 # The MIT License (MIT)
 #
@@ -84,6 +85,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 [ "$1" = '-v' ] && { version; exit; }
 lib=~/.local/lib/libshlist/liblist.sh
 [ ! -r "$lib" ] && { "$lib: library not found."; exit 1; }
+lib=~/bin/liblist.sh
 . "$lib"
 
 arg_err() {
