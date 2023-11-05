@@ -6,7 +6,7 @@ bindsym control+mod1+Delete exec --no-startup-id ~/bin/menu_powermenu.sh
 ## Display Management
 # https://github.com/Ventto/mons
 # alternative: https://github.com/chmln/enact
-set $mons ~/bin/mons
+set $mons exec --no-startup-id ~/bin/mons
 set $display_layout [←↑↓→] , [d]uplicate, [m]irror, [s]ol[o], [Shift+s]econd-only, [a]uto
 mode "$display_layout" {
     set $arandr pkill arandr || arandr
@@ -26,22 +26,22 @@ mode "$display_layout" {
                --output DP-2-1 --mode 1920x1200 --pos 1920x0 --primary \
                --output DP-2-2 --mode 1920x1200 --pos    0x0", $resetmode, $exec_bg;
 
-    bindsym Left    exec $mons -e left,   $resetmode, $exec_bg;
-    bindsym $left   exec $mons -e left,   $resetmode, $exec_bg;
-    bindsym $left2  exec $mons -e left,   $resetmode, $exec_bg;
-    bindsym Down    exec $mons -e bottom, $resetmode, $exec_bg;
-    bindsym $down   exec $mons -e bottom, $resetmode, $exec_bg;
-    bindsym $down2  exec $mons -e bottom, $resetmode, $exec_bg;
-    bindsym Up      exec $mons -e top,    $resetmode, $exec_bg;
-    bindsym $up     exec $mons -e top,    $resetmode, $exec_bg;
-    bindsym $up2    exec $mons -e top,    $resetmode, $exec_bg;
-    bindsym Right   exec $mons -e right,  $resetmode, $exec_bg;
-    bindsym $right  exec $mons -e right,  $resetmode, $exec_bg;
-    bindsym $right2 exec $mons -e right,  $resetmode, $exec_bg;
-    bindsym d       exec $mons -d,        $resetmode, $exec_bg;
-    bindsym m       exec $mons -m,        $resetmode, $exec_bg;
-    bindsym Shift+s exec $mons -s,        $resetmode, $exec_bg;
-    bindsym o       exec $mons -o,        $resetmode, $exec_bg;
+    bindsym Left    $mons -e left,   $resetmode, $exec_bg;
+    bindsym $left   $mons -e left,   $resetmode, $exec_bg;
+    bindsym $left2  $mons -e left,   $resetmode, $exec_bg;
+    bindsym Down    $mons -e bottom, $resetmode, $exec_bg;
+    bindsym $down   $mons -e bottom, $resetmode, $exec_bg;
+    bindsym $down2  $mons -e bottom, $resetmode, $exec_bg;
+    bindsym Up      $mons -e top,    $resetmode, $exec_bg;
+    bindsym $up     $mons -e top,    $resetmode, $exec_bg;
+    bindsym $up2    $mons -e top,    $resetmode, $exec_bg;
+    bindsym Right   $mons -e right,  $resetmode, $exec_bg;
+    bindsym $right  $mons -e right,  $resetmode, $exec_bg;
+    bindsym $right2 $mons -e right,  $resetmode, $exec_bg;
+    bindsym d       $mons -d,        $resetmode, $exec_bg;
+    bindsym m       $mons -m,        $resetmode, $exec_bg;
+    bindsym Shift+s $mons -s,        $resetmode, $exec_bg;
+    bindsym o       $mons -o,        $resetmode, $exec_bg;
     bindsym Return mode "default"
     bindsym $return mode "default"
     bindsym Escape mode "default"
