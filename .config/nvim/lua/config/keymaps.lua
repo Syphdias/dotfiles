@@ -7,9 +7,12 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to Clipboard" })
 -- delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 
--- move seletcted block up and down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 -- fix visual block indent interruption
-vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set({ "i", "n", "v" }, "<C-c>", "<Cmd>noh<CR><Esc>")
+-- disable ESC to train C-c
+vim.keymap.set({ "i", "n", "v" }, "<Esc>", "<nop>")
+
+-- split navigation with alt
+for _, key in ipairs({ "h", "j", "k", "l" }) do
+  vim.keymap.set({ "i", "n", "v" }, "<A-" .. key .. ">", "<cmd>wincmd " .. key .. "<cr>")
+end
