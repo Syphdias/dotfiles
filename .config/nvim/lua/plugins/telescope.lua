@@ -12,6 +12,9 @@ return {
 
   opts = {
     defaults = {
+      layout_config = { prompt_position = "top" },
+      sorting_strategy = "ascending",
+      -- winblend = 10,
       mappings = {
         i = {
           ["<C-k>"] = function(...)
@@ -19,10 +22,6 @@ return {
           end,
           ["<C-j>"] = function(...)
             return require("telescope.actions").move_selection_next(...)
-          end,
-          ["<C-q>"] = function(...)
-            return require("telescope.actions").send_selected_to_qflist(...)
-              + require("telescope.actions").open_qflist(...)
           end,
         },
       },
