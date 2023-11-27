@@ -16,3 +16,5 @@ vim.keymap.set({ "i", "n", "v" }, "<Esc>", "<nop>")
 for _, key in ipairs({ "h", "j", "k", "l" }) do
   vim.keymap.set({ "i", "n", "v" }, "<A-" .. key .. ">", "<cmd>wincmd " .. key .. "<cr>")
 end
+
+vim.keymap.set({ "n" }, "<leader>wo", "<c-w>o", { desc = "Close all other windows" })
