@@ -8,7 +8,7 @@ return {
 
   -- workaround for https://github.com/LazyVim/LazyVim/issues/1955
   {
-    dir = "/home/syphdias/git/private/which-key.nvim",
+    "folke/which-key.nvim",
     opts = {
       defaults = {
         mode = { "n", "v" },
