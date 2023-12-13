@@ -23,3 +23,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spl = "en,de_20"
   end,
 })
+
+-- autoreload kitty config edits
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*/kitty.conf" },
+  command = "silent !kill -SIGUSR1 $(pgrep kitty)",
+})
