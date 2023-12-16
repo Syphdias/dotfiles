@@ -66,7 +66,7 @@ bindsym $mod+control+t           exec pkill gtimelog || ~/.local/bin/gtimelog
 ## Various // Switch Audio Sink //  + Ctrl + o ##
 bindsym $mod+control+o           exec --no-startup-id "~/bin/pulse-audio-cycle.py --notify \
                                     -c 'alsa_card.usb-BEHRINGER_UMC202HD_192k-00|alsa_card.pci-0000_09_00|Jabra_Link' \
-                                    -p 'alsa_card.pci-0000_09_00.1' 'hdmi-stereo-extra.'\
+                                    -p 'alsa_card.pci-0000_09_00.1' 'hdmi-stereo$'\
                                     -p 'Jabra_Link' 'analog-stereo\+input:mono|analog-stereo$'"
 ## Various // Toggle Status Bar //  + Ctrl + b ##
 bindsym $mod+control+b           bar mode toggle
