@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- fix spellchecking language(s)
+-- filetypes that use indentation of 2
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "lua" },
   callback = function()

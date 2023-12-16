@@ -62,6 +62,7 @@ if [[ "$SHELL" =~ "zsh" && -n "$ZSH_VERSION" ]]; then
     alias -g JQL='| jq -C . | less -A'
     alias -g ...="../.."
     alias -g ....="../../.."
+    alias -g R='$(fc -s -- -1 2>/dev/null)'
 fi
 
 

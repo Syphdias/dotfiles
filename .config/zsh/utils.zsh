@@ -48,12 +48,51 @@ function histrm () {
 }
 
 function how-long-to-zero-with() {
-    [[ $# -eq 0 ]] && echo "how-log-to-zero-with 13:00 5 12:00 20" && return
-    time_delta_in_sec=$(($(date +%s -d "$1")-$(date +%s -d "$3")));
-    done_delta=$(($4 - $2)); done_delta=$((done_delta*1.))
-    rate=$((done_delta/time_delta_in_sec))
-    time_in_sec=$(($2/rate))
-    done_time="$(date -d "@$(($(date +%s -d "$3")+time_in_sec))0")"
-    human_time="$(time_in_sec=$(sed 's/\..*//' <<<$time_in_sec) bash -c 'echo $((time_in_sec/3600))h $((time_in_sec%3600/60))min')"
-    echo "done with $rate/s in $human_time at $done_time"
+    # TODO: name arguments
+    # TODO: make recognize bigger number and switch arguments
+    # TODO: detect no value change in time or in value
+    if [[ $# -eq 0 ]]; then
+        echo "Provide to time value pairs to calculate when value reach zero"
+        echo "times need to be valid \`date\` format"
+        echo "how-long-to-zero-with 13:00 5 12:00 20"
+        echo "how-long-to-zero-with 12:00 20 13:00 5"
+        return
+    fi
+
+    # detect bigger value and set times and values accordingly
+    if [[ $2 -gt $4 ]]; then
+        first_time="$1"
+        first_value="$2"
+        second_time="$3"
+        second_value="$4"
+    else
+        first_time="$3"
+        first_value="$4"
+        second_time="$1"
+        second_value="$2"
+    fi
+
+
+    first_time_sec="$(date +%s -d "$first_time")"
+    second_time_sec="$(date +%s -d "$second_time")"
+    if [[ $first_time_sec -gt $second_time_sec ]]; then
+        echo "You provided ascending values. The value will never reach zero." >&2
+        echo "This assumes linar change" >&2
+        return 1
+    fi
+
+
+    time_delta_sec=$((second_time_sec - first_time_sec));
+    value_delta=$((first_value - second_value))
+    value_delta=$((value_delta*1.)) # workaround I don't remember; convert to float?
+    value_per_time=$((value_delta/time_delta_sec))
+
+    time_in_sec=$((second_value/value_per_time))
+    # append 0 in case the calculation ends in .
+    done_time="$(date -d "@$((second_time_sec + time_in_sec))0")"
+
+    # "cast to int"
+    time_in_sec="$(sed 's/\..*//' <<<$time_in_sec)"
+    human_time="$((time_in_sec/3600))h $((time_in_sec%3600/60))min"
+    echo "done with $value_per_time/s in $human_time at $done_time"
 }
