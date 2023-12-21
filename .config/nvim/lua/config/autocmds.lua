@@ -38,3 +38,19 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*/kitty.conf" },
   command = "silent !kill -SIGUSR1 $(pgrep kitty)",
 })
+
+-- Disable re-reading file descriptors that will then be gone
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = { "/proc/*/fd/*" },
+  callback = function()
+    vim.opt_local.buftype = "nofile"
+  end,
+})
+
+-- show quotes in JSON files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "json" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
