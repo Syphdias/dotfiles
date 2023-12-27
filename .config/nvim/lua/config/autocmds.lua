@@ -54,3 +54,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.conceallevel = 0
   end,
 })
+
+-- recognize certain yamls to trigger lspconfig
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "yaml" },
+  callback = function()
+    local path = vim.fn.expand("%:p")
+    local filename = vim.fn.expand("%:t")
+
+    if vim.fn.match(path, "/tasks/") > -1 or vim.fn.match(path, "/handlers/") or filename == "playbook.yaml" then
+      vim.opt_local.filetype = "yaml.ansible"
+    end
+  end,
+})
