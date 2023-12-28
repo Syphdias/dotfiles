@@ -3,7 +3,8 @@ import = [
 ]
 
 [env]
-TERM = "xterm-256color"
+# TERM = "xterm-256color"
+TERM = "xterm-kitty"
 
 [window]
 opacity = 0.9
@@ -11,9 +12,9 @@ opacity = 0.9
 [scrolling]
 history = 100000
 
-[font.normal]
-# Monaspace Neon (try if healing works)
-family = "MesloLGS NF"
+[font]
+# "Monaspace Neon" if font healing is supported
+normal = {family = "MesloLGS NF"}
 
 [colors]
 transparent_background_colors = true
