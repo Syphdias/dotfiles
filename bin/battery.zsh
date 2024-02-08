@@ -32,7 +32,7 @@ local state remain
 local -i bat_percent
 
 local -a bats=( /sys/class/power_supply/(BAT*|battery)/(FN) )
-(( $#bats )) || return
+(( $#bats )) || return 0
 
 local -i energy_now energy_full power_now 
 local -i is_full=1 is_calculating is_charching
