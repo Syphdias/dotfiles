@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-from dbus import SessionBus, Interface
-from dbus.exceptions import DBusException
-from os import environ
-from sys import version_info
 import subprocess
+from os import environ
+
+from dbus import Interface, SessionBus
+from dbus.exceptions import DBusException
+from gi.repository import GLib
 
 spotify = None
 try:
@@ -40,4 +41,7 @@ spotify_iface = Interface(spotify, "org.freedesktop.DBus.Properties")
 props = spotify_iface.Get("org.mpris.MediaPlayer2.Player", "Metadata")
 
 if props["xesam:artist"]:
-    print(f'{props["xesam:artist"][0]} – {props["xesam:title"]}')
+    print(
+        f'{GLib.markup_escape_text(props["xesam:artist"][0])} '
+        f'– {GLib.markup_escape_text(props["xesam:title"])}'
+    )
