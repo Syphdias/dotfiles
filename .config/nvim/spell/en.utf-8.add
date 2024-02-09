@@ -139,6 +139,10 @@ OSD
 RGW
 RADOS
 RadosGW
+zonegroup
+CephFS
+OMAP
+radosgw
 # Cloud
 OpenStack
 AWS
