@@ -16,5 +16,7 @@ return {
       -- complete() or confirm()? Currently used for snippets and treesitter
       -- ["<C-Space>"] = cmp.confirm(),
     })
+
+    opts.experimental.ghost_text = false
   end,
 }
