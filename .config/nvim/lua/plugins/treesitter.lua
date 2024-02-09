@@ -62,6 +62,12 @@ return {
           },
         },
       },
+      incremental_selection = {
+        keymaps = {
+          init_selection = "<M-d>",
+          node_incremental = "<M-d>",
+        },
+      },
     },
   },
 }
