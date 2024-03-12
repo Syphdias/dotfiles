@@ -4,7 +4,7 @@
 bindsym $mod+space          exec --no-startup-id \
     j4-dmenu-desktop \
         --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" \
-        --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/tilix
+        --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/alacritty
 bindsym mod1+F2         exec --no-startup-id \
     /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
 bindsym $mod+shift+d    exec --no-startup-id \
@@ -44,9 +44,9 @@ bindsym shift+XF86AudioLowerVolume exec playerctl previous
 ## Help
 bindsym $mod+control+mod1+ssharp exec pkill remontoire || remontoire -s $I3SOCK
 ## Applications // Terminal //  + Return ##
-bindsym $mod+Return              exec tilix
-bindsym $mod+KP_Enter            exec tilix
-bindsym $mod+$return             exec tilix
+bindsym $mod+Return              exec --no-startup-id alacritty
+bindsym $mod+KP_Enter            exec --no-startup-id alacritty
+bindsym $mod+$return             exec --no-startup-id alacritty
 ## Applications // Screenshot //  + Shift + S ##
 bindsym $mod+shift+s             exec flameshot gui
 ## Applications // Settings //  + Ctrl + , ##
@@ -56,7 +56,7 @@ bindsym $mod+control+n           exec nm-connection-editor
 ## Applications // Pulseaudio Volumne Control //  + Ctrl + m ##
 bindsym $mod+control+m           exec pkill pavucontrol || pavucontrol
 ## Applications // File Explorer //  + Ctrl + e ##
-bindsym $mod+control+e           exec --no-startup-id tilix -e ranger
+bindsym $mod+control+e           exec --no-startup-id alacritty -e ranger
 bindsym $mod+shift+control+e     exec --no-startup-id thunar    # fallback
 ## Applications // xkill //  + Ctrl + x ##
 bindsym $mod+control+x --release exec --no-startup-id pkill xkill || xkill
