@@ -48,8 +48,6 @@ function histrm () {
 }
 
 function how-long-to-zero-with() {
-    # TODO: name arguments
-    # TODO: make recognize bigger number and switch arguments
     # TODO: detect no value change in time or in value
     if [[ $# -eq 0 ]]; then
         echo "Provide to time value pairs to calculate when value reach zero"
@@ -94,5 +92,6 @@ function how-long-to-zero-with() {
     # "cast to int"
     time_in_sec="$(sed 's/\..*//' <<<$time_in_sec)"
     human_time="$((time_in_sec/3600))h $((time_in_sec%3600/60))min"
+    echo "${(q)first_time} ${(q)first_value} -> ${(q)second_time} ${(q)second_value}"
     echo "done with $value_per_time/s in $human_time at $done_time"
 }

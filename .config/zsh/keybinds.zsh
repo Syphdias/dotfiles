@@ -60,7 +60,7 @@ function set-cd-cache() {
 add-zsh-hook chpwd set-cd-cache
 
 # manually save pwd to last_cd
-alias d='<<<"${PWD}" > ~/.cache/last_cd'
+alias d='echo "${PWD}" > ~/.cache/last_cd'
 
 # autojump to last_cd if it was modified in the last 10s
 if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd \
