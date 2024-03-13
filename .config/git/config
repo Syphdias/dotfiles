@@ -24,7 +24,7 @@
 	oldest-ancestor = !bash -c 'diff -u <(git rev-list --first-parent \"${1:-main}\") <(git rev-list --first-parent \"${2:-HEAD}\") | sed -ne \"s/^ //p\" | head -1' -
 	fixws = !git diff-index --check --cached HEAD -- | sed /^[+-]/d | sed -r s/:[0-9]+:.*// | uniq | xargs sed -e s/[[:space:]]*$// -i
 [diff]
-	tool = vimdiff
+	tool = difftastic
 	algorithm = patience
 [difftool]
 	prompt = false
@@ -39,6 +39,8 @@
 	textconv = gpg -d --quiet --yes --compress-algo=none --no-encrypt-to --batch --use-agent
 [diff "ansible-vault"]
 	textconv = ansible-vault view 2>/dev/null
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -68,3 +70,8 @@
 	follow = true
 [help]
 	autoCorrect = prompt
+# needs to be at end for overwrites to take effect
+[includeIf "gitdir:~/git/work/"]
+	path = ~/.config/git/work
+[pager]
+	difftool = true
