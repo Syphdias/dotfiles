@@ -86,6 +86,7 @@ for_window [class="(?i).*gnome.*"] border pixel 2
 for_window [class="Evince"] border pixel 2
 for_window [class="(?i)^steam$"] border pixel 2
 for_window [class="^Snapper-gui$"] border pixel 2
+for_window [class="^Gtimelog$"] border pixel 2
 # Tabs Outliner
 for_window [title="Tabs Outliner"] floating disable
 for_window [title="Tabs Outliner"] resize set width 350px

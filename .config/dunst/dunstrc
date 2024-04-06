@@ -75,24 +75,21 @@ history = ctrl+asciicircum      # Redisplay last message(s).
 context = ctrl+shift+period     # Context menu.
 
 [urgency_low]
-frame_color = "#3B7C87"
-foreground = "#3B7C87"
-background = "#191311"
-#background = "#2B313C"
+background = "#16161e"
+foreground = "#c0caf5"
+frame_color = "#c0caf5"
 timeout = 4
 
 [urgency_normal]
-frame_color = "#454b56"
-foreground = "#f3f4f5"
-#background = "#454b56"
-background = "#2B313C"
+background = "#1a1b26"
+foreground = "#c0caf5"
+frame_color = "#c0caf5"
 timeout = 6
 
 [urgency_critical]
-frame_color = "#B7472A"
-foreground = "#B7472A"
-background = "#191311"
-#background = "#2B313C"
+background = "#292e42"
+foreground = "#db4b4b"
+frame_color = "#db4b4b"
 timeout = 8
 
 
