@@ -26,6 +26,11 @@ zstyle ':z4h:' prompt-at-bottom 'no'
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard 'pc'
 
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+    --color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64 \
+    --color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+    --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+    --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 # Set key bindings for fzf menus
 # toggle-all: only for fzf-complete
 # repeat: `accept`s for fzf-history and fzf-dir-history
@@ -33,8 +38,11 @@ zstyle ':z4h:(fzf-complete|fzf-history|fzf-dir-history|cd-down)' \
                               fzf-bindings     'tab:repeat' \
                                                'ctrl-a:toggle-all' \
                                                'ctrl-k:up' 'ctrl-j:down'
-zstyle ':z4h:fzf-complete'    fzf-flags        --no-exact   # EXPERIMENTAL
-zstyle ':z4h:fzf-history'     fzf-flags        --preview-window=down:20%:wrap --height 50% # history extra flags
+zstyle ':z4h:fzf-complete'    fzf-flags        ${=FZF_DEFAULT_OPTS} \
+                                               --no-exact  # EXPERIMENTAL
+zstyle ':z4h:fzf-history'     fzf-flags        ${=FZF_DEFAULT_OPTS} \
+                                               --preview-window=down:20%:wrap --height 50% # history extra flags
+zstyle ':z4h:*'               fzf-flags        ${=FZF_DEFAULT_OPTS}
 
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?

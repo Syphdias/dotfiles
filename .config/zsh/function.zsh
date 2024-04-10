@@ -306,3 +306,16 @@ function _2os() {
 }
 compdef _2os 2os
 
+function m() {
+    if [[ -e ~/.cache/m-last-run && $(stat -c %Y ~/.cache/m-last-run) > $(date +%s -d -2days) ]]; then
+        echo wait
+    else
+        syu
+        flatpak update
+        nvim --headless '+Lazy! sync' +TSUpdateSync +qa
+        dot pull
+        touch  ~/.cache/m-last-run
+        # needs to be last since it replaces shell
+        z4h update
+    fi
+}
