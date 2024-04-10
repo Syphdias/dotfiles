@@ -3,7 +3,7 @@
 ## i3 // Launcher //  + Space ##
 bindsym $mod+space          exec --no-startup-id \
     j4-dmenu-desktop \
-        --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12'" \
+        --dmenu="/usr/bin/dmenu -i -fn 'System San Francisco Display-12' -sf '$accent_fg' -sb '$accent' -nf '$fg' -nb '$bg'" \
         --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/alacritty
 bindsym mod1+F2         exec --no-startup-id \
     /usr/bin/dmenu_run -i -fn 'System San Francisco Display-12'
@@ -15,8 +15,8 @@ bindsym $mod+shift+d    exec --no-startup-id \
 ## i3 // Switch/Rename Window //  + Tab ##
 bindsym $mod+Tab        exec --no-startup-id \
     rofi -show combi \
-        -combi-modi 'rename:~/bin/i3-workspace-rename.py --default-color A9C03F#window' \
-        -modi 'combi#rename:~/bin/i3-workspace-rename.py --default-color A9C03F' \
+        -combi-modi 'rename:~/bin/i3-workspace-rename.py --default-color $accent_no_pound#window' \
+        -modi 'combi#rename:~/bin/i3-workspace-rename.py --default-color $accent_no_pound' \
         -i -lines 10 -eh 1 -width 50 -padding 50 -opacity 85 -font 'MesloLGS NF Regular 16'
 
 

@@ -1,16 +1,20 @@
 # bar
 bar {
-        # status_command i3status # default
-        # (requires i3blocks)
         status_command i3blocks
         colors {
-                background $base_dark
-                separator #757575
-                #separator $text_dim
-                #                  border      background  text
-                focused_workspace  $base_dark  $base_dark  $text_light
-                inactive_workspace $base_light $base_light $text_dim
-                urgent_workspace   $urgent     $urgent     $text_light
+                background $bg
+
+                statusline         $fg_dim
+                focused_statusline $fg
+                separator          $bg_dim
+                focused_separator  $bg_dim  # defaults to separator
+
+                #                  border  background text
+                focused_workspace  $accent $bg_dim    $accent
+                active_workspace   $fg     $bg_dim    $fg
+                inactive_workspace $bg_dim $bg_dark   $fg_dim
+                urgent_workspace   $urgent $urgent    $urgent_fg
+                binding_mode       $accent $accent    $accent_fg  # default to urgnet colors
         }
         strip_workspace_numbers no
         tray_output primary
@@ -18,19 +22,6 @@ bar {
 
         bindsym button4 nop # wheel up
         bindsym button5 nop # wheel down
-        # font xft:URWGothic-Book 11
-        #colors {
-        #        background #222D31
-        #        statusline #F9FAF9
-        #        separator  #454947
-
-        #        #                  border  backgr. text
-        #        focused_workspace  #F9FAF9 #16a085 #292F34
-        #        active_workspace   #595B5B #353836 #FDF6E3
-        #        inactive_workspace #595B5B #222D31 #EEE8D5
-        #        binding_mode       #16a085 #2C2C2C #F9FAF9
-        #        urgent_workspace   #16a085 #FDF6E3 #E5201D
-        #}
 
 }
 

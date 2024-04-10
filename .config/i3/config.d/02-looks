@@ -7,53 +7,30 @@ default_border pixel 2
 default_floating_border normal
 hide_edge_borders smart  # used to be both
 
-set_from_resource $term_background background
-set_from_resource $term_foreground foreground
-set_from_resource $term_color0     color0
-set_from_resource $term_color1     i3wm.color1
-set_from_resource $term_color2     color2
-set_from_resource $term_color3     color3
-set_from_resource $term_color4     color4
-set_from_resource $term_color5     color5
-set_from_resource $term_color6     color6
-set_from_resource $term_color7     color7
-set_from_resource $term_color8     color8
-set_from_resource $term_color9     color9
-set_from_resource $term_color10    color10
-set_from_resource $term_color11    color11
-set_from_resource $term_color12    color12
-set_from_resource $term_color13    color13
-set_from_resource $term_color14    color14
-set_from_resource $term_color15    color15
-
-set $base_dark  #2f343f
-set $base_light #454b56
-set $text_light #f3f4f5
-set $text_dim   #848c9b
-set $text_dark  #000000
-set $urgent     #A9C03F
-set $indicator  #bbbbbb
-#set $base_light #3f4550
-#set $base_light #343944
-#set $text_dim   #676E7D
-#set $urgent    #E53935
-
 for_window [class=".*"] title_format "  %title"
 
-# window colors         border      background  text        indicator  child_border
-client.focused          $urgent     $urgent     $text_dark  $indicator $urgent
-client.unfocused        $base_light $base_light $text_dim   $indicator
-client.focused_inactive $base_light $base_light $text_dim   $indicator
-client.urgent           $urgent     $urgent     $text_light $indicator
+set $fg      #c0caf5
+set $fg_dim  #565f89
+set $bg_dim  #292e42
+set $bg      #1a1b26
+set $bg_dark #16161e
 
-## Theme colors
-## class                   border  backgr. text    indic.   child_border
-#  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-#  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-#  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
-#  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-#  client.placeholder      #000000 #0c0c0c #ffffff #000000
-#
-#  client.background       #2B2C2B
+set $accent #27a1b9
+set $accent_no_pound 27a1b9
+# alternatives: #27a1b9 #db4b4b
+set $accent_fg #000000
+
+set $urgent #1abc9c
+set $urgent_fg #000000
+
+
+# window colors         border  background text       indicator child_border
+client.focused          $accent $accent    $accent_fg $fg       $accent
+client.focused_inactive $fg_dim $bg        $fg        $fg       $fg_dim
+client.unfocused        $fg_dim $bg        $fg        $fg       $fg_dim
+client.urgent           $urgent $urgent    $urgent_fg $fg       $urgent
+# placeholder
+client.placeholder      #ffff00 $bg        $fg        $fg       $fg_dim
+client.background       $bg
 
 #---------------------------------------------------------------------------------------------------

@@ -62,7 +62,7 @@ inputbar {
     text-color:                     @foreground;
     expand:                         false;
     border:                         2px;
-    border-color:                   #A9C03F;
+    border-color:                   @accent;
     margin:                         0% 50% 0% 0%;
     padding:                        0%;
     position:                       center;

@@ -26,9 +26,7 @@
 command=/usr/lib/i3blocks/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=none
-#color=#f3f4f5
-color=#848c9b
-#color=#2ebd59
+
 
 # CPU usage
 # The script may be called with -w and -c switches to specify thresholds,
