@@ -18,3 +18,7 @@ for _, key in ipairs({ "h", "j", "k", "l" }) do
 end
 
 vim.keymap.set({ "n" }, "<leader>wo", "<c-w>o", { desc = "Close all other windows" })
+
+vim.keymap.set({ "n", "v" }, "<leader>gd", function(...)
+  return require("gitsigns").preview_hunk(...)
+end, { desc = "Preview Hunk" })
