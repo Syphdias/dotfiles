@@ -15,7 +15,8 @@ return {
         -- group = true,
         ["<leader>gh"] = {
           name = "+hunks",
-          [" "] = { "" },
+          -- https://github.com/LazyVim/LazyVim/discussions/2887#discussioncomment-8962181
+          ["🚫"] = "which_key_ignore",
         },
       },
     },
