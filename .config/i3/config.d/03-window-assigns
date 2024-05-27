@@ -32,6 +32,7 @@ assign [class="mono"] number $gws # unrailed
 assign [class="^steam_app_"] number $gws # generic steam
 assign [instance="gw2-64.exe"] number $gws
 assign [instance="hollow_knight.x86_64"] number $gws
+assign [class="Stardew Valley"] number $gws
 for_window [class="^Minecraft"] move --no-auto-back-and-forth to workspace number $gws
 for_window [instance="overwatch.exe"] move --no-auto-back-and-forth to workspace number $gws
 
