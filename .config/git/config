@@ -75,3 +75,5 @@
 	path = ~/.config/git/work
 [pager]
 	difftool = true
+[includeIf "hasconfig:remote.*.url:https://git-codecommit.*.amazonaws.com/**"]
+	path = ~/.config/git/aws.gitconfig
