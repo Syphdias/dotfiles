@@ -67,7 +67,7 @@ if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd \
         && ${#$(dirs -v)} == 2 \
         && $(zstat -F '%s' +mtime -- ${XDG_CACHE_HOME:-~/.cache}/last_cd) -ge $(date +%s)-10 \
     ]]; then
-    cd $(<${XDG_CACHE_HOME:-~/.cache}/last_cd)
+    cd "$(<${XDG_CACHE_HOME:-~/.cache}/last_cd)"
 fi
 
 
