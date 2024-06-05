@@ -1,12 +1,13 @@
 return {
   {
     "echasnovski/mini.indentscope",
+    enabled = false,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
     opts = {
-      draw = {
-        -- no delay and animation for indentation markers
-        delay = 0,
-        animation = require("mini.indentscope").gen_animation.none(),
-      },
+      scope = { enabled = false },
     },
   },
 }
