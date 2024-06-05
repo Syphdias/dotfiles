@@ -20,6 +20,11 @@ return {
         "yaml",
       },
 
+      -- Fixes: https://github.com/nvim-treesitter/nvim-treesitter/issues/1377
+      indent = {
+        disable = { "yaml" },
+      },
+
       textobjects = {
         select = {
           enable = true,
