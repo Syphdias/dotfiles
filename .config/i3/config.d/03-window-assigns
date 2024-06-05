@@ -16,6 +16,7 @@ for_window [title="Friends List"] resize set width 300px, move right
 ### To Communication Workspace ($ws9)
 assign [class="Rambox"] number $ws9
 assign [class="Ferdi"] number $ws9
+assign [class="Signal"] number $ws9
 assign [class="discord"] number $ws9
 assign [class="TeamSpeak 3"] number $ws9
 assign [class="TelegramDesktop"] number $ws9
@@ -39,7 +40,7 @@ for_window [instance="overwatch.exe"] move --no-auto-back-and-forth to workspace
 # floating
 for_window [window_role="pop-up"]         floating enable
 for_window [window_role="task_dialog"]    floating enable
-for_window [class="Pavucontrol"]          floating enable
+for_window [class="(?i)pavucontrol"]      floating enable
 for_window [class="Skype"]                floating enable
 for_window [class="Nemo"]                 floating enable
 for_window [class="Nm-connection-editor"] floating enable
