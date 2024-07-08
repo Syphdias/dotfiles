@@ -320,3 +320,19 @@ function m() {
         z4h update
     fi
 }
+
+function tf() {
+    if ! [[ $* =~ "(destroy|apply|plan|import)" ]]; then
+        command terraform $@
+        return
+    fi
+
+    # get TF_VARFILE_<workspace> or default to TF_VARFILE
+    _TF_VARFILE="${(P)${:-TF_VARFILE_${$(terraform workspace show)}}:-${TF_VARFILE}}"
+    if [[ -e "${_TF_VARFILE}" ]]; then
+        command terraform $1 -var-file "${_TF_VARFILE}" ${@:2}
+    else
+        command terraform $@
+    fi
+}
+compdef tf=terraform
