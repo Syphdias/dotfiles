@@ -23,6 +23,7 @@ return {
           ["<C-j>"] = function(...)
             return require("telescope.actions").move_selection_next(...)
           end,
+          ["<C-u>"] = false,
         },
       },
     },
