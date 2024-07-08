@@ -321,7 +321,10 @@ function m() {
     fi
 }
 
+# alias is just here to make function work with POWERLEVEL9K_*_SHOW_ON_COMMAND
+alias tf='terraform'
 function tf() {
+    # automatically read tfvars file taken form environment
     if ! [[ $* =~ "(destroy|apply|plan|import)" ]]; then
         command terraform $@
         return

@@ -39,7 +39,6 @@ alias ds='dig +short'
 alias zshrc="vim ~/.zshrc"
 alias aecho=' echo; echo'
 alias k='kubectl'
-alias tf='terraform'
 alias gok='gok -i gokrazy'
 alias v='nvim'
 
