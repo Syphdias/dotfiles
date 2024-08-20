@@ -3,11 +3,10 @@ sort = no               # Sort messages by urgency.
 indicate_hidden = yes   # how many messages are currently hidden
 alignment = "right"     # Possible values: left, center, right
 word_wrap = yes         # Split notifications into multiple lines
-bounce_freq = 0         # alternative to "word_wrap"
 show_age_threshold = -1 # Show age of message if message is older
 ignore_newline = no     # Ignore newlines '\n' in notifications.
 stack_duplicates = yes  # Hide duplicate's count and stack them
-hide_duplicates_count = yes
+hide_duplicate_count = yes
 shrink = no             # Shrink window if smaller than width
 idle_threshold = 0      # Don't remove messages, if the user is idle
 monitor = 0             # Select monitor, 0 for follow
@@ -22,7 +21,6 @@ font = System San Francisco Display 10
 # For a complete reference see
 # <http://developer.gnome.org/pango/stable/PangoMarkupFormat.html>.
 markup = full
-plain_text = no
 
 # The format of the message.  Possible variables are:
 #   %a  appname         %s  summary
@@ -34,19 +32,9 @@ line_height = 3         # Min line height
 padding = 10            # Between text and separator
 horizontal_padding = 13 # Horizontal padding
 
-# The geometry of the window:
-#   [{width}]x{height}[+/-{x}+/-{y}]
-# The geometry of the message window.
-# The height is measured in number of notifications everything else
-# in pixels.  If the width is omitted but the height is given
-# ("-geometry x2"), the message window expands over the whole screen
-# (dmenu-like).  If width is 0, the window expands to the longest
-# message displayed.  A positive x is measured from the left, a
-# negative from the right side of the screen.  Y is measured from
-# the top and down respectevly.
-# The width can be negative.  In this case the actual width is the
-# screen width minus the width defined in within the geometry option.
-geometry = "300x50-15+49"
+# width = 300
+# height = 50
+offset = 15x15
 separator_color = auto  # Alt: auto, foreground, frame, $X-color
 frame_width = 1
 corner_radius = 4
@@ -59,7 +47,6 @@ max_icon_size = 75
 # Paths to default icons.
 icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/
 
-startup_notification = false
 browser = /usr/bin/xdg-open # Browser for opening urls from context
 dmenu = /usr/bin/dmenu -p dunst:
 
