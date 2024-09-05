@@ -1,0 +1,7 @@
+{
+    "argp": {
+        "prefix": "argp",
+        "body": "parser = ArgumentParser()",
+        "description": ""
+    }
+}
