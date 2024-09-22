@@ -2,8 +2,10 @@
     "iferr": {
         "prefix": "iferr",
         "body": [
-            "if err != nil",
-            "    return err"
+            "if err != nil {",
+            "    ${1|return err,log.Fatal(err),panic(err)|}",
+            "}",
+            "${2}"
         ]
     }
 }
