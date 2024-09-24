@@ -70,13 +70,34 @@ if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd \
     cd "$(<${XDG_CACHE_HOME:-~/.cache}/last_cd)"
 fi
 
+# VI mode
 bindkey -v
+
+# <C-c> to enter vicmd but still enable interrupts while running commands
+# FIXME: First precmd hook has no tty yet and <C-c> cannot be unset via stty
+function disable-ctrl-c() { [[ -t 0 ]] && stty intr undef }
+zle -N disable-ctrl-c
+add-zsh-hook precmd disable-ctrl-c
+function enable-ctrl-c() { [[ -t 0 ]] && stty intr \^c }
+zle -N enable-ctrl-c
+add-zsh-hook preexec enable-ctrl-c
+bindkey -M viins '^C' vi-cmd-mode
+
 # non default working vi mode bindings
 for keymap in viins vicmd; do
     bindkey -M $keymap '^[[1;5D' z4h-backward-word
     bindkey -M $keymap '^[[1;5C' z4h-forward-word
     bindkey -M $keymap '^[[F'    end-of-line                    # end
+    bindkey -M $keymap '^U'      backward-kill-line
+    bindkey -M $keymap '^K'      kill-line
 done
+
+bindkey -M viins '^?'       backward-delete-char
+bindkey -M viins "^[[3;5~"  z4h-kill-word
+bindkey -M viins "^H"       z4h-backward-kill-word
+bindkey -M vicmd '^R'       redo-or-history
+redo-or-history() { zle redo || z4h-fzf-history }; zle -N redo-or-history
+bindkey -M viins '^R'       z4h-fzf-history
 
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
