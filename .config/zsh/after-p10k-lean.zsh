@@ -26,6 +26,7 @@ typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     dir dir_writable        # current/directory 
     my_git_dir vcs          # dotfiles git_status
     newline                 # \n
+    demo
     prompt_char             # prompt symbol
 )
 
