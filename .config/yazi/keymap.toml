@@ -1,7 +1,16 @@
 [manager]
 prepend_keymap = [
-    { on = [ "<C-d>" ], run = '''
+    { on = "<C-d>", run = '''
         shell 'dragon-drop -x -a -T "$@"' --confirm
     ''' },
-    { on = ["&"], run = "filter" }
+    { on = ["&"], run = "filter" },
+    { on = "<C-s>", run = '''
+        shell --block --confirm "$SHELL"
+    ''' },
+    { on = ["M"], run = '''
+        shell --confirm --block \
+            "python ~/.config/ranger/plugins/ranger_udisk_menu/menu.py /tmp/ranger_udisk_menu_cd \
+                && ya pub dds-cd --str $(</tmp/ranger_udisk_menu_cd)"
+    ''' },
+    { on = "<C-m>", run = "plugin --sync mount"},
 ]
