@@ -70,7 +70,13 @@ if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd \
     cd "$(<${XDG_CACHE_HOME:-~/.cache}/last_cd)"
 fi
 
-
+bindkey -v
+# non default working vi mode bindings
+for keymap in viins vicmd; do
+    bindkey -M $keymap '^[[1;5D' z4h-backward-word
+    bindkey -M $keymap '^[[1;5C' z4h-forward-word
+    bindkey -M $keymap '^[[F'    end-of-line                    # end
+done
 
 # TODO: What do I want? http://chneukirchen.org/dotfiles/.zshrc
 # # Disable bracketed paste.
