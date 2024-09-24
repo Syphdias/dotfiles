@@ -41,6 +41,7 @@ alias aecho=' echo; echo'
 alias k='kubectl'
 alias gok='gok -i gokrazy'
 alias v='nvim'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.zig-cache}'
 
 # zsh aliases
 # extra files?
