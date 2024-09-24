@@ -97,6 +97,9 @@ PROMPT_EOL_MARK=$'%{\e]8;;\a\e]8;;\a%}%K{red} %k'  # reset OSC 8: romkatv/powerl
 # Source additional local files if they exist.
 z4h source "${ZDOTDIR}/env.zsh"
 
+# Ghostty shell integration
+z4h source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+
 # Extend PATH further
 [[ -n "$GOPATH" ]] && path+=($GOPATH/bin)
 [[ -n "$PYENV_ROOT" ]] && path+=($PYENV_ROOT/bin)
