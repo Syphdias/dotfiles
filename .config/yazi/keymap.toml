@@ -3,4 +3,5 @@ prepend_keymap = [
     { on = [ "<C-d>" ], run = '''
         shell 'dragon-drop -x -a -T "$@"' --confirm
     ''' },
+    { on = ["&"], run = "filter" }
 ]
