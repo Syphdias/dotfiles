@@ -75,13 +75,15 @@ bindkey -v
 
 # <C-c> to enter vicmd but still enable interrupts while running commands
 # FIXME: First precmd hook has no tty yet and <C-c> cannot be unset via stty
-function disable-ctrl-c() { [[ -t 0 ]] && stty intr undef }
-zle -N disable-ctrl-c
-add-zsh-hook precmd disable-ctrl-c
-function enable-ctrl-c() { [[ -t 0 ]] && stty intr \^c }
-zle -N enable-ctrl-c
-add-zsh-hook preexec enable-ctrl-c
-bindkey -M viins '^C' vi-cmd-mode
+if [[ "${(@)$(bindkey -lL main)[-2]}" != "emacs" ]]; then
+    function disable-ctrl-c() { [[ -t 0 ]] && stty intr undef }
+    zle -N disable-ctrl-c
+    add-zsh-hook precmd disable-ctrl-c
+    function enable-ctrl-c() { [[ -t 0 ]] && stty intr \^c }
+    zle -N enable-ctrl-c
+    add-zsh-hook preexec enable-ctrl-c
+    bindkey -M viins '^C' vi-cmd-mode
+fi
 
 # non default working vi mode bindings
 for keymap in viins vicmd; do
@@ -90,6 +92,8 @@ for keymap in viins vicmd; do
     bindkey -M $keymap '^[[F'    end-of-line                    # end
     bindkey -M $keymap '^U'      backward-kill-line
     bindkey -M $keymap '^K'      kill-line
+    bindkey -M $keymap '^[[3~'   delete-char
+    bindkey -M $keymap '^[[H'    beginning-of-line
 done
 
 bindkey -M viins '^?'       backward-delete-char
