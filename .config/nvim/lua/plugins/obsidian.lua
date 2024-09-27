@@ -9,6 +9,7 @@ return {
     "nvim-lua/plenary.nvim",
   },
   opts = {
+    disable_frontmatter = true,
     dir = "/home/syphdias/Documents/obsidian-palace",
   },
   -- TODO: gf cannot be rebound because it is set elsewhere
