@@ -11,3 +11,8 @@ R = function(name)
   RELOAD(name)
   return require(name)
 end
+
+SafeRequire = function(moduleName)
+  local success, result = pcall(require, moduleName)
+  return success and result or {}
+end
