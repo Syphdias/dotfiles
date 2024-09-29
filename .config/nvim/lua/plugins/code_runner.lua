@@ -1,7 +1,6 @@
 return {
   {
-    -- "CRAG666/code_runner.nvim",
-    dir = "~/git/private/code_runner.nvim",
+    "CRAG666/code_runner.nvim",
     config = true,
     keys = {
       { "<leader>pp", "<cmd>RunProject<cr>", desc = "Execute Code Runner project command" },
@@ -11,7 +10,7 @@ return {
       term = {
         size = 30,
       },
-      project = SafeRequire("...code_runner_projects"),
+      project = SafeRequire("config.code_runner_projects"),
     },
   },
 
