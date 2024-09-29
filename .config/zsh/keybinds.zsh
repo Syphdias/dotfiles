@@ -83,22 +83,32 @@ if [[ "${(@)$(bindkey -lL main)[-2]}" != "emacs" ]]; then
     zle -N enable-ctrl-c
     add-zsh-hook preexec enable-ctrl-c
     bindkey -M viins '^C' vi-cmd-mode
+    bindkey -M visual '^C' deactivate-region
 fi
 
 # non default working vi mode bindings
 for keymap in viins vicmd; do
     bindkey -M $keymap '^[[1;5D' z4h-backward-word
     bindkey -M $keymap '^[[1;5C' z4h-forward-word
-    bindkey -M $keymap '^[[F'    end-of-line                    # end
     bindkey -M $keymap '^U'      backward-kill-line
     bindkey -M $keymap '^K'      kill-line
     bindkey -M $keymap '^[[3~'   delete-char
-    bindkey -M $keymap '^[[H'    beginning-of-line
+    bindkey -M $keymap '^[[H'    beginning-of-line              # pos1
+    bindkey -M $keymap '^A'      beginning-of-line
+    bindkey -M $keymap '^[[F'    end-of-line                    # end
+    bindkey -M $keymap '^E'      end-of-line
+    bindkey -M $keymap '^[[A'    z4h-up-substring-local         # up
+    bindkey -M $keymap '^[[B'    z4h-down-substring-local       # down
+    bindkey -M $keymap '^[[C'    forward-char                   # right
+    bindkey -M $keymap '^[[D'    backward-char                  # left
+    bindkey -M $keymap '^[r'     z4h-fzf-dir-history            # Alt-R
+    bindkey -M $keymap '^I'      z4h-fzf-complete               # Tab
 done
 
 bindkey -M viins '^?'       backward-delete-char
 bindkey -M viins "^[[3;5~"  z4h-kill-word
-bindkey -M viins "^H"       z4h-backward-kill-word
+bindkey -M viins '^W'       z4h-backward-kill-word
+bindkey -M viins "^H"       z4h-backward-kill-word  # <C-BS>
 bindkey -M vicmd '^R'       redo-or-history
 redo-or-history() { zle redo || z4h-fzf-history }; zle -N redo-or-history
 bindkey -M viins '^R'       z4h-fzf-history
