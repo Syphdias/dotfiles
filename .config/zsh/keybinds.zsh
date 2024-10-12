@@ -41,7 +41,8 @@ function z4h-cd-back-or-cached() {
         # This must run with user options (because of reset-prompt).
         local f
         for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
-            [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
+            [[ "${+functions[$f]}" == 0 ]] || "${f}" &>/dev/null || true
+            # " fix high lighter, sorry
         done
         zle .reset-prompt
         zle -R
