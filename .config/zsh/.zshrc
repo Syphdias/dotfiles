@@ -132,7 +132,6 @@ bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
 bindkey -M viins '^K' kill-line
 bindkey -M viins '^[.' insert-last-word
-bindkey -M viins '^[h' z4h-run-help
 # TODO: set z4h vi keys
 z4h source ${ZDOTDIR}/z4h-keybinds.zsh # rebinding viins, vicmd
 z4h source ${ZDOTDIR}/keybinds.zsh # more complex stuff
