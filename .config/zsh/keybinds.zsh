@@ -104,13 +104,16 @@ for keymap in viins vicmd; do
     bindkey -M $keymap '^[[D'    backward-char                  # left
     bindkey -M $keymap '^[r'     z4h-fzf-dir-history            # Alt-R
     bindkey -M $keymap '^I'      z4h-fzf-complete               # Tab
+    bindkey -M $keymap '^[h'     run-help                       # Alt-h
 done
 
+bindkey -M viins "^_"       undo
 bindkey -M viins '^?'       backward-delete-char
 bindkey -M viins "^[[3;5~"  z4h-kill-word
 bindkey -M viins '^W'       z4h-backward-kill-word
 bindkey -M viins "^H"       z4h-backward-kill-word  # <C-BS>
 bindkey -M vicmd '^R'       redo-or-history
+bindkey -M vicmd '_'        beginning-of-line
 redo-or-history() { zle redo || z4h-fzf-history }; zle -N redo-or-history
 bindkey -M viins '^R'       z4h-fzf-history
 
