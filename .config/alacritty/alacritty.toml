@@ -1,3 +1,4 @@
+[general]
 import = [
   "~/.config/alacritty/tokyonight_night.toml"
 ]
