@@ -3,5 +3,6 @@ return {
   opts = {
     dashboard = { enabled = false },
     indent = { animate = { enabled = false } },
+    scroll = { enabled = false },
   },
 }
