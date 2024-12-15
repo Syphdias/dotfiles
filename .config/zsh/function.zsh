@@ -348,3 +348,22 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+function bsnap() {
+    if [[ $1 == "clean" ]]; then
+        for snap in .snap/*; do
+            unlink "$snap"
+        done
+        rmdir .snap
+        return
+    fi
+
+    mkdir -p .snap
+    for snap in ~/.snapshots/*; do
+        if [[ -e "$snap/snapshot/${PWD#~/}" ]]; then
+            ln -s \
+                "$snap/snapshot/${PWD#~/}" \
+                ".snap/$(grep -Po '(?<=<date>).*(?=</date>)' "$snap/info.xml")"
+        fi
+    done
+}
