@@ -72,7 +72,11 @@ if [[ -f ${XDG_CACHE_HOME:-~/.cache}/last_cd \
 fi
 
 # VI mode
-bindkey -v
+if [[ -n "$NVIM" ]]; then
+    bindkey -e
+else
+    bindkey -v
+fi
 
 # <C-c> to enter vicmd but still enable interrupts while running commands
 # FIXME: First precmd hook has no tty yet and <C-c> cannot be unset via stty
