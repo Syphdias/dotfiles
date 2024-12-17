@@ -363,7 +363,8 @@ function bsnap() {
         if [[ -e "$snap/snapshot/${PWD#~/}" ]]; then
             ln -s \
                 "$snap/snapshot/${PWD#~/}" \
-                ".snap/$(grep -Po '(?<=<date>).*(?=</date>)' "$snap/info.xml")"
+                ".snap/$(grep -Po '(?<=<date>).*(?=</date>)' "$snap/info.xml")-$(grep -Po '(?<=<description>).*(?=</description>)' "$snap/info.xml")"
         fi
     done
+    # FIXME: Currently unhandled: same date, removed snap
 }
