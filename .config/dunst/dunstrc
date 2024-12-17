@@ -14,6 +14,7 @@ follow = mouse          # Alternative to monitor: mouse, keyboard, none
 sticky_history = yes    # No timeout for notifications from history
 history_length = 15     # Maximum amount of notifications
 show_indicators = yes   # Show indicators: (U)RL, (A)ction
+ignore_dbusclose = false
 
 #font = Iosevka Term 11
 font = System San Francisco Display 10
