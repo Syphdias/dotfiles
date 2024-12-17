@@ -21,9 +21,13 @@ return {
         "yaml",
       },
 
-      -- Fixes: https://github.com/nvim-treesitter/nvim-treesitter/issues/1377
       indent = {
-        disable = { "yaml" },
+        disable = {
+          -- Fixes: https://github.com/nvim-treesitter/nvim-treesitter/issues/1377
+          "yaml",
+          -- Fixes bullet point indent with gw
+          "markdown",
+        },
       },
 
       textobjects = {
