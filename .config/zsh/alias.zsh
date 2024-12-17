@@ -64,6 +64,7 @@ if [[ "$SHELL" =~ "zsh" && -n "$ZSH_VERSION" ]]; then
     alias -g ...="../.."
     alias -g ....="../../.."
     alias -g R='$(fc -s -- -1 2>/dev/null)'
+    alias -g V='| xargs -o -x nvim'
 fi
 
 
