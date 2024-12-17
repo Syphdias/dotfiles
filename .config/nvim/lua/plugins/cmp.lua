@@ -6,7 +6,7 @@ return {
       opts.keymap = vim.tbl_extend("force", opts.keymap, {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-Space>"] = { "select_and_accept", "fallback" },
+        ["<C-Space>"] = { "accept", "fallback" },
       })
     end,
   },
