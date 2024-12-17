@@ -10,7 +10,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yankin
 -- fix visual block indent interruption
 vim.keymap.set({ "i", "n", "v" }, "<C-c>", "<Cmd>noh<CR><Esc>")
 -- disable ESC to train C-c
-vim.keymap.set({ "i", "n", "v" }, "<Esc>", "<nop>")
+-- vim.keymap.set({ "i", "n", "v" }, "<Esc>", "<nop>")
 
 -- split navigation with alt
 for _, key in ipairs({ "h", "j", "k", "l" }) do
