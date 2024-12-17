@@ -136,7 +136,9 @@ MON
 MGR
 MDS
 OSD
+OSDs
 RGW
+PGs
 RADOS
 RadosGW
 zonegroup
