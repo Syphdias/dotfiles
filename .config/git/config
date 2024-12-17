@@ -78,3 +78,9 @@
 	difftool = true
 [includeIf "hasconfig:remote.*.url:https://git-codecommit.*.amazonaws.com/**"]
 	path = ~/.config/git/aws.gitconfig
+[merge]
+	conflictstyle = zdiff3
+[delta]
+	navigate = true
+[interactive]
+	diffFilter = delta --color-only
