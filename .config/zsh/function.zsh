@@ -330,10 +330,15 @@ function terraform() {
         return
     fi
 
-    # get TF_VARFILE_<workspace> or default to TF_VARFILE
-    _TF_VARFILE="${(P)${:-TF_VARFILE_${$(terraform workspace show)}}:-${TF_VARFILE}}"
-    if [[ -e "${_TF_VARFILE}" ]]; then
-        command terraform $1 -var-file "${_TF_VARFILE}" ${@:2}
+    # get TF_VARFILES_<workspace> or default to TF_VARFILES
+    _TF_VARFILES="${(P)${:-TF_VARFILE_${$(terraform workspace show)}}:-${TF_VARFILE}}"
+    if [[ -n "${_TF_VARFILES}" ]]; then
+        local _TF_ARGS varfile
+        _TF_ARGS=""
+        for varfile in ${(Q)${(z)_TF_VARFILES}}; do
+            _TF_ARGS+=" -var-file ${varfile}"
+        done
+        command terraform $1 ${_TF_ARGS} ${@:2}
     else
         command terraform $@
     fi
@@ -348,6 +353,18 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+function tfdebug() {
+    case "$1" in
+        on) export TF_LOG=DEBUG TF_LOG_PATH=./terraform.log ;;
+        off) unset TF_LOG TF_LOG_PATH ;;
+        *) echo "Usage: $0 [on|off]" ; return 1 ;;
+    esac
+}
+fuction _tfdebug() {
+    _arguments '1:option:(on off)'
+}
+compdef _tfdebug tfdebug
 
 function bsnap() {
     if [[ $1 == "clean" ]]; then
@@ -367,4 +384,11 @@ function bsnap() {
         fi
     done
     # FIXME: Currently unhandled: same date, removed snap
+}
+
+function o() {
+    case "$(file --mime-type -b $@)" in
+        image/*) kitten icat $@ ;;
+        *) xdg-open $@ ;;
+    esac
 }

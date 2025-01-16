@@ -58,8 +58,8 @@ set $return Mod3+Return
 #workspace "1:​​​​1" output DP-4
 
 # assign default output
-workspace $ws1 output DP-2-1 DP-0
-workspace $ws2 output DP-2-2 DP-4
+# workspace $ws1 output DP-2-1 DP-0
+# workspace $ws2 output DP-2-2 DP-4
 #workspace $ws3 output DP-2-1 DP-4
 ##workspace $ws4
 #workspace $ws5 output DP-0

@@ -8,9 +8,10 @@ return {
     opts = {
       focus = false,
       term = {
-        size = 30,
+        size = 20,
       },
       project = SafeRequire("config.code_runner_projects"),
+      hot_reload = false,
     },
   },
 
