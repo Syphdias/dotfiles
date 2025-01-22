@@ -53,7 +53,7 @@ bindsym $mod+shift+s             exec flameshot gui
 ## Applications // Settings //  + Ctrl + , ##
 bindsym $mod+control+comma       exec --no-startup-id manjaro-settings-manager || gnome-control-center || cinnamon-settings
 ## Applications // NetworkManager Connections //  + Ctrl + n ##
-bindsym $mod+control+n           exec --no-startup-id pkill -f nm-connection-editor || nm-connection-editor
+bindsym $mod+control+n           exec --no-startup-id pkill nm-connection-e || nm-connection-editor
 ## Applications // Pulseaudio Volumne Control //  + Ctrl + m ##
 bindsym $mod+control+m           exec --no-startup-id pkill pavucontrol || pavucontrol
 ## Applications // File Explorer //  + Ctrl + e ##
