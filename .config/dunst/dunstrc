@@ -56,7 +56,7 @@ mouse_left_click = close_current
 mouse_middle_click = do_action
 mouse_right_click = close_all
 
-close = ctrl+space              # Close notification.
+close = mod4+ctrl+space         # Close notification.
 close_all = ctrl+shift+space    # Close all notifications.
 history = mod4+n                # Redisplay last message(s).
 context = ctrl+shift+period     # Context menu.
