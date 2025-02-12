@@ -384,9 +384,14 @@ function bsnap() {
         fi
     done
     # FIXME: Currently unhandled: same date, removed snap
+    # FIXME: Fails if there is no ~/.snapshots/ and clean stops working
 }
 
 function o() {
+    if [[ -n "$ALACRITTY_SOCKET" ]]; then
+        xdg-open $@
+        return $?
+    fi
     case "$(file --mime-type -b $@)" in
         image/*) kitten icat $@ ;;
         *) xdg-open $@ ;;

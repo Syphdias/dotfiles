@@ -20,6 +20,21 @@ after_zle-line-init () {
 }
 bindkey "^[_" redo
 
+# change cursor shape depending on mode
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # Block cursor
+        viins|main) echo -ne '\e[5 q';; # Line cursor
+    esac
+}
+zle -N zle-keymap-select
+function zle-line-init {
+    # make cursor switch work in alacritty
+    zle -K viins
+    echo -ne "\e[5 q" # line cursor
+}
+zle -N zle-line-init
+
 # patching it dirtly
 # https://unix.stackexchange.com/questions/450043/overwrite-and-reuse-existing-function-in-zsh
 functions[zle-line-init]="
