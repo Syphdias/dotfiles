@@ -3,9 +3,15 @@
 [includeIf "gitdir:~/git/private/"]
 	path = ~/git/private/.private.gitconfig
 [core]
+	attributesfile = ~/.config/git/attributes
+	excludesfile = ~/.config/git/ignore
 	pager = delta
-	excludesfile = ~/.config/git/gitignore-global
-	attributesfile = ~/.config/git/gitattributes-global
+[feature]
+	experimental = true
+[init]
+	defaultBranch = main
+[help]
+	autoCorrect = prompt
 [alias]
 	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %G? %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %G? %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
@@ -24,9 +30,18 @@
 	oldest-ancestor = !bash -c 'diff -u <(git rev-list --first-parent \"${1:-main}\") <(git rev-list --first-parent \"${2:-HEAD}\") | sed -ne \"s/^ //p\" | head -1' -
 	fixws = !git diff-index --check --cached HEAD -- | sed /^[+-]/d | sed -r s/:[0-9]+:.*// | uniq | xargs sed -e s/[[:space:]]*$// -i
 	sb = "!git stash && git switch \"$1\" && git stash pop #"
+[pager]
+	difftool = true
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
 [diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 	tool = difftastic
-	algorithm = patience
 [difftool]
 	prompt = false
 [diff "pandoc"]
@@ -56,31 +71,39 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
-[init]
-	defaultBranch = main
-[pull]
-	ff = only
-[commit]
-	gpgsign = true
-[rebase]
-	stat = true
-	autosquash = true
-[rerere]
-	enabled = true
 [log]
 	follow = true
-[help]
-	autoCorrect = prompt
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[pull]
+	ff = only
+	rebase = true
+[commit]
+	gpgsign = true
+	verbose = true
+[merge]
+	conflictstyle = zdiff3
+[rebase]
+	stat = true
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[rerere]
+	enabled = true
+	autoupdate = true
+[push]
+	default = simple
+	autoSetupRemote = true
+[branch]
+	sort = committerdate
+[tag]
+	sort = version:refname
+[grep]
+	patternType = perl
 # needs to be at end for overwrites to take effect
 [includeIf "gitdir:~/git/work/"]
 	path = ~/.config/git/work
-[pager]
-	difftool = true
 [includeIf "hasconfig:remote.*.url:https://git-codecommit.*.amazonaws.com/**"]
 	path = ~/.config/git/aws.gitconfig
-[merge]
-	conflictstyle = zdiff3
-[delta]
-	navigate = true
-[interactive]
-	diffFilter = delta --color-only
