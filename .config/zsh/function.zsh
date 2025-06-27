@@ -331,6 +331,7 @@ function m() {
         syu
         flatpak update
         pipx upgrade-all
+        uv tool upgrade --all
         nvim --headless '+Lazy! sync' +TSUpdateSync +qa
         dot pull
         touch  ~/.cache/m-last-run
