@@ -131,24 +131,42 @@ function notes() {
   PASSWORD_STORE_DIR=$HOME/.notes pass $@
 }
 
-# do git stuff for all directories in current working directory
-function all () {
+# do (git) stuff for all directories (or files) in current working directory
+function all() {
+    _GLOB_QUALIFIER='(/)'
+    case "$1" in
+        # all files (implies no cd-ing)
+        -a)
+            _GLOB_QUALIFIER=''
+            shift
+            ;;
+        # files only
+        -f)
+            _GLOB_QUALIFIER='(.)'
+            shift
+            ;;
+    esac
+
     cur_pwd=$(pwd)
 
-    for i in $(ls -d *); do
-        if cd ${cur_pwd}/${i}; then
-
-            echo -e "\e[36m$(pwd)\e[0m"
-            $@
-            if [ $? -ne 0 ] ; then
-                >&2 echo -e "\e[31mError in $(pwd)\e[0m"
+    for i in *${~_GLOB_QUALIFIER}; do
+        # only cd if we only have directories
+        if [[ "${_GLOB_QUALIFIER}" == '(/)' ]]; then
+            cd "${cur_pwd}/${i}"
+            if [[ $? -ne 0 ]]; then
+                >&2 echo -e \
+                    "\e[31mcd to \e[36m${cur_pwd}/${i}\e[31m was not sucessful." \
+                    "$@ did not execute.\e[0m"
+                continue
             fi
-            echo
-
-        else
-            >&2 echo -e "\e[31mcd to \e[36m${cur_pwd}/${i}\e[31m was not sucessfull. $@ did not execute.\e[0m"
         fi
 
+        echo -e "\e[36m$(pwd)\e[0m"
+        $@
+        if [ $? -ne 0 ] ; then
+            >&2 echo -e "\e[31mError in $(pwd)\e[0m"
+        fi
+        echo
     done
 
     cd ${cur_pwd}
