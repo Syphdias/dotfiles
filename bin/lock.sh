@@ -1,7 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 CACHEDIR="${XDG_CACHE_HOME:-${HOME}/.cache}/lock"
 LOCK_OVERLAY=~/.config/i3lock/Glados_promo.png
+
+if [[ "${XDG_SESSION_TYPE:-x11}" == "wayland" ]]; then
+    swaylock \
+        --screenshot --effect-pixelate 10 \
+        --effect-compose "500,0;northwest;${LOCK_OVERLAY}" \
+        --clock
+    --ignore-empty-password
+    exit
+fi
 
 # noone should be able to get screenshots
 umask 0077
@@ -21,9 +30,9 @@ scrot_pid=$!
 i3lock -efi "${CACHEDIR}/screen_locked_last.png" -c 2f343f &
 
 # Pixellate it 10x
-wait $scrot_pid && \
-    mogrify -scale 10% -scale 1000% "${CACHEDIR}/screen_locked.png"
-    convert -gamma .67 -gravity NorthWest -geometry +500 -composite "${CACHEDIR}/screen_locked.png" "$LOCK_OVERLAY" "${CACHEDIR}/screen_locked.png"
+wait $scrot_pid \
+    && mogrify -scale 10% -scale 1000% "${CACHEDIR}/screen_locked.png"
+convert -gamma .67 -gravity NorthWest -geometry +500 -composite "${CACHEDIR}/screen_locked.png" "$LOCK_OVERLAY" "${CACHEDIR}/screen_locked.png"
 #convert -blur 0x8 /tmp/locking_screen.png /tmp/screen_blur.png
 #ffmpeg -loglevel quiet -i <(import -silent -window root png:-) \
 #    -i ~/.i3/Evil_Rick_Sprite.png \
@@ -42,5 +51,5 @@ i3lock -nefi "${CACHEDIR}/screen_locked.png" -c 2f343f
 # Enable Notifications again
 killall -SIGUSR2 dunst
 
-# backup 
+# backup
 cp "${CACHEDIR}/screen_locked.png" "${CACHEDIR}/screen_locked_last.png"
