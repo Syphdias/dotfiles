@@ -51,15 +51,18 @@ vim.api.nvim_create_autocmd("BufRead", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "json", "yaml", "markdown" },
   callback = function()
-    if not package.loaded["obsidian.util"] then
+    local path = vim.fn.expand("%:p")
+    local vault_path = vim.fn.expand("~/Documents/obsidian-palace")
+    if path:sub(1, #vault_path) ~= vault_path then
       vim.opt_local.conceallevel = 0
-    else
-      local path = vim.fn.expand("%:p")
-      local vault_path = "/home/syphdias/Documents/obsidian-palace"
-      if path:sub(1, #vault_path) ~= vault_path then
-        vim.opt_local.conceallevel = 0
-      end
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "ObsidianNoteEnter",
+  callback = function()
+    require("render-markdown").buf_disable()
   end,
 })
 
