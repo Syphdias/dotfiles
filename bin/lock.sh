@@ -3,6 +3,8 @@
 CACHEDIR="${XDG_CACHE_HOME:-${HOME}/.cache}/lock"
 LOCK_OVERLAY=~/.config/i3lock/Glados_promo.png
 
+playerctl pause || true
+
 if [[ "${XDG_SESSION_TYPE:-x11}" == "wayland" ]]; then
     swaylock \
         --daemonize \
