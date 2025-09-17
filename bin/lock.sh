@@ -5,6 +5,7 @@ LOCK_OVERLAY=~/.config/i3lock/Glados_promo.png
 
 if [[ "${XDG_SESSION_TYPE:-x11}" == "wayland" ]]; then
     swaylock \
+        --daemonize \
         --screenshot --effect-pixelate 10 \
         --effect-compose "500,0;northwest;${LOCK_OVERLAY}" \
         --clock \
