@@ -10,6 +10,7 @@
 	experimental = true
 [init]
 	defaultBranch = main
+	defaultRefFormat = files
 [help]
 	autoCorrect = prompt
 [alias]
