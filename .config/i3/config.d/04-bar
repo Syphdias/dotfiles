@@ -7,14 +7,16 @@ bar {
                 statusline         $fg_dim
                 focused_statusline $fg
                 separator          $bg_dim
-                focused_separator  $bg_dim  # defaults to separator
+                # defaults to separator
+                focused_separator  $bg_dim
 
                 #                  border  background text
                 focused_workspace  $accent $bg_dim    $accent
                 active_workspace   $fg     $bg_dim    $fg
                 inactive_workspace $bg_dim $bg_dark   $fg_dim
                 urgent_workspace   $urgent $urgent    $urgent_fg
-                binding_mode       $accent $accent    $accent_fg  # default to urgnet colors
+                # default to urgent colors
+                binding_mode       $accent $accent    $accent_fg
         }
         strip_workspace_numbers no
         tray_output primary
@@ -22,7 +24,6 @@ bar {
 
         bindsym button4 nop # wheel up
         bindsym button5 nop # wheel down
-
 }
 
 #---------------------------------------------------------------------------------------------------
