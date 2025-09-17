@@ -14,7 +14,7 @@ vi_mode_style.shape = "Block"
 #TERM = "xterm-kitty"
 
 [window]
-opacity = 0.9
+opacity = 0.95
 padding.x = 5
 padding.y = 5
 
@@ -24,7 +24,7 @@ history = 100000
 [font]
 # "Monaspace Neon" if font healing is supported
 normal.family = "MesloLGS NF"
-size = 12
+size = 14
 
 [colors]
 transparent_background_colors = true
@@ -32,3 +32,11 @@ transparent_background_colors = true
 [selection]
 semantic_escape_chars = ",│‘|:\"' ()[]{}<>\t="
 # Tilix was reverese and defined what combined words: -,./?%&#_~*
+
+[mouse]
+bindings = [
+{ mouse = "Right", mods = "Control", action = "IncreaseFontSize" },
+# FIXME: scrollwheel cannot be bound right now
+{ mouse = 4, mods = "Control", action = "IncreaseFontSize" },
+{ mouse = 5, mods = "Control", action = "DecreaseFontSize" },
+]
