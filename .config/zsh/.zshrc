@@ -197,3 +197,18 @@ if [[ -f ~/.local/bin/virtualenvwrapper.sh || -f /usr/bin/virtualenvwrapper.sh ]
     export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
     source ~/.local/bin/virtualenvwrapper.sh 2>/dev/null || source /usr/bin/virtualenvwrapper.sh
 fi
+
+# eval "$(direnv hook zsh)"
+_direnv_hook() {
+  trap -- '' SIGINT
+  eval "$("/usr/bin/direnv" export zsh)"
+  trap - SIGINT
+}
+typeset -ag precmd_functions
+if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
+  precmd_functions=(_direnv_hook $precmd_functions)
+fi
+typeset -ag chpwd_functions
+if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
+  chpwd_functions=(_direnv_hook $chpwd_functions)
+fi
