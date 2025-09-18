@@ -78,3 +78,11 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+
+-- treesitter: treat zsh like bash
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    vim.treesitter.language.register("bash", { "zsh" })
+  end,
+})
