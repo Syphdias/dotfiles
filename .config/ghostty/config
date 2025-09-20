@@ -1,22 +1,13 @@
 # looks
-theme = tokyonight
+theme = dark:TokyoNight Night, light:TokyoNight Day
 font-family = MesloLGS NF
-# font-family = CaskaydiaMono Nerd Font Mono
 font-size = 14
 background-opacity = 0.95
-# gtk-titlebar = false
-# gtk-adwaita = false
 resize-overlay = never
-window-decoration = none
 window-padding-color = extend
 
 # behavior
 focus-follows-mouse = true
-gtk-single-instance = true
-quit-after-last-window-closed = false
-# tmp 
-# gtk-single-instance = false
-# quit-after-last-window-closed = true
 
 keybind = ctrl+enter=unbind
 
@@ -25,28 +16,24 @@ linux-cgroup = always
 linux-cgroup-processes-limit = 10000
 # linux-cgroup-memory-limit = 200000000
 
-# tmp
-# linux-cgroup = never
-# gtk-single-instance = false
-# quit-after-last-window-closed = true
-
 # TODOs
-# vi mode
-# inf scrollback
-# scrollbar
-# ctrl + scroll to zoom
-# padding
-# border
-# startup time
-# search
+# high:
+# - search
+# - scrollbar
+# medium:
+# - ctrl + scroll to zoom
+# - inf scrollback
+# low:
+# - vi mode
+# - open scollback with nvim not vscode
+#
 # Ctrl + Click selection
-# OSC for iTerm
 # OSC for directories, etc
-# open scollback with nvim not vscode
-# find out which font-feature I want
-# checkout CaskaydiaCove NF (name could be different)
+# find out which font-feature I want for ligatures
 # selection characters
 #   tilix: select-by-word-chars='-,./?%&#_~*'
 #   alacritty: semantic_escape_chars = ",│‘|:\"' ()[]{}<>\t="
-# control scoll for zoom
-# keybind = ctrl+shift+endash=reload_config
+
+# start should be handled by systemd unit
+gtk-single-instance = true
+quit-after-last-window-closed = false
