@@ -19,11 +19,15 @@ end
 
 vim.keymap.set({ "n" }, "<leader>wo", "<c-w>o", { desc = "Close all other windows" })
 
-vim.keymap.set({ "n", "v" }, "<leader>gd", function(...)
-  return require("gitsigns").preview_hunk(...)
+vim.keymap.set({ "n", "v" }, "<leader>gd", function()
+  return require("gitsigns").preview_hunk()
 end, { desc = "Preview Hunk" })
 
-local diagnostic_level = 5
+vim.keymap.set({ "n" }, "<leader>ts", function()
+  return Snacks.terminal.toggle()
+end, { desc = "Toggle Snack Terminal" })
+
+local diagnostic_level = 4
 --@param change number The value to increase or decrease
 --@return nil
 local function change_diagnostic_level(change)
