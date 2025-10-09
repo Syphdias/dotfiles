@@ -1,0 +1,71 @@
+## System // Power Management // Ctrl-Alt-Del ##
+bindsym control+mod1+Delete exec --no-startup-id ~/bin/menu_powermenu.sh
+
+## i3 // Switch/Rename Window //   + P ##
+bindsym $mod+p exec --no-startup-id nwg-displays
+
+## i3 // Switch/Rename Window //   + Tab ##
+bindsym $mod+Tab exec --no-startup-id \
+    rofi -show rename \
+        -combi-modi 'rename:~/bin/i3-workspace-rename.py --default-color $accent_no_pound#window' \
+        -modi 'combi#rename:~/bin/i3-workspace-rename.py --default-color $accent_no_pound' \
+        -i -lines 10 -eh 1 -width 50 -padding 50 -opacity 85 -font 'MesloLGS NF Regular 16'
+
+# app keys
+## app launchers
+## i3 // Launcher //   + Space ##
+bindsym $mod+space exec --no-startup-id \
+    j4-dmenu-desktop \
+        --dmenu="/usr/bin/dmenu -m $(swaymsg -t get_outputs | jq -r 'map(.focused) | index(true)') -i -fn 'System San Francisco Display-12' -sf '$accent_fg' -sb '$accent' -nf '$fg' -nb '$bg'" \
+        --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/alacritty
+
+## Applications // Screenshot //   + Shift + S ##
+bindsym $mod+shift+s             exec grim -g "$(slurp)" - | swappy -f -
+
+## Applications // Terminal //   + Return ##
+bindsym $mod+Return       exec --no-startup-id ghostty +new-window
+bindsym $mod+KP_Enter     exec --no-startup-id alacritty
+bindsym $mod+$return      exec --no-startup-id alacritty
+bindsym $mod+Shift+Return exec --no-startup-id alacritty
+
+# Notification // Dismiss //   + Ctrl + Space ##
+bindsym $mod+control+space exec --no-startup-id swaync-client --close-latest
+
+## Notification // Toggle Center //   + Ctrl + . ##
+bindsym $mod+control+period exec --no-startup-id swaync-client --toggle-panel
+
+## Applications // Settings? //   + Ctrl + , ##
+# FIXME: Launcher for Keybinds, etc?
+
+## Applications // Pulseaudio Volumne Control //   + Ctrl + M ##
+bindsym $mod+control+m exec --no-startup-id \
+    pkill wiremix || alacritty --title wiremix -e wiremix
+
+## Applications // NetworkManager Connections //   + Ctrl + N ##
+bindsym $mod+control+n exec --no-startup-id \
+    pkill nm-connection-e || nm-connection-editor
+
+## Applications // File Explorer //   + Ctrl + E ##
+# FIXME: +new-window not working with -e yet
+bindsym $mod+control+e       exec --no-startup-id ghostty -e yazi
+bindsym $mod+shift+control+e exec --no-startup-id thunar    # fallback
+
+## Applications // nvim-obsidian //   + Ctrl + O ##
+# FIXME: +new-window not working with -e yet
+bindsym $mod+control+o exec --no-startup-id ghostty \
+            --title=VimObsidian \
+            --working-directory=/home/syphdias/Documents/obsidian-palace/ \
+            -e 'nvim' '_projects/self/My Open Projects.md'
+
+## Applications // xkill //   + Ctrl + X ##
+bindsym $mod+control+x exec --no-startup-id swaymsg kill
+
+## Applications // gtimelog //   + Ctrl + T ##
+bindsym $mod+control+t exec --no-startup-id \
+    pkill -f "/usr/bin/uv tool uvx gtimelog" || uvx gtimelog
+
+## Various // Switch Audio Sink //   + Ctrl + C ##
+bindsym $mod+control+c exec --no-startup-id ~/bin/pulse-audio-cycle.py --notify \
+    -c 'alsa_card.usb-BEHRINGER_UMC202HD_192k-00|alsa_card.pci-0000_09_00|Jabra_Link' \
+    -p 'alsa_card.pci-0000_09_00.1' 'hdmi-stereo$' \
+    -p 'Jabra_Link' 'analog-stereo\+input:mono|analog-stereo$'

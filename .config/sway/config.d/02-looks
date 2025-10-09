@@ -1,0 +1,42 @@
+# theme/style
+# 9pt * 1.5 px/pt = 13.5px
+font pango:System San Francisco Display 13
+#font xft:URWGothic-Book 11
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 2
+default_floating_border normal
+hide_edge_borders smart  # used to be both
+
+# Set inner/outer gaps
+gaps inner 10
+gaps outer -3
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+for_window [class=".*"] title_format " %title"
+
+set $fg      #c0caf5
+set $fg_dim  #565f89
+set $bg_dim  #292e42
+set $bg      #1a1b26
+set $bg_dark #16161e
+
+set $accent #27a1b9
+set $accent_no_pound 27a1b9
+# alternatives: #27a1b9 #db4b4b
+set $accent_fg #000000
+
+set $urgent #1abc9c
+set $urgent_fg #000000
+
+
+# window colors         border  background text       indicator child_border
+client.focused          $accent $accent    $accent_fg $fg       $accent
+client.focused_inactive $fg_dim $bg        $fg        $fg       $fg_dim
+client.unfocused        $fg_dim $bg        $fg        $fg       $fg_dim
+client.urgent           $urgent $urgent    $urgent_fg $fg       $urgent
+# placeholder
+client.placeholder      #ffff00 $bg        $fg        $fg       $fg_dim
+client.background       $bg

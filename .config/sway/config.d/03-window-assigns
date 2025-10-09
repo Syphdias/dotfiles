@@ -1,0 +1,106 @@
+### To Code Workspace ($ws3)
+#assign [class="Atom"] $ws3
+#assign [class="^code-oss"] $ws3     # vscode
+### To Media Workspace ($ws5)
+#assign [class="vlc"] $ws5
+#assign [class="zoom"] $ws5
+#assign [class="^gimp"] $ws5
+### To Lobby ($ws8)
+assign [instance="battle.net.exe"] number $gws
+assign [class="(?i)steam"] number $gws
+assign [class="Lutris"] number $gws
+assign [class="minecraft-launcher"] number $gws
+for_window [title="Friends List"] resize set width 300px, move right
+### To Communication Workspace ($ws9)
+assign [class="Rambox"] number $ws9
+assign [class="Ferdi"] number $ws9
+assign [app_id="signal"] number $ws9
+assign [class="discord"] number $ws9
+assign [class="TeamSpeak 3"] number $ws9
+assign [class="TelegramDesktop"] number $ws9
+assign [class="Microsoft Teams"] number $ws9
+assign [class="thunderbird"] number $ws9
+### To Sound Workspace ($ws0)
+for_window [class="Spotify"] move --no-auto-back-and-forth to workspace number $ws0
+### To Dedicated Workspace ($gws)
+assign [class="Tabletop Simulator.x86_64"] number $gws
+assign [class="battle.net.exe"] number $gws
+assign [class="csgo_linux64"] number $gws
+assign [class="dota2"] number $gws
+assign [class="mono"] number $gws # unrailed
+assign [class="^steam_app_"] number $gws # generic steam
+assign [instance="gw2-64.exe"] number $gws
+assign [instance="hollow_knight.x86_64"] number $gws
+assign [class="Stardew Valley"] number $gws
+for_window [class="^Minecraft"] move --no-auto-back-and-forth to workspace number $gws
+for_window [instance="overwatch.exe"] move --no-auto-back-and-forth to workspace number $gws
+
+# floating
+for_window [window_role="pop-up"]         floating enable
+for_window [window_role="task_dialog"]    floating enable
+for_window [window_type="dialog"]         floating enable
+for_window [window_role="dialog"]         floating enable
+for_window [class="Pinentry-gtk"]         floating enable
+for_window [class="Pinentry-gtk"]         border normal
+for_window [class="(?i)pavucontrol"]      floating enable
+for_window [class="Skype"]                floating enable
+for_window [class="Nemo"]                 floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Cinnamon-settings.py"] floating enable
+for_window [class="Gnome-calculator"]     floating enable
+for_window [class="Arandr"]               floating enable
+for_window [class="Gtimelog"]             floating enable
+for_window [title="^zoom$"]               floating enable
+for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
+for_window [class="zoom" title="Zoom Meeting"]            floating disable
+for_window [class="^Cssh$"]               floating enable
+for_window [title="(CSSH|CLUSTERSSH): "]  floating enable
+for_window [title="alsamixer"]            floating enable border pixel 2
+for_window [class="calamares"]            floating enable border normal
+for_window [class="Clipgrab"]             floating enable
+for_window [title="File Transfer*"]       floating enable
+for_window [class="fpakman"]              floating enable
+for_window [class="GParted"]              floating enable border normal
+for_window [class="Lightdm-settings"]     floating enable
+for_window [class="Lxappearance"]         floating enable sticky enable border normal
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"]             floating enable sticky enable border normal
+for_window [class="octopi"]               floating enable
+for_window [title="About Pale Moon"]      floating enable
+for_window [class="Pamac-manager"]        floating enable
+for_window [class="Pavucontrol"]          floating enable
+for_window [class="qt5ct"]                floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"]         floating enable sticky enable border normal
+for_window [class="Simple-scan"]          floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Timeset-gui"]          floating enable border normal
+for_window [class="(?i)virtualbox"]       floating enable border normal
+for_window [class="Xfburn"]               floating enable
+for_window [class="Thunar"]               floating enable
+for_window [class="Lutris"]               floating enable border pixel 2
+for_window [class="TeamViewer"]           floating enable
+for_window [class="Evolution-alarm-notify"] floating enable
+for_window [instance="battle.net.exe"]    floating enable
+for_window [instance="origin.exe"]        floating enable
+for_window [instance="steam_app_1182480"] floating enable
+
+# Fix applications that hint "no decorations"
+for_window [class="obsidian"] border pixel 2
+for_window [class="Microsoft Teams"] border pixel 2
+for_window [class="(?i).*gnome.*"] border pixel 2
+for_window [class="Evince"] border pixel 2
+for_window [class="(?i)^steam$"] border pixel 2
+for_window [class="^Snapper-gui$"] border pixel 2
+for_window [class="^Gtimelog$"] border pixel 2
+for_window [class="Vivaldi"] border pixel 2
+# Tabs Outliner
+for_window [title="Tabs Outliner"] floating disable
+for_window [title="Tabs Outliner"] resize set width 350px
+for_window [title="Tabs Outliner"] move left
+# Calendar
+for_window [class="(?i)(gsimplecal|zenity)"] floating enable pixel 1
+for_window [class="(?i)(gsimplecal|zenity)"] border pixel 1
+for_window [class="(?i)(gsimplecal|zenity)"] move position mouse, move up 20px
+# Various
+for_window [instance="crx_abjcfabbhafbcdfjoecdgepllmpfceif"] kill   # kill Magic Actions for YouTube pop-up

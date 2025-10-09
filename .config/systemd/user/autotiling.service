@@ -1,0 +1,13 @@
+[Unit]
+Description=Script for automatically switching hsplit/vsplit
+Documentation=https://github.com/nwg-piotr/autotiling
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/autotiling --limit 2 --splitratio 1.25
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

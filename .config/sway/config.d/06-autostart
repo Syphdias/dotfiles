@@ -1,0 +1,15 @@
+# stuff started by systemd:
+# - (ssh|gpg)-agent
+# - ghostty
+# - swaync
+# - set-background.timer
+# - swayidle
+# - autotiling
+
+# https://wiki.archlinux.org/title/Polkit#Authentication_agents
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+## applets
+exec --no-startup-id nm-applet
+exec --no-startup-id pasystray
+exec --no-startup-id 1password --silent
