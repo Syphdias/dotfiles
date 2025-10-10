@@ -5,7 +5,8 @@
     "spacing": 0,
     "height": 26,
     "modules-left": [
-        "sway/workspaces"
+        "sway/workspaces",
+        "sway/mode",
     ],
     "modules-center": [
         "clock",
@@ -14,6 +15,7 @@
     "modules-right": [
         "mpris",
         "group/tray-expander",
+        "custom/notification",
         "bluetooth",
         "network",
         "pulseaudio",
@@ -35,6 +37,26 @@
         "status-icons": {
             "paused": "⏸"
         },
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{0} {icon} ",
+        "format-icons": {
+            "notification": " <span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": " <span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": " <span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": " <span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
     "sway/workspaces": {
         "disable-scroll": true,
@@ -62,9 +84,8 @@
         "interval": 86400
     },
     "custom/kb-layout": {
-        "format": " ",
-        "tooltip-format": "swaymsg -t get_inputs",
-        "interval": 1,
+        "exec": "echo ' '; swaymsg -t get_inputs| jq -r '.[0].xkb_active_layout_name'",
+        "interval": 10,
         "tooltip": true,
         "on-click": "swaymsg input type:keyboard xkb_variant neo_qwertz",
         "on-click-middle": "swaymsg input type:keyboard xkb_variant nodeadkeys",
