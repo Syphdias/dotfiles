@@ -394,12 +394,15 @@ function bsnap() {
         return
     fi
 
+    local snapshot_date snapshot_description
     mkdir -p .snap
     for snap in ~/.snapshots/*; do
         if [[ -e "$snap/snapshot/${PWD#~/}" ]]; then
+            snapshot_date="$(grep -Po '(?<=<date>).*(?=</date>)' "$snap/info.xml")"
+            snapshot_description="$(grep -Po '(?<=<description>).*(?=</description>)' "$snap/info.xml")"
             ln -s \
                 "$snap/snapshot/${PWD#~/}" \
-                ".snap/$(grep -Po '(?<=<date>).*(?=</date>)' "$snap/info.xml")-$(grep -Po '(?<=<description>).*(?=</description>)' "$snap/info.xml")"
+                ".snap/${snapshot_date/ /T}-${snapshot_description// /-}"
         fi
     done
     # FIXME: Currently unhandled: same date, removed snap
