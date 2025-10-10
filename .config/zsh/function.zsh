@@ -416,3 +416,23 @@ function o() {
         *) xdg-open $@ ;;
     esac
 }
+
+# FIXME: This has no safeguards
+# TODO: easy way to create and switch worktrees
+function git-worktree-clone() {
+    if [[ "$#" != "2" ]]; then
+        echo "Usage: $0 GIT_URL FOLDER_NAME [BRANCH]"
+        return 1
+    fi
+
+    git clone --bare "$1" "$2/.git"
+    cd "$2"
+    local default_branch="$(git name-rev --name-only HEAD)"
+    git worktree add "$default_branch"
+    if [[ -n "$3" ]]; then
+        git worktree add "$3"
+        cd "$3"
+    else
+        cd "$default_branch"
+    fi
+}
