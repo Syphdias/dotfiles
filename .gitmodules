@@ -1,0 +1,3 @@
+[submodule ".local/share/omarchy"]
+	path = .local/share/omarchy
+	url = https://github.com/Syphdias/omarchy.git
