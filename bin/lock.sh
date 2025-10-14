@@ -5,6 +5,11 @@ LOCK_OVERLAY=~/.config/i3lock/Glados_promo.png
 
 playerctl pause || true
 
+# Ensure 1password is locked
+if pgrep -x "1password" >/dev/null; then
+    1password --lock &
+fi
+
 if [[ "${XDG_SESSION_TYPE:-x11}" == "wayland" ]]; then
     swaylock \
         --daemonize \
