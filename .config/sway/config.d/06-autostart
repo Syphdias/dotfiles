@@ -5,6 +5,7 @@
 # - set-background.timer
 # - swayidle
 # - autotiling
+# - waybar
 
 # https://wiki.archlinux.org/title/Polkit#Authentication_agents
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

@@ -20,13 +20,9 @@ include /etc/sway/config.d/50-systemd-user.conf
 include /etc/sway/config.d/95-xdg-desktop-autostart.conf
 
 # exec_always swaymsg && systemctl --user start sway-session.target
-# exec_always sh -c 'while true; do ( date; systemctl --user is-active sway-session.target; swaymsg; echo $? ) >>/tmp/session-test; sleep .2; done'
 
 # TODO: clipboard manager
 #  - wl-clip-persist --clipboard regular --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'
-# TODO: wl-record?
-# TODO: replace pasystray
-# TODO: replace nm-applet
 # TODO: new launcher? `walker --gapplication-service &`?
 # TODO: keybind help
 # TODO: what is fcitx5?
@@ -34,20 +30,13 @@ include /etc/sway/config.d/95-xdg-desktop-autostart.conf
 # TODO: arandr replacement (nwg-displays? watch out with adaptive-sync issue(only on one), deleting bg issue) https://wiki.archlinux.org/title/Sway#Change_screen_resolution_after_start
 # TODO: replace https://github.com/Ventto/mons or https://github.com/chmln/enact
 # TODO: Launch of Focus?
+# TODO: localsend
 
-# TODO: waybar do-not-disturb indicator and switch with swaync-client
+# waybar
+# TODO: get todos from ThePrimeagen Omachy video
+# TODO: replace pasystray
+# TODO: replace nm-applet
+# TODO: wl-record?
 
 # TODO: sway as systemd-unit(s)
-# TODO: uwsm-app? envs seperate?
-# TODO: waybar as systemd unit
-# TODO: Autostarts to systemd?
-
-# Check autostarts
-# stuff started by systemd:
-# - (ssh|gpg)-agent
-# - ghostty
-# - swaync
-# - set-background.timer
-# - swayidle
-# - autotiling
-
+# TODO: setsid uwsm-app? envs seperate?
