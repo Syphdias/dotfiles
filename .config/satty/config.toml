@@ -1,0 +1,6 @@
+[general]
+output-filename = "~/Pictures/screenshot/satty-%F-%H:%M:%S.png"
+early-exit = true
+actions-on-enter = ["save-to-clipboard"]
+actions-on-escape = ["save-to-clipboard"]
+copy-command = "wl-copy"

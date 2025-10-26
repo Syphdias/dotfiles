@@ -20,7 +20,8 @@ bindsym $mod+space exec --no-startup-id \
         --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/alacritty
 
 ## Applications // Screenshot //   + Shift + S ##
-bindsym $mod+shift+s             exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+shift+s exec grim -g "$(slurp -o -c '$accent')" -t ppm - | satty -f -
+# Alternative for satty: swappy
 
 ## Applications // Terminal //   + Return ##
 bindsym $mod+Return       exec --no-startup-id ghostty +new-window
