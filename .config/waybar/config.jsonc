@@ -20,6 +20,7 @@
         "network",
         "pulseaudio",
         "cpu",
+        "memory",
         "battery",
         "custom/kb-layout"
     ],
@@ -93,8 +94,29 @@
     },
     "cpu": {
         "interval": 5,
-        "format": "󰍛",
-        "on-click": "alacritty -e btop"
+        "format": "{icon} ",
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ],
+        "on-click": "ghostty --title=Btop -e btop"
+    },
+    "memory": {
+        "interval": 5,
+        "format": "<span font='17'>{icon} </span>",
+        "format-icons": [
+            "◔",
+            "◑",
+            "◕",
+            "●"
+        ],
+        "on-click": "ghostty --title=Btop -e btop"
     },
     "clock": {
         "format": "KW {:%V %a %F %H:%M}",
@@ -140,7 +162,7 @@
         "tooltip-format-disconnected": "Disconnected",
         "interval": 3,
         "spacing": 1,
-        "on-click": "alacritty --class=Impala -e impala"
+        "on-click": "ghostty --title=Impala -e impala"
     },
     "battery": {
         "format": "{capacity}% {icon}",
@@ -191,12 +213,12 @@
         "on-click": "blueberry"
     },
     "pulseaudio": {
-        "format": "{icon}",
-        "on-click": "alacritty --class=Wiremix -e wiremix",
+        "format": "{icon} ",
+        "on-click": "ghostty --title=Wiremix -e wiremix",
         "on-click-right": "pamixer -t",
         "tooltip-format": "Playing at {volume}%",
         "scroll-step": 5,
-        "format-muted": "󰝟",
+        "format-muted": "󰝟   {volume}%",
         "format-icons": {
             "default": [
                 "",
