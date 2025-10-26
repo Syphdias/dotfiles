@@ -41,6 +41,10 @@ return {
         order = { " ", "x" },
       },
 
+      attachments = {
+        img_folder = "./media",
+      },
+
       -- Optional, customize how note IDs are generated given an optional title.
       ---@param title string|?
       ---@return string
@@ -74,6 +78,7 @@ return {
         { "<leader>o", group = "Obsidian" },
         { "<leader>ob", "<cmd>Obsidian backlinks<cr>", desc = "Backlinks" },
         { "<leader>on", "<cmd>Obsidian new<cr>", desc = "New Note" },
+        { "<leader>oe", "<cmd>Obsidian new_from_template<cr>", desc = "New Note from Template" },
         { "<leader>oo", "<cmd>Obsidian quick_switch<cr>", desc = "Quick Switch" },
         { "<leader>ot", "<cmd>Obsidian today<cr>", desc = "Today Note" },
         { "<leader>oy", "<cmd>Obsidian yesterday<cr>", desc = "Yesterday Note" },
