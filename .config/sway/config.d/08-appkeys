@@ -1,8 +1,9 @@
 ## System // Power Management // Ctrl-Alt-Del ##
+bindsym XF86PowerOff exec --no-startup-id ~/bin/menu_powermenu.sh
 bindsym control+mod1+Delete exec --no-startup-id ~/bin/menu_powermenu.sh
 
 ## i3 // Switch/Rename Window //   + P ##
-bindsym $mod+p exec --no-startup-id nwg-displays
+bindsym $mod+p exec --no-startup-id pkill nwg-displays || nwg-displays
 
 ## i3 // Switch/Rename Window //   + Tab ##
 bindsym $mod+Tab exec --no-startup-id \
@@ -67,6 +68,6 @@ bindsym $mod+control+t exec --no-startup-id \
 
 ## Various // Switch Audio Sink //   + Ctrl + C ##
 bindsym $mod+control+c exec --no-startup-id ~/bin/pulse-audio-cycle.py --notify \
-    -c 'alsa_card.usb-BEHRINGER_UMC202HD_192k-00|alsa_card.pci-0000_09_00|Jabra_Link' \
-    -p 'alsa_card.pci-0000_09_00.1' 'hdmi-stereo$' \
+    -c 'alsa_card.usb-BEHRINGER_UMC202HD_192k-00|alsa_card.pci-0000_0b_00.1|Jabra_Link' \
+    -p 'alsa_card.pci-0000_0b_00' 'hdmi-stereo$' \
     -p 'Jabra_Link' 'analog-stereo\+input:mono|analog-stereo$'
