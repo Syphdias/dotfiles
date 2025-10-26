@@ -20,9 +20,13 @@ bindsym $mod+space exec --no-startup-id \
         --dmenu="/usr/bin/dmenu -m $(swaymsg -t get_outputs | jq -r 'map(.focused) | index(true)') -i -fn 'System San Francisco Display-12' -sf '$accent_fg' -sb '$accent' -nf '$fg' -nb '$bg'" \
         --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/alacritty
 
-## Applications // Screenshot //   + Shift + S ##
-bindsym $mod+shift+s exec grim -g "$(slurp -o -c '$accent')" -t ppm - | satty -f -
-# Alternative for satty: swappy
+## Applications // Screenshot Region //   + Shift + S ##
+bindsym $mod+shift+s   exec grim -g "$(slurp -o -c '$accent')" -t ppm - | satty -f -
+## Applications // Screenshot Window //   + Ctrl + S ##
+bindsym $mod+control+s exec \
+    swaymsg -t get_tree \
+    | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' \
+    | grim -t ppm -g - - | satty -f -
 
 ## Applications // Terminal //   + Return ##
 bindsym $mod+Return       exec --no-startup-id ghostty +new-window
