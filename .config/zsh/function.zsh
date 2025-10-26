@@ -423,18 +423,20 @@ function o() {
 # FIXME: This has no safeguards
 # TODO: easy way to create and switch worktrees
 function git-worktree-clone() {
-    if [[ "$#" != "2" ]]; then
-        echo "Usage: $0 GIT_URL FOLDER_NAME [BRANCH]"
+    if [[ $# -gt 2 ]]; then
+        echo "Usage: $0 GIT_URL [BRANCH]"
         return 1
     fi
 
-    git clone --bare "$1" "$2/.git"
-    cd "$2"
+    local git_dir="${1:t}/.git"
+    git clone --bare "$1" "${git_dir}"
+    cd "${git_dir}/.." || { echo "Clone failed" >&2; return 2 }
+
     local default_branch="$(git name-rev --name-only HEAD)"
     git worktree add "$default_branch"
-    if [[ -n "$3" ]]; then
-        git worktree add "$3"
-        cd "$3"
+    if [[ -n "$2" ]]; then
+        git worktree add "$2"
+        cd "$2"
     else
         cd "$default_branch"
     fi

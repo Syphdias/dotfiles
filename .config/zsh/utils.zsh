@@ -31,6 +31,11 @@ function aww() {
 }
 
 function sshdiff() {
+    if [[ $# -lt 3 ]]; then
+        echo "Usage: $0 HOST1 HOST2 COMMAND…"
+        echo "Usage: $0 -l COMMAND_TO_EVAL HOST COMMAND…"
+        return 1
+    fi
     if [[ "$1" == "-l" ]]; then
         shift
         vimdiff <(eval "$1") <(ssh "$2" ${@:3})
@@ -40,7 +45,25 @@ function sshdiff() {
 }
 
 function ssh3diff() {
+    if [[ $# -lt 4 ]]; then
+        echo "Usage: $0 HOST1 HOST2 HOST3 COMMAND…"
+        return 1
+    fi
     vimdiff <(ssh "$1" ${@:4}) <(ssh "$2" ${@:4}) <(ssh "$3" ${@:4})
+}
+
+function kdiff() {
+    if [[ $# -lt 3 ]]; then
+        echo "Usage: $0 CONTEXT1 CONTEXT2 K_COMMAND…"
+        echo "Usage: $0 -l COMMAND_TO_EVAL CONTEXT2 K_COMMAND…"
+        return 1
+    fi
+    if [[ "$1" == "-l" ]]; then
+        shift
+        vimdiff <(eval "$1") <(k --context "$2" ${@:3})
+    else
+        vimdiff <(k --context "$1" ${@:3}) <(k --context "$2" ${@:3})
+    fi
 }
 
 function histrm () {

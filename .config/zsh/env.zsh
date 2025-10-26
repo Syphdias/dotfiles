@@ -1,5 +1,6 @@
 export GPG_TTY=$TTY
 export EDITOR=nvim
+export SUDO_EDITOR=nvim
 #export PAGER='vim -u ~/.config/vim/vimrc.less -'
 # This affects every invocation of `less`.
 #   -R   color
