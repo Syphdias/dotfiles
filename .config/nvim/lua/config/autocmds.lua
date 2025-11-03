@@ -73,7 +73,7 @@ vim.api.nvim_create_autocmd("FileType", {
     local path = vim.fn.expand("%:p")
     local filename = vim.fn.expand("%:t")
 
-    if vim.fn.match(path, "/tasks/") > -1 or vim.fn.match(path, "/handlers/") or filename == "playbook.yaml" then
+    if vim.fn.match(path, "/tasks/") > -1 or vim.fn.match(path, "/handlers/") > -1 or filename == "playbook.yaml" then
       vim.opt_local.filetype = "yaml.ansible"
     end
   end,
