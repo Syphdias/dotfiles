@@ -47,6 +47,16 @@ return {
           },
         },
       },
+      --- @type lspconfig.options.jsonls
+      jsonls = {
+        settings = {
+          json = {
+            schemas = {
+              { fileMatch = { "*.jsonc" }, schema = { allowTrailingCommas = true } },
+            },
+          },
+        },
+      },
     },
   },
 }
