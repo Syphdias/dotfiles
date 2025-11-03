@@ -441,3 +441,17 @@ function git-worktree-clone() {
         cd "$default_branch"
     fi
 }
+
+function aws-assume-role() {
+    eval "$(
+        aws sts assume-role --role-arn "${1}"  --role-session-name $2 \
+            | jq -r '.Credentials 
+                | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)
+                   export AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)
+                   export AWS_SESSION_TOKEN=\(.SessionToken)"'
+    )"
+}
+
+function aws-unassume-role() {
+    unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+}
