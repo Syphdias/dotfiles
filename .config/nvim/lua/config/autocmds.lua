@@ -86,3 +86,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.treesitter.language.register("bash", { "zsh" })
   end,
 })
+
+-- set default diagnostics level
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    ChangeDiagnosticsLevel(DIAGNOSTICS_LEVEL)
+  end,
+})
