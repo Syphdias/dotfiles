@@ -107,54 +107,50 @@ end
 
 local ns = vim.api.nvim_create_namespace("CurlineDiag")
 
--- vim.api.nvim_create_autocmd("LspDetach", {
---   callback = function(args)
---     vim.diagnostic.hide(ns, args.buf)
---   end,
--- })
-
-vim.api.nvim_create_autocmd("LspAttach", {
+vim.api.nvim_create_autocmd("LspDetach", {
   callback = function(args)
-    vim.api.nvim_create_autocmd("CursorHold", {
-      buffer = args.buf,
-      callback = function()
-        if DIAGNOSTICS_ON_CURSOR == false then
-          vim.diagnostic.hide(ns, args.buf)
-          return
-        end
-
-        -- dismiss other lines
-        pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)
-
-        local curline = vim.api.nvim_win_get_cursor(0)[1]
-        local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline - 1 })
-
-        if DIAGNOSTICS_ON_CURSOR == "virtual_text_or_lines" and #diagnostics > 1 then
-          vim.diagnostic.show(ns, args.buf, diagnostics, {
-            signs = signs,
-            underline = true,
-            virtual_text = false,
-            virtual_lines = current_line,
-          })
-        else
-          vim.diagnostic.show(ns, args.buf, diagnostics, {
-            signs = signs,
-            underline = true,
-            virtual_text = virtual_text_current_line,
-            virtual_lines = false,
-          })
-        end
-      end,
-    })
-
-    -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-    --   buffer = args.buf,
-    --   callback = function()
-    --     vim.diagnostic.hide(ns, args.buf)
-    --   end,
-    -- })
+    vim.diagnostic.hide(ns, args.buf)
   end,
 })
 
--- set default diagnostics level
-ChangeDiagnosticsLevel(DIAGNOSTICS_LEVEL, false)
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function(args)
+    if DIAGNOSTICS_ON_CURSOR == false then
+      vim.diagnostic.hide(ns, args.buf)
+      return
+    end
+
+    -- dismiss other lines
+    pcall(vim.api.nvim_buf_clear_namespace, args.buf, ns, 0, -1)
+
+    local curline = vim.api.nvim_win_get_cursor(0)[1]
+    local diagnostics = vim.diagnostic.get(args.buf, { lnum = curline - 1 })
+
+    if DIAGNOSTICS_ON_CURSOR == "virtual_text_or_lines" and #diagnostics > 1 then
+      vim.diagnostic.show(ns, args.buf, diagnostics, {
+        signs = signs,
+        underline = true,
+        virtual_text = false,
+        virtual_lines = current_line,
+      })
+    else
+      vim.diagnostic.show(ns, args.buf, diagnostics, {
+        signs = signs,
+        underline = true,
+        virtual_text = virtual_text_current_line,
+        virtual_lines = false,
+      })
+    end
+  end,
+})
+
+-- set default diagnostics level once
+local diagnostics_initialized = false
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    if not diagnostics_initialized then
+      ChangeDiagnosticsLevel(DIAGNOSTICS_LEVEL, false)
+      diagnostics_initialized = true
+    end
+  end,
+})
