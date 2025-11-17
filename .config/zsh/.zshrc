@@ -69,6 +69,9 @@ zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 # Misc
 zstyle ':z4h:' iterm2-integration 'yes'
 
+zstyle ':z4h:direnv' enable 'yes'
+zstyle ':z4h:direnv:success' notify 'yes'
+
 # Clone additional Git repositories from GitHub.
 #
 # This doesn't do anything apart from cloning the repository and keeping it
@@ -189,26 +192,3 @@ setopt pushd_minus
 setopt no_hist_ignore_dups # _do_ store duplications
 setopt list_packed         # make the completion list smaller (non-fzf)
 setopt extended_history    # save duration in seconds to histfile
-
-# Load virtualenvwrapper
-if [[ -f ~/.local/bin/virtualenvwrapper.sh || -f /usr/bin/virtualenvwrapper.sh ]]; then
-    export WORKON_HOME="${HOME}/.virtualenvs"
-    export PROJECT_HOME="${HOME}/ves"
-    export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
-    source ~/.local/bin/virtualenvwrapper.sh 2>/dev/null || source /usr/bin/virtualenvwrapper.sh
-fi
-
-# eval "$(direnv hook zsh)"
-_direnv_hook() {
-  trap -- '' SIGINT
-  eval "$("/usr/bin/direnv" export zsh)"
-  trap - SIGINT
-}
-typeset -ag precmd_functions
-if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
-  precmd_functions=(_direnv_hook $precmd_functions)
-fi
-typeset -ag chpwd_functions
-if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
-  chpwd_functions=(_direnv_hook $chpwd_functions)
-fi

@@ -447,7 +447,7 @@ function git-worktree-clone() {
 function aws-assume-role() {
     eval "$(
         aws sts assume-role --role-arn "${1}"  --role-session-name $2 \
-            | jq -r '.Credentials 
+            | jq -r '.Credentials
                 | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)
                    export AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)
                    export AWS_SESSION_TOKEN=\(.SessionToken)"'
