@@ -340,29 +340,31 @@ function m() {
     fi
 }
 
-# alias is just here to make function work with POWERLEVEL9K_*_SHOW_ON_COMMAND
-alias tf='terraform'
-function terraform() {
-    # automatically read tfvars file taken form environment
-    if ! [[ $* =~ "(destroy|apply|plan|import)" ]]; then
-        command terraform $@
-        return
-    fi
+if (( $+commands[terraform] )); then
+    # alias is just here to make function work with POWERLEVEL9K_*_SHOW_ON_COMMAND
+    alias tf='terraform'
+    function terraform() {
+        # automatically read tfvars file taken form environment
+        if ! [[ $* =~ "(destroy|apply|plan|import)" ]]; then
+            command terraform $@
+            return
+        fi
 
-    # get TF_VARFILES_<workspace> or default to TF_VARFILES
-    _TF_VARFILES="${(P)${:-TF_VARFILE_${$(terraform workspace show)}}:-${TF_VARFILE}}"
-    if [[ -n "${_TF_VARFILES}" ]]; then
-        local _TF_ARGS varfile
-        _TF_ARGS=""
-        for varfile in ${(Q)${(z)_TF_VARFILES}}; do
-            _TF_ARGS+=" -var-file ${varfile}"
-        done
-        command terraform $1 ${_TF_ARGS} ${@:2}
-    else
-        command terraform $@
-    fi
-}
-compdef tf=terraform
+        # get TF_VARFILES_<workspace> or default to TF_VARFILES
+        _TF_VARFILES="${(P)${:-TF_VARFILE_${$(terraform workspace show)}}:-${TF_VARFILE}}"
+        if [[ -n "${_TF_VARFILES}" ]]; then
+            local _TF_ARGS varfile
+            _TF_ARGS=""
+            for varfile in ${(Q)${(z)_TF_VARFILES}}; do
+                _TF_ARGS+=" -var-file ${varfile}"
+            done
+            command terraform $1 ${_TF_ARGS} ${@:2}
+        else
+            command terraform $@
+        fi
+    }
+    compdef tf=terraform
+fi
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
