@@ -8,6 +8,7 @@ input * {
 # input 10730:866:Kinesis_Corporation_Adv360_Pro_Keyboard xkb_model "pc105"
 
 include ~/.config/sway/config.d/*
+include ~/.config/sway/outputs
 
 include /etc/sway/config.d/10-systemd-cgroups.conf
 include /etc/sway/config.d/10-systemd-session.conf

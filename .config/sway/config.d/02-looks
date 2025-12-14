@@ -1,3 +1,7 @@
+output "*" {
+    bg ~/Pictures/wallpapers/current fill
+}
+
 # theme/style
 # 9pt * 1.5 px/pt = 13.5px
 font pango:System San Francisco Display 13
