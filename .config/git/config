@@ -58,6 +58,8 @@
 	textconv = ansible-vault view 2>/dev/null
 [difftool "difftastic"]
     cmd = difft "$LOCAL" "$REMOTE"
+[diff "sopsdiffer"]
+    textconv = "sops decrypt"
 [color]
 	ui = true
 [color "diff-highlight"]
