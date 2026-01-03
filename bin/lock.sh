@@ -15,8 +15,30 @@ if [[ "${XDG_SESSION_TYPE:-x11}" == "wayland" ]]; then
         --daemonize \
         --screenshot --effect-pixelate 10 \
         --effect-compose "500,0;northwest;${LOCK_OVERLAY}" \
+        --ignore-empty-password \
         --clock \
-        --ignore-empty-password
+        --timestr '%H:%M' --datestr '%a %F' \
+        \
+        --layout-bg-color '#00000000' \
+        --layout-text-color '#c0caf5' \
+        \
+        --inside-color '#1a1b26f0' \
+        --ring-color '#27a1b9' \
+        --key-hl-color '#1abc9c' \
+        --bs-hl-color '#f7768e' \
+        --text-color '#c0caf5' \
+        \
+        --inside-clear-color '#1a1b26f0' \
+        --ring-clear-color '#e0af68' \
+        --text-clear-color '#e0af68' \
+        \
+        --inside-ver-color '#1a1b26f0' \
+        --ring-ver-color '#1abc9c' \
+        --text-ver-color '#1abc9c' \
+        \
+        --inside-wrong-color '#1a1b26f0' \
+        --ring-wrong-color '#f7768e' \
+        --text-wrong-color '#f7768e'
     exit
 fi
 
