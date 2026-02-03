@@ -1,0 +1,15 @@
+AWS_EXPIRATION="$(aws configure export-credentials |jq -r .Expiration \
+                  || date --iso-8601=seconds -d @0)"
+if (($(date -d "$AWS_EXPIRATION" +%s) < $(date -d +"${TOLERATE_AWS_EXPIRATION:-30min}" +%s) )); then
+    aws sso login
+    echo -en "Login for \e[33m${AWS_PROFILE:-default}\e[0m expires at "
+    aws configure export-credentials |jq -r .Expiration \
+        | sed -E $'s/ (..:..)/ \e[33m''\1'$'\e[0m/'
+else
+    echo -en "Login for \e[33m${AWS_PROFILE:-default}\e[0m expires at "
+    date -d "$AWS_EXPIRATION" --rfc-3339=seconds \
+        | sed -E $'s/ (..:..)/ \e[33m''\1'$'\e[0m/'
+fi
+unset AWS_EXPIRATION
+
+# vi: ft=bash
