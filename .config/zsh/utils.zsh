@@ -5,6 +5,7 @@ function ssh-until-up() {
         sleep 1;
     done
 }
+compdef ssh-until-up=ssh
 
 function recho() {
     echo -e "\e[33m$@\e[0m"
