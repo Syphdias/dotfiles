@@ -293,7 +293,7 @@ function fshow() {
 
 function syu() {
     if command -v paru >/dev/null; then
-        command paru -Syu --sudoloop
+        command paru -Syu --sudoloop --fm ~/bin/Syu-fm
     elif command -v yay >/dev/null; then
         command yay -Syu --sudoloop
     elif command -v pacman >/dev/null; then
