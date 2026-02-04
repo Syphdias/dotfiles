@@ -1,0 +1,32 @@
+# https://medium.com/codecodecode/uv-virtualenv-direnv-a-fast-reproducible-python-workflow-with-envrc-36da47ce1f4b
+
+if [ -f .python-version ]; then
+    PY_VER="$(<.python-version)"
+else
+    PY_VER="$(python --version |sed -E 's/Python ([0-9]+\.[0-9]/\1/')"
+    uv python install "$PY_VER"
+fi
+
+if ! has uv; then
+    echo "ERROR: uv not found. Install uv first." >&2
+    exit 1
+fi
+
+if [ ! -d .venv ]; then
+    uv venv --python "$PY_VER"
+fi
+
+PATH_add ".venv/bin"
+export VIRTUAL_ENV="$PWD/.venv"
+
+watch_file pyproject.toml
+watch_file uv.lock
+
+if [ -f uv.lock ]; then
+    uv sync --frozen || uv sync
+else
+    uv sync
+fi
+dotenv_if_exists
+
+# vi: ft=bash
