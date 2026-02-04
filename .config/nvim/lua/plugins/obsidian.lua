@@ -47,16 +47,18 @@ return {
 
       -- Optional, customize how note IDs are generated given an optional title.
       ---@param title string|?
-      ---@return string
+      ---@param path obsidian.Path|?
+      ---@return string|?
       note_id_func = function(title)
         -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
         -- In this case a note with the title 'My new note' will be given an ID that looks
         -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
-        if title ~= nil then
-          return title
-        else
-          return "Nope"
+        if title == nil then
+          return nil
         end
+
+        local name = title:gsub(":", "–")
+        return name
       end,
 
       -- Optional, customize how note file names are generated given the ID,
