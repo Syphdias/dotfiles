@@ -72,6 +72,8 @@ zstyle ':z4h:' iterm2-integration 'yes'
 zstyle ':z4h:direnv' enable 'yes'
 zstyle ':z4h:direnv:success' notify 'yes'
 
+unsetopt nomatch # pass unmatched objects
+
 # Clone additional Git repositories from GitHub.
 #
 # This doesn't do anything apart from cloning the repository and keeping it
