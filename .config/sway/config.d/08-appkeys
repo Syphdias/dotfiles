@@ -15,8 +15,9 @@ bindsym $mod+Tab exec --no-startup-id \
 # app keys
 ## app launchers
 ## i3 // Launcher //   + Space ##
+# Workaround as XDG_DATA_DIRS not set in sway process
 bindsym $mod+space exec --no-startup-id \
-    j4-dmenu-desktop \
+    XDG_DATA_DIRS=~/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/ j4-dmenu-desktop \
         --dmenu="/usr/bin/dmenu -m $(swaymsg -t get_outputs | jq -r 'map(.focused) | index(true)') -i -fn 'System San Francisco Display-12' -sf '$accent_fg' -sb '$accent' -nf '$fg' -nb '$bg'" \
         --usage-log .config/j4-dmenu-desktop-usage-log --term=/usr/bin/alacritty
 
