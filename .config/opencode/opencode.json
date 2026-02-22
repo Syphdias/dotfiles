@@ -1,0 +1,60 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "theme": "tokyonight",
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "http://localhost:11434/v1"
+            },
+            "models": {
+                "deepseek-r1:8b": {},
+                "qwen3-coder": {
+                    "name": "Qwen3 Coder"
+                },
+                "llama2": {
+                    "name": "Llama 2"
+                },
+                "llama3": {
+                    "name": "Llama 3"
+                }
+            }
+        },
+        "ollama-server": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "http://{env:OLLAMA_HOST}:11434/v1"
+            },
+            "models": {
+                "qwen3-coder": {
+                    "name": "Qwen3 Coder (Server)"
+                },
+                "hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:latest": {
+                    "name": "Big Qwen3 Coder (Server)"
+                },
+            }
+        }
+    },
+    "mcp": {
+        "context7": {
+            "type": "remote",
+            "url": "https://mcp.context7.com/mcp",
+            "headers": {
+                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+            },
+            "enabled": true
+        }
+    },
+    "permission": {
+        "*": "ask",
+        "todoread": "allow",
+        "todowrite": "allow",
+        "list": "allow",
+        "glob": "allow",
+        "read": "allow",
+        "grep": "allow",
+        "websearch": "allow",
+        "webfetch": "allow",
+        "lsp": "allow"
+    }
+}

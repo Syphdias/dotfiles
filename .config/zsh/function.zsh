@@ -459,3 +459,44 @@ function aws-assume-role() {
 function aws-unassume-role() {
     unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
+
+function occ() {
+    # FIXME: Use session files because `opencode session list` is slow AF
+    # But I do not know where non-global sessions are being stored
+    local _oc_sessions
+    _oc_sessions=(
+        ${(f)"$(opencode session list --format json \
+        | jq -r '[.[]|select(.directory=="'"$PWD"'")]|sort_by(.updated)[]|"\(.id) \(.title)"'
+        )"}
+    )
+    # workaround bash syntax highlighting being broken with ")
+
+    opencode -s "${${(s: :)${_oc_sessions[-1]}}[1]}"
+}
+
+function oc() {
+    if [[ $# -ne 0 ]]; then
+        opencode $@
+        return
+    fi
+
+    local _oc_sessions _oc_session
+    # FIXME: see occ
+    _oc_sessions=(
+        ${(f)"$(opencode session list --format json \
+        | jq -r '[.[]|select(.directory=="'"$PWD"'")]|sort_by(.updated)[]|"\(.id) \(.title)"'
+        )"}
+    )
+    # workaround bash syntax highlighting being broken with ")
+
+    if [[ "${#_oc_sessions}" -gt 1 ]]; then
+        _oc_session="$(<<<"${(F)_oc_sessions}" fzf --delimiter=" " --with-nth=2.. --accept-nth=1)"
+        opencode -s "$_oc_session"
+    elif [[ "${#_oc_sessions}" -eq 1 ]]; then
+        _oc_session="${${(@s: :)_oc_sessions}[1]}"
+        opencode -s "$_oc_session"
+    else
+        opencode
+    fi
+}
+compdef oc=opencode
