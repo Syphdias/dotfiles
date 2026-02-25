@@ -33,6 +33,12 @@
                     "name": "Big Qwen3 Coder (Server)"
                 },
             }
+        },
+        "amazon-bedrock": {
+            "options": {
+                "region": "eu-central-1",
+                "profile": "opencode"
+            }
         }
     },
     "mcp": {
@@ -46,15 +52,23 @@
         }
     },
     "permission": {
-        "*": "ask",
+        "bash": {
+            "*": "ask"
+        },
         "todoread": "allow",
         "todowrite": "allow",
+        "question": "allow",
         "list": "allow",
         "glob": "allow",
-        "read": "allow",
+        "read": {
+            "*.envrc": "deny",
+            "*.env": "deny",
+            "*": "allow"
+        },
         "grep": "allow",
         "websearch": "allow",
         "webfetch": "allow",
-        "lsp": "allow"
+        "lsp": "allow",
+        "*": "ask",
     }
 }
