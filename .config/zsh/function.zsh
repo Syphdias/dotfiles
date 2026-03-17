@@ -131,27 +131,41 @@ function notes() {
   PASSWORD_STORE_DIR=$HOME/.notes pass $@
 }
 
-# do (git) stuff for all directories (or files) in current working directory
+# do (git) stuff for all directories (or on files) in current working directory
 function all() {
-    _GLOB_QUALIFIER='(/)'
-    case "$1" in
-        # all files (implies no cd-ing)
-        -a)
-            _GLOB_QUALIFIER=''
-            shift
-            ;;
-        # files only
-        -f)
-            _GLOB_QUALIFIER='(.)'
-            shift
-            ;;
-    esac
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: all [-a] [-f] [-g GLOB] [-v] [--] COMMAND"
+        echo
+        echo "Run COMMAND in all subdirectories (default) or"
+        echo "on all files (-a) or all files files (-f)"
+        echo "that match (-g) GLOB (* by default)"
+        echo "and -v to show GLOB"
+        return
+    fi
+
+    local _GLOB_QUALIFIER='/'
+    local _GLOB_PATTERN='*'
+    local OPTIND OPTARG opt _VERBOSE
+    while getopts "afg:v" opt; do
+        case "$opt" in
+            # default is to cd and run command inside
+            a) _GLOB_QUALIFIER='' ;; # run command on all files
+            f) _GLOB_QUALIFIER='.' ;; # run command all files files
+            g) _GLOB_PATTERN="$OPTARG" ;;
+            v) _VERBOSE=true ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    if [[ "${_VERBOSE}" == "true" ]]; then
+        echo "Glob: ${_GLOB_PATTERN}(${~_GLOB_QUALIFIER}N)"
+    fi
 
     cur_pwd=$(pwd)
 
-    for i in *${~_GLOB_QUALIFIER}; do
+    for i in ${~_GLOB_PATTERN}(${~_GLOB_QUALIFIER}N); do
         # only cd if we only have directories
-        if [[ "${_GLOB_QUALIFIER}" == '(/)' ]]; then
+        if [[ "${_GLOB_QUALIFIER}" == '/' ]]; then
             cd "${cur_pwd}/${i}"
             if [[ $? -ne 0 ]]; then
                 >&2 echo -e \
@@ -161,10 +175,16 @@ function all() {
             fi
         fi
 
-        echo -e "\e[36m$(pwd)\e[0m"
-        $@
+        echo -e "\e[36m${i}\e[0m"
+
+        if [[ "${_GLOB_QUALIFIER}" == '/' ]]; then
+            $@
+        else
+            $@ "$i"
+        fi
+
         if [ $? -ne 0 ] ; then
-            >&2 echo -e "\e[31mError in $(pwd)\e[0m"
+            >&2 echo -e "\e[31mError for ${i}\e[0m"
         fi
         echo
     done
@@ -175,8 +195,6 @@ function all() {
     # - possibility for aliases
     # - sameline output for short stuff: $all +short -- git status oder all -n -- git status
     #   - echo -n "$(pwd): $(git status)"
-    # - specify director(y|ies) with POSIX wildcards (e.g. all -d dir* -- doing_stuff)
-    # - bug: if files in folder it will try them -> for read < find -type d
     # help page (-h|--help|no options) -> all [-n] [-d <dir|posix]> [[--] COMMAND]
     #   example --helps: ssh, tig, cp,git,vim
 }
