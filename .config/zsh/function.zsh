@@ -350,7 +350,7 @@ function m() {
         flatpak update
         pipx upgrade-all
         uv tool upgrade --all
-        nvim --headless '+Lazy! sync' +TSUpdateSync +qa
+        nvim --headless '+Lazy! sync' +TSUpdate +qa
         dot pull
         touch  ~/.cache/m-last-run
         # needs to be last since it replaces shell
