@@ -26,7 +26,9 @@ return {
           path = "~/Documents/obsidian-palace/",
         },
       },
-      disable_frontmatter = true,
+      frontmatter = {
+        enabled = false,
+      },
       notes_subdir = "_inbox",
       new_notes_location = "notes_subdir",
       picker = {
@@ -42,7 +44,7 @@ return {
       },
 
       attachments = {
-        img_folder = "./media",
+        folder = "./media",
       },
 
       -- Optional, customize how note IDs are generated given an optional title.
@@ -70,6 +72,8 @@ return {
         local path = spec.dir / tostring(spec.id)
         return path:with_suffix(".md")
       end,
+
+      legacy_commands = false,
     },
   },
 
