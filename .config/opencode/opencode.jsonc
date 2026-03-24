@@ -1,0 +1,85 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "http://localhost:11434/v1",
+            },
+            "models": {
+                "deepseek-r1:8b": {},
+                "qwen3-coder": {
+                    "name": "Qwen3 Coder",
+                },
+                "llama2": {
+                    "name": "Llama 2",
+                },
+                "llama3": {
+                    "name": "Llama 3",
+                },
+            },
+        },
+        "ollama-server": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "https://{env:OLLAMA_HOST}/api",
+                "apiKey": "{env:OLLAMA_API_KEY}",
+            },
+            "models": {
+                "qwen3:0.6b": {},
+                "qwen3-coder:latest": {},
+                "hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:latest": {},
+                "hf.co/unsloth/Qwen3.5-35B-A3B-GGUF:latest": {},
+            },
+        },
+        "amazon-bedrock": {
+            "options": {
+                "region": "eu-central-1",
+                "profile": "opencode",
+            },
+        },
+    },
+    "mcp": {
+        "context7": {
+            "type": "remote",
+            "url": "https://mcp.context7.com/mcp",
+            "headers": {
+                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
+            },
+            "enabled": true,
+        },
+    },
+    "agent": {
+        "plan": {
+            "permission": {
+                "websearch": "allow",
+                "webfetch": "allow",
+                "lsp": "allow",
+                "context7_*": "allow",
+            },
+        },
+    },
+    "permission": {
+        // last match wins
+        "*": "ask",
+        "bash": {
+            "*": "ask",
+        },
+        "todoread": "allow",
+        "todowrite": "allow",
+        "question": "allow",
+        "list": "allow",
+        "glob": "allow",
+        "read": {
+            "*": "allow",
+            "*.env": "deny",
+            "*.env.*": "deny",
+            "*.envrc": "deny",
+        },
+        "grep": "allow",
+        "websearch": "allow",
+        "webfetch": "allow",
+        "lsp": "allow",
+        "context7_*": "allow",
+    },
+}
