@@ -54,12 +54,12 @@ bindsym $mod+control+n exec --no-startup-id \
 
 ## Applications // File Explorer //   + Ctrl + E ##
 # FIXME: +new-window not working with -e yet
-bindsym $mod+control+e       exec --no-startup-id ghostty -e yazi
+bindsym $mod+control+e       exec --no-startup-id ghostty +new-window -e yazi
 bindsym $mod+shift+control+e exec --no-startup-id thunar    # fallback
 
 ## Applications // nvim-obsidian //   + Ctrl + O ##
 # FIXME: +new-window not working with -e yet
-bindsym $mod+control+o exec --no-startup-id ghostty \
+bindsym $mod+control+o exec --no-startup-id ghostty +new-window \
             --title=VimObsidian \
             --working-directory=/home/syphdias/Documents/obsidian-palace/ \
             -e 'nvim' '_projects/self/My Open Projects.md'
@@ -68,11 +68,11 @@ bindsym $mod+control+o exec --no-startup-id ghostty \
 bindsym $mod+control+x exec --no-startup-id swaymsg kill
 
 ## Applications // gtimelog //   + Ctrl + T ##
-bindsym $mod+control+t exec --no-startup-id \
-    pkill -f "/usr/bin/uv tool uvx gtimelog" || uvx gtimelog
+bindsym $mod+control+t exec --no-startup-id /usr/bin/uvx gtimelog
 
 ## Various // Switch Audio Sink //   + Ctrl + C ##
-bindsym $mod+control+c exec --no-startup-id ~/bin/pulse-audio-cycle.py --notify \
+bindsym $mod+control+c exec --no-startup-id uv run --project="$(dirname "$(readlink -f ~/bin/pulse-audio-cycle.py)")" \
+    ~/bin/pulse-audio-cycle.py --notify \
     -c 'alsa_card.usb-BEHRINGER_UMC202HD_192k-00|alsa_card.pci-0000_0b_00.1|Jabra_Link' \
-    -p 'alsa_card.pci-0000_0b_00' 'hdmi-stereo$' \
+    -p 'alsa_card.pci-0000_0b_00' 'hdmi-stereo-extra1$' \
     -p 'Jabra_Link' 'analog-stereo\+input:mono|analog-stereo$'
