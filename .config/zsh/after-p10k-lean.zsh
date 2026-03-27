@@ -47,6 +47,9 @@ for context_segment in ${(@)context_segments}; do
     insert_segment_before $context_segment dir
 done
 
+# this is to make space for the scrollbar
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=" "
+
 # colors for context segments
 typeset -g POWERLEVEL9K_PRENV_FOREGROUND='#fff8e7'
 typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND='#3970E4'
