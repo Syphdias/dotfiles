@@ -10,6 +10,9 @@ compdef ssh-until-up=ssh
 function recho() {
     echo -e "\e[33m$@\e[0m"
 }
+function wecho() {
+    echo -e "\e[1;4;30;107m$@\e[0m"
+}
 
 function ok() {
     echo -e "\e[32m${@:-ok}\e[0m"
