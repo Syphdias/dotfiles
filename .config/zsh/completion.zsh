@@ -72,3 +72,5 @@ zstyle ':completion::complete:*::options' prefix-needed false
 #bindkey "^R" _history-incremental-preserving-pattern-search-backward
 #bindkey -M isearch "^R" history-incremental-pattern-search-backward
 #bindkey "^S" history-incremental-pattern-search-forward
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
