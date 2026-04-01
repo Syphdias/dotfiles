@@ -518,3 +518,29 @@ function oc() {
     fi
 }
 compdef oc=opencode
+
+function wtt() {
+    # switch to last wt
+    if [[ "$1" == "-" ]]; then
+        wt switch -
+        return $?
+    fi
+
+    # wt picker
+    if [[ $# -eq 0 ]]; then
+        wt switch
+        return $?
+    fi
+
+    # idempotent switch
+    local worktrees=(
+        "${(@f)$(git worktree list --porcelain \
+                 |awk '/^branch / {sub(/^refs\/heads\//, "", $NF); print $NF}')}"
+    )
+    # does $1 exist
+    if [[ "${worktrees[(Ie)$1]}" -ne 0 ]]; then
+        wt switch "$1"
+    else
+        wt switch --create "$1"
+    fi
+}
