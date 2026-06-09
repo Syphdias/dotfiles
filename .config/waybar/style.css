@@ -25,16 +25,18 @@
   margin: 0 1.5px;
   min-width: 9px;
   border: solid 1px @background;
+  opacity: .7;
 }
 
-#workspaces button.empty {
-  opacity: 0.5;
+/* `.visible` is on both outputs but `.focused` overwrites it */
+#workspaces button.visible {
+  border: solid 1px @foreground;
 }
 
 #workspaces button.focused {
-  border: @accent solid 1px;
+  border: solid 1px @accent;
+  opacity: 1;
 }
-
 #workspaces button.focused label {
   color: @accent;
 }
