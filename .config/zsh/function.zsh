@@ -517,7 +517,8 @@ function oc() {
         opencode
     fi
 }
-compdef oc=opencode
+(( $+commands[opencode] )) \
+    && compdef oc=opencode
 
 function wtt() {
     # switch to last wt
