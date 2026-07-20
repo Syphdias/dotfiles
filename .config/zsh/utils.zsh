@@ -7,6 +7,46 @@ function ssh-until-up() {
 }
 compdef ssh-until-up=ssh
 
+function changed() {
+    local interval=2
+    local print_first_last=0
+    local timeout=0
+    local watch=0
+
+    local OPTIND OPTARG opt
+    while getopts "pn:wt:" opt; do
+        case $opt in
+        n) interval=$OPTARG ;;
+        p) print_first_last=1 ;;
+        t) timeout=$OPTARG ;;
+        w) watch=1 ;;
+        *) return 2 ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    if ! (($#)); then
+        echo "usage: $0 [-n interval] [-p] [-t timeout] [-w] CMD..." >&2
+        return 1
+    fi
+
+    local first
+    local _start=$SECONDS
+    first=$("$@" 2>&1)
+    ((watch || print_first_last)) && echo "$first"
+
+    local current
+    while :; do
+        sleep $interval
+        current=$("$@" 2>&1)
+        ((watch)) && echo "$current"
+        [[ "$current" != "$first" ]] && break
+        ((timeout > 0 && SECONDS - _start >= timeout)) && return 125
+    done
+
+    ((print_first_last)) && echo "$current"
+}
+
 function recho() {
     echo -e "\e[33m$@\e[0m"
 }
