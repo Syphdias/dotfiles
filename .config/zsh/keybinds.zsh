@@ -28,19 +28,25 @@ function zle-keymap-select () {
     esac
 }
 zle -N zle-keymap-select
+# Chain onto the zle-line-init that is already installed instead of replacing
+# it. As it was done before (see
+# https://unix.stackexchange.com/questions/450043/overwrite-and-reuse-existing-function-in-zsh)
+# z4h binds this widget to -z4h-zle-line-init, which is the only place that
+# arms the dir-history recorder; clobbering it means plain `cd` never shows up
+# in z4h-fzf-dir-history (Alt+R).
+if [[ ${widgets[zle-line-init]-} == (user|builtin):* \
+        && ${widgets[zle-line-init]} != user:zle-line-init \
+    ]]; then
+    zle -A -- zle-line-init -orig-zle-line-init
+fi
 function zle-line-init {
+    (( ${+widgets[-orig-zle-line-init]} )) && zle -- -orig-zle-line-init "$@"
     # make cursor switch work in alacritty
     zle -K viins
     echo -ne "\e[5 q" # line cursor
+    after_zle-line-init
 }
 zle -N zle-line-init
-
-# patching it dirtly
-# https://unix.stackexchange.com/questions/450043/overwrite-and-reuse-existing-function-in-zsh
-functions[zle-line-init]="
-    $functions[zle-line-init]
-    after_zle-line-init
-"
 
 
 # cd on keybind
