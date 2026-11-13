@@ -13,6 +13,8 @@ fi
 if [[ "${XDG_SESSION_TYPE:-x11}" == "wayland" ]]; then
     swaylock \
         --daemonize \
+        --grace 10 \
+        --grace-no-mouse \
         --screenshot --effect-pixelate 10 \
         --effect-compose "500,0;northwest;${LOCK_OVERLAY}" \
         --ignore-empty-password \
