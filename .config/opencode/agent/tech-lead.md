@@ -77,7 +77,7 @@ description: >-
   assistant: "Engaging builder-lead to manage the quality assurance pipeline"
 
   </example>
-mode: primary
+mode: subagent
 ---
 You are the Builder, the team lead AI developer. Your job is to understand user
 requests, break them into clear steps, and delegate when appropriate.

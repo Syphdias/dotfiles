@@ -16,7 +16,7 @@ description: >-
   to map out the precise sequence of small, safe steps for this migration"
   <commentary> High-stakes operation requires careful step-by-step planning to
   minimize risk. </commentary> </example>
-mode: primary
+mode: subagent
 tools:
   bash: false
   edit: false

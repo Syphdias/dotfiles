@@ -1,9 +1,9 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "provider": {
+    "providers": {
         "ollama": {
-            "npm": "@ai-sdk/openai-compatible",
-            "options": {
+            "package": "@ai-sdk/openai-compatible",
+            "settings": {
                 "baseURL": "http://localhost:11434/v1",
             },
             "models": {
@@ -11,8 +11,8 @@
                 "qwen3-coder": {
                     "name": "Qwen3 Coder",
                 },
-                "llama2": {
-                    "name": "Llama 2",
+                "Qwen3.6:27b": {
+                    "name": "Qwen3.6",
                 },
                 "llama3": {
                     "name": "Llama 3",
@@ -20,10 +20,12 @@
             },
         },
         "ollama-server": {
-            "npm": "@ai-sdk/openai-compatible",
-            "options": {
+            "package": "@ai-sdk/openai-compatible",
+            "settings": {
                 "baseURL": "https://{env:OLLAMA_HOST}/api",
                 "apiKey": "{env:OLLAMA_API_KEY}",
+                "timeout": false, // 300000 (ms) default
+                "tool_call": true,
             },
             "models": {
                 "qwen3:0.6b": {},
@@ -33,53 +35,140 @@
             },
         },
         "amazon-bedrock": {
-            "options": {
+            "settings": {
                 "region": "eu-central-1",
                 "profile": "opencode",
             },
         },
     },
     "mcp": {
-        "context7": {
-            "type": "remote",
-            "url": "https://mcp.context7.com/mcp",
-            "headers": {
-                "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
+        "servers": {
+            "context7": {
+                "type": "remote",
+                "url": "https://mcp.context7.com/mcp",
+                "headers": {
+                    "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
+                },
             },
-            "enabled": true,
+            "aws-knowledge-mcp-server": {
+                "type": "remote",
+                "url": "https://knowledge-mcp.global.api.aws",
+                "disabled": true,
+            },
+            "awslabs-aws-pricing-mcp-server": {
+                "type": "local",
+                "command": [
+                    "uvx",
+                    "awslabs.aws-pricing-mcp-server@latest"
+                ],
+                "disabled": true,
+            },
+            "awslabs-cloudtrail-mcp-server": {
+                "type": "local",
+                "command": [
+                    "uvx",
+                    "awslabs.cloudtrail-mcp-server@latest"
+                ],
+                "environment": {
+                    "FASTMCP_LOG_LEVEL": "ERROR",
+                },
+                "disabled": true,
+            },
+            "awslabs-cloudwatch-mcp-server": {
+                "type": "local",
+                "command": [
+                    "uvx",
+                    "awslabs.cloudwatch-mcp-server@latest"
+                ],
+                "environment": {
+                    "FASTMCP_LOG_LEVEL": "ERROR",
+                },
+                "disabled": true,
+            },
+            "awslabs-eks-mcp-server": {
+                "type": "local",
+                "command": [
+                    "uvx",
+                    "awslabs.eks-mcp-server@latest"
+                ],
+                "environment": {
+                    "FASTMCP_LOG_LEVEL": "ERROR",
+                },
+                "disabled": true,
+            },
         },
     },
-    "agent": {
+    "agents": {
         "plan": {
-            "permission": {
-                "websearch": "allow",
-                "webfetch": "allow",
-                "lsp": "allow",
-                "context7_*": "allow",
-            },
+            "permissions": [
+                { "action": "websearch", "resource": "*", "effect": "allow" },
+                { "action": "webfetch", "resource": "*", "effect": "allow" },
+                { "action": "lsp", "resource": "*", "effect": "allow" },
+                { "action": "context7_*", "resource": "*", "effect": "allow" },
+            ],
         },
     },
-    "permission": {
+    "permissions": [
         // last match wins
-        "*": "ask",
-        "bash": {
-            "*": "ask",
-        },
-        "todoread": "allow",
-        "todowrite": "allow",
-        "question": "allow",
-        "list": "allow",
-        "glob": "allow",
-        "read": {
-            "*": "allow",
-            "*.env": "deny",
-            "*.env.*": "deny",
-            "*.envrc": "deny",
-        },
-        "grep": "allow",
-        "websearch": "allow",
-        "webfetch": "allow",
-        "lsp": "allow",
-        "context7_*": "allow",
-    },
+        { "action": "*", "resource": "*", "effect": "ask" },
+        { "action": "shell", "resource": "*", "effect": "ask" },
+        { "action": "shell", "resource": "find *", "effect": "ask" }, // arbitrary code exec
+        { "action": "shell", "resource": "timeout *", "effect": "ask" }, // arbitrary code exec
+        { "action": "shell", "resource": "awk *", "effect": "ask" }, // arbitrary code exec
+        { "action": "shell", "resource": "cat *", "effect": "allow" }, // danger in read perm circumventing
+        { "action": "shell", "resource": "head *", "effect": "allow" }, // danger in read perm circumventing
+        { "action": "shell", "resource": "tail *", "effect": "allow" }, // danger in read perm circumventing
+        { "action": "shell", "resource": "ls *", "effect": "allow" }, // low danger in read perm circumventing
+        { "action": "shell", "resource": "grep *", "effect": "allow" }, // low danger in read perm circumventing
+        { "action": "shell", "resource": "rg *", "effect": "allow" }, // low danger in read perm circumventing
+        { "action": "shell", "resource": "readlink *", "effect": "allow" },
+        { "action": "shell", "resource": "dig *", "effect": "allow" },
+        { "action": "shell", "resource": "host *", "effect": "allow" },
+        { "action": "shell", "resource": "echo *", "effect": "allow" },
+        { "action": "shell", "resource": "pwd *", "effect": "allow" },
+        { "action": "shell", "resource": "sort *", "effect": "allow" },
+        { "action": "shell", "resource": "uniq *", "effect": "allow" },
+        { "action": "shell", "resource": "comm *", "effect": "allow" },
+        { "action": "shell", "resource": "wc *", "effect": "allow" },
+        { "action": "shell", "resource": "tr *", "effect": "allow" },
+        { "action": "shell", "resource": "file *", "effect": "allow" },
+        { "action": "shell", "resource": "which *", "effect": "allow" },
+        { "action": "shell", "resource": "git status *", "effect": "allow" },
+        { "action": "shell", "resource": "git log *", "effect": "allow" },
+        { "action": "shell", "resource": "git diff *", "effect": "allow" },
+        { "action": "shell", "resource": "git show *", "effect": "allow" },
+        { "action": "shell", "resource": "git ls-files *", "effect": "allow" },
+        { "action": "shell", "resource": "nix eval *", "effect": "allow" },
+        { "action": "shell", "resource": "nix build *", "effect": "allow" },
+        { "action": "shell", "resource": "ruff *", "effect": "allow" },
+        { "action": "shell", "resource": "sed *", "effect": "ask" }, // basically no reason for a harness to use that
+        // TODO: Can I split environment specific allows to different files, e.g. ansible, terraform, etc.
+        { "action": "shell", "resource": "ansible-lint *", "effect": "allow" },
+        { "action": "shell", "resource": "sops *", "effect": "deny" },
+        { "action": "shell", "resource": "age *", "effect": "deny" },
+        { "action": "shell", "resource": "gpg *", "effect": "deny" },
+        { "action": "shell", "resource": "gpg2 *", "effect": "deny" },
+        { "action": "todoread", "resource": "*", "effect": "allow" },
+        { "action": "todowrite", "resource": "*", "effect": "allow" },
+        { "action": "question", "resource": "*", "effect": "allow" },
+        { "action": "list", "resource": "*", "effect": "allow" },
+        { "action": "glob", "resource": "*", "effect": "allow" },
+        { "action": "read", "resource": "*", "effect": "allow" },
+        { "action": "read", "resource": "*.env", "effect": "deny" },
+        { "action": "read", "resource": "*.env.*", "effect": "deny" },
+        { "action": "read", "resource": "*.envrc", "effect": "deny" },
+        { "action": "explore", "resource": "*", "effect": "allow" },
+        { "action": "grep", "resource": "*", "effect": "allow" },
+        { "action": "websearch", "resource": "*", "effect": "allow" },
+        { "action": "webfetch", "resource": "*", "effect": "allow" },
+        { "action": "lsp", "resource": "*", "effect": "allow" },
+        { "action": "context7_*", "resource": "*", "effect": "allow" },
+        { "action": "aws-knowledge-mcp-server_*", "resource": "*", "effect": "ask" },
+        { "action": "awslabs-aws-diagram-mcp-server_*", "resource": "*", "effect": "ask" },
+        { "action": "awslabs-aws-pricing-mcp-server_*", "resource": "*", "effect": "ask" },
+        { "action": "awslabs-cloudtrail-mcp-server_*", "resource": "*", "effect": "ask" },
+        { "action": "awslabs-cloudwatch-mcp-server_*", "resource": "*", "effect": "ask" },
+        { "action": "awslabs-eks-mcp-server_*", "resource": "*", "effect": "ask" },
+        { "action": "awslabs-terraform-mcp-server_*", "resource": "*", "effect": "ask" },
+    ],
 }
