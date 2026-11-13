@@ -34,6 +34,8 @@ return {
               "!Select sequence",
               "!Split",
               "!Split sequence",
+              -- CloudFormation
+              "!reference",
             },
           },
         },
