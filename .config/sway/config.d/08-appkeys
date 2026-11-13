@@ -46,19 +46,17 @@ bindsym $mod+control+period exec --no-startup-id swaync-client --toggle-panel
 
 ## Applications // Pulseaudio Volumne Control //   + Ctrl + M ##
 bindsym $mod+control+m exec --no-startup-id \
-    pkill wiremix || alacritty --title wiremix -e wiremix
+    pkill wiremix || ghostty +new-window --title wiremix -e wiremix
 
 ## Applications // NetworkManager Connections //   + Ctrl + N ##
 bindsym $mod+control+n exec --no-startup-id \
     pkill nm-connection-e || nm-connection-editor
 
 ## Applications // File Explorer //   + Ctrl + E ##
-# FIXME: +new-window not working with -e yet
 bindsym $mod+control+e       exec --no-startup-id ghostty +new-window -e yazi
 bindsym $mod+shift+control+e exec --no-startup-id thunar    # fallback
 
 ## Applications // nvim-obsidian //   + Ctrl + O ##
-# FIXME: +new-window not working with -e yet
 bindsym $mod+control+o exec --no-startup-id ghostty +new-window \
             --title=VimObsidian \
             --working-directory=/home/syphdias/Documents/obsidian-palace/ \
