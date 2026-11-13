@@ -545,3 +545,14 @@ function wtt() {
         wt switch --create "$1"
     fi
 }
+
+function xswaymsg() {
+    SWAYSOCK="/run/user/${UID:-1000}/sway-ipc.${UID:-1000}.$(pgrep -u "${UID:-1000}" -x sway)" \
+        swaymsg $@
+}
+
+function re-lock() {
+    xswaymsg "output * dpms on"
+    pkill -x swaylock
+    xswaymsg exec swaylock
+}
