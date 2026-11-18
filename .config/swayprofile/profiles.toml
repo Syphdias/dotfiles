@@ -1,0 +1,66 @@
+# swayprofile configuration -> ~/.config/swayprofile/profiles.toml
+#
+# Precedence: manual pin > window rule > idle > default.
+# Output settings not overridden by a profile come from `outputs_file`
+# (managed by nwg-displays), so "normal" simply means "what nwg-displays says".
+
+default = "normal"
+cycle = ["eco", "normal", "gaming"]   # order for `swayprofile cycle`
+exit_delay = 60                       # seconds to stay in a rule's profile after its last window closes
+outputs_file = "~/.config/sway/outputs"
+inhibit_idle_revert = "fullscreen"    # inhibit_idle value restored on game windows when leaving a profile
+hook_timeout = 60
+notify_manual = true                  # notify on manual / default switches
+
+[idle]
+enabled = true
+timeout = 600        # seconds; a separate swayidle instance, your own swayidle config is untouched
+profile = "eco"
+notify = true
+
+[lact]
+# Only enable after reviewing and creating the swayprofile-* LACT profiles:
+#   swayprofile lact-sync --dry-run && swayprofile lact-sync
+enabled = true
+socket = "/run/lactd.sock"
+# gpu = "1002:744C-1DA2:471D-0000:0b:00.0"   # RX 7900 XT; auto-detected (only GPU)
+prefix = "swayprofile-"
+
+# Window rules: `match` is a regex matched (fully) against app_id and X11 class.
+[[rule]]
+name = "game"
+match = 'steam_app_\d+|gamescope'
+profile = "gaming"
+# exit_delay = 60
+# notify = true
+
+[profiles.eco]
+icon = "󱤆 "          # md-leaf_circle_outline (automatic)
+icon_pinned = "󱤅 "   # md-leaf_circle (pinned)
+power_profile = "power-saver"
+outputs.DP-1 = { refresh = 60 }
+outputs.DP-2 = { refresh = 60 }
+# LACT GpuConfig fields, overlaid on LACT's default config for the GPU.
+# power_profile_mode_index requires performance_level = "manual" (LACT rejects it with "auto").
+lact = { power_cap = 238.0, performance_level = "manual", power_profile_mode_index = 2 }   # 2 = POWER_SAVING
+
+[profiles.normal]
+icon = "󰚡 "          # md-home_outline
+icon_pinned = "󰋜 "   # md-home
+power_profile = "balanced"
+# outputs: from outputs_file (DP-1 120 Hz, DP-2 144 Hz)
+lact = { power_cap = 265.0, performance_level = "auto" }   # auto = BOOTUP_DEFAULT power profile mode
+
+[profiles.gaming]
+icon = "󰺷 "          # md-gamepad_variant_outline
+icon_pinned = "󰊗 "   # md-gamepad_variant
+power_profile = "performance"
+outputs.DP-1 = { refresh = 144 }
+outputs.DP-2 = { refresh = 144 }
+lact = { power_cap = 265.0, performance_level = "manual", power_profile_mode_index = 1 }   # 1 = 3D_FULL_SCREEN
+dnd = true            # previous DND state is restored when leaving
+inhibit_idle = true   # `inhibit_idle open` on windows matched by rules for this profile
+# on_enter = ["some command"]
+# on_exit = ["some command"]
+
+# Available per-output keys: refresh (Hz), resolution ("WxH"), adaptive_sync (bool), enabled (bool)
